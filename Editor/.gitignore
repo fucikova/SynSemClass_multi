@@ -1,0 +1,6 @@
+resources/??/example_sentences/*txt
+resources/??/example_sentences/*php
+
+Config/config_file_multi
+*~
+*.swp
