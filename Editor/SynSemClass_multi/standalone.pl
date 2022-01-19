@@ -225,25 +225,25 @@ sub read_cs_resources{
 	require SynSemClass_multi::LibXMLCzEngVallex;
 	require SynSemClass_multi::CS::Links;
 
-	my $pdtvallex_file = SynSemClass_multi::Config->getFromResources("vallex_cz.xml");
+	my $pdtvallex_file = SynSemClass_multi::Config->getFromResources("CS/vallex_cz.xml");
 	die ("Can not read file vallex_cz.xml") if ($pdtvallex_file eq "0");
 	$SynSemClass_multi::LibXMLVallex::pdtvallex_data=SynSemClass_multi::LibXMLVallex->new($pdtvallex_file,1);
 
-	my $substituted_pairs_file = SynSemClass_multi::Config->getFromResources("substitutedPairs.txt");
+	my $substituted_pairs_file = SynSemClass_multi::Config->getFromResources("CS/substitutedPairs.txt");
 	die ("Can not read file substutedPairs.txt") if ($substituted_pairs_file eq "0");
 	$SynSemClass_multi::LibXMLVallex::substituted_pairs=SynSemClass_multi::LibXMLVallex->getSubstitutedPairs($substituted_pairs_file);
 
 	unless ($SynSemClass_multi::LibXMLCzEngVallex::czengvallex_data){
-		my $czengvallex_file = SynSemClass_multi::Config->getFromResources("frames_pairs.xml");
+		my $czengvallex_file = SynSemClass_multi::Config->getFromResources("CS/frames_pairs.xml");
 		die ("Can not read file vallex_cz.xml") if ($czengvallex_file eq "0");
 		$SynSemClass_multi::LibXMLCzEngVallex::czengvallex_data=SynSemClass_multi::LibXMLCzEngVallex->new($czengvallex_file,1);
 	}
 
-	my $vallex4_0_mapping_file = SynSemClass_multi::Config->getFromResources("vallex4.0_mapping.txt");
+	my $vallex4_0_mapping_file = SynSemClass_multi::Config->getFromResources("CS/vallex4.0_mapping.txt");
 	die ("Can not read file vallex4.0_mapping.xml") if ($vallex4_0_mapping_file eq "0");
 	$SynSemClass_multi::CS::LexLink::vallex4_0_mapping=SynSemClass_multi::CS::LexLink->getMapping("vallex4.0",$vallex4_0_mapping_file);
 
-	my $pdtval_val3_mapping_file = SynSemClass_multi::Config->getFromResources("pdtval_val3_mapping.txt");
+	my $pdtval_val3_mapping_file = SynSemClass_multi::Config->getFromResources("CS/pdtval_val3_mapping.txt");
 	die ("Can not read file pdtval_val3_mapping.xml") if ($pdtval_val3_mapping_file eq "0");
 	$SynSemClass_multi::CS::LexLink::pdtval_val3_mapping=SynSemClass_multi::CS::LexLink->getMapping("pdtval_val3",$pdtval_val3_mapping_file);
 
@@ -254,17 +254,17 @@ sub read_en_resources{
 	require SynSemClass_multi::LibXMLCzEngVallex;
 	require SynSemClass_multi::EN::Links;
 
-	my $engvallex_file = SynSemClass_multi::Config->getFromResources("vallex_en.xml");
+	my $engvallex_file = SynSemClass_multi::Config->getFromResources("EN/vallex_en.xml");
 	die ("Can not read file vallex_en.xml") if ($engvallex_file eq "0");
 	$SynSemClass_multi::LibXMLVallex::engvallex_data=SynSemClass_multi::LibXMLVallex->new($engvallex_file,1);
 
 	unless ($SynSemClass_multi::LibXMLCzEngVallex::czengvallex_data){
-		my $czengvallex_file = SynSemClass_multi::Config->getFromResources("frames_pairs.xml");
+		my $czengvallex_file = SynSemClass_multi::Config->getFromResources("EN/frames_pairs.xml");
 		die ("Can not read file vallex_cz.xml") if ($czengvallex_file eq "0");
 		$SynSemClass_multi::LibXMLCzEngVallex::czengvallex_data=SynSemClass_multi::LibXMLCzEngVallex->new($czengvallex_file,1);
 	}
 
-	my $fn_mapping_file = SynSemClass_multi::Config->getFromResources("framenet_mapping.txt");
+	my $fn_mapping_file = SynSemClass_multi::Config->getFromResources("EN/framenet_mapping.txt");
 	die ("Can not read file framenet_mapping.xml") if ($fn_mapping_file eq "0");
 	$SynSemClass_multi::EN::LexLink::framenet_mapping=SynSemClass_multi::EN::LexLink->getMapping("framenet",$fn_mapping_file);
 
@@ -273,11 +273,11 @@ sub read_en_resources{
 sub read_de_resources{
 	require SynSemClass_multi::DE::Links;
 
-	my $gup_mapping_file = SynSemClass_multi::Config->getFromResources("gup_mapping.txt");
+	my $gup_mapping_file = SynSemClass_multi::Config->getFromResources("DE/gup_mapping.txt");
 	die ("Can not read file gup_mapping.txt") if ($gup_mapping_file eq "0");
 	$SynSemClass_multi::DE::LexLink::gup_mapping=SynSemClass_multi::DE::LexLink->getMapping("gup",$gup_mapping_file);
 
-	my $valbu_mapping_file = SynSemClass_multi::Config->getFromResources("valbu_mapping.txt");
+	my $valbu_mapping_file = SynSemClass_multi::Config->getFromResources("DE/valbu_mapping.txt");
 	die ("Can not read file valbu_mapping.txt") if ($valbu_mapping_file eq "0");
 	$SynSemClass_multi::DE::LexLink::valbu_mapping=SynSemClass_multi::DE::LexLink->getMapping("valbu",$valbu_mapping_file);
 
