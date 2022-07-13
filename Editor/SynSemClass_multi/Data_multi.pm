@@ -7,7 +7,7 @@
 package SynSemClass_multi::Data_multi;
 require SynSemClass_multi::Data_main;
 require SynSemClass_multi::Data_cms;
-require SynSemClass_multi::Sort;
+require SynSemClass_multi::Sort_all;
 
 use strict;
 use utf8;
@@ -29,53 +29,11 @@ sub set_languages {
 	@{$self->[0]} = @langs;
 }
 
-sub get_lang_c {
-  my ($self)=@_;
-  my @codes=();
-  my @langs = @{$self->languages};
-  foreach (@langs){ 
-	  $_=~s/:.*$//;
-	  push @codes, $_;
-  }
-  return @codes;
-}
-
-sub get_lang_n {
-  my ($self)=@_;
-  my @names=();
-  my @langs = @{$self->languages};
-  foreach (@langs){ 
-	  $_=~s/^.*://;
-	  push @names, $_;
-  }
-  return @names;
-}
-
-sub get_lang_name_for_c {
-  my ($self, $code) = @_;
-  my @langs = @{$self->languages};
-  foreach (@langs){
-  	my ($c, $n)=split(":", $_);
-	return $n if ($c eq $code);
-  }
-  return "";
-}
-
-sub get_lang_code_for_n {
-  my ($self, $name) = @_;
-  my @langs = @{$self->languages};
-  foreach (@langs){
-  	my ($c, $n)=split(":", $_);
-	return $c if ($n eq $name);
-  }
-  return "";
-}
-
-sub get_priority_lang_c {	
+sub get_priority_lang {	
   my ($self) = @_;
-  my @codes = ($self->get_lang_c);
+  my @langs = @{$self->languages};
 
-  return $codes[0];
+  return $langs[0];
 }
 
 sub main {
@@ -106,7 +64,7 @@ sub changed {
 	return undef unless ref($self);
 	  
 	return 1 if ($self->main->changed());
-	foreach my $lang ($self->get_lang_c()){
+	foreach my $lang (@{$self->languages()}){
 		return 1 if ($self->lang_cms($lang)->changed());
 	}
 	return 0;
@@ -117,7 +75,7 @@ sub save {
 	return undef unless ref($self);
 	  
 	$self->main->save();
-	foreach my $lang ($self->get_lang_c()){
+	foreach my $lang (@{$self->languages()}){
 	 	$self->lang_cms($lang)->save();
 	}
 }
@@ -127,7 +85,7 @@ sub doc_reload {
 	return undef unless ref($self);
 	  
 	$self->main->doc_reload();
-	foreach my $lang ($self->get_lang_c()){
+	foreach my $lang (@{$self->languages()}){
 		$self->lang_cms($lang)->doc_reload();
 	}
 }
@@ -137,7 +95,7 @@ sub doc_free {
 	return undef unless ref($self);
 	  
 	$self->main->doc_free();
-	foreach my $lang ($self->get_lang_c()){
+	foreach my $lang (@{$self->languages()}){
 		$self->lang_cms($lang)->doc_free();
 	}
 }
@@ -147,17 +105,243 @@ sub reload {
 	return undef unless ref($self);
 	  
 	$self->main->reload();
-	foreach my $lang ($self->get_lang_c()){
+	foreach my $lang (@{$self->languages()}){
 		$self->lang_cms($lang)->reload();
 	}
 }
 
- 
+=item getClassSublist($item,$slen)
+
+Return $slen classes before and after given $item.
+
+=cut
+
+sub getClassSubList {
+  my ($self, $item,$search_csl_by,$exact_search,$slen)=@_;
+#  use locale;
+  my @classes=();
+  my ($milestone,$after,$before,$i);
+  my $class_attr="2";
+  my $name_lang="ces";
+  if ($search_csl_by eq "class_roles"){
+ 	return $self->getClassList("$search_csl_by:$item");
+  }
+  my @all_classes=$self->getClassList($search_csl_by);
+
+
+  if (ref($item)) {
+	  my $class=$all_classes[0];
+	  $i=0;
+	  while ($class){
+	  	last if ($i >= scalar @all_classes);
+		last if ($self->compare($class->[1],$item->getAttribute("id"))==0);
+		$i++;
+		$class=$all_classes[$i];
+	  }
+    $milestone = $i;
+    $before = $slen;
+    $after = $slen;
+  } elsif ($item eq "") {
+    $milestone = 0;
+    $after = 2*$slen;
+    $before = 0;
+  } else {
+    # search by lemma or enname or dename or classID
+	if($search_csl_by eq "class_id"){
+		$class_attr = "1";
+	}elsif($search_csl_by =~ /_class_name/){
+		$class_attr = "3";
+	}
+    my $class = $all_classes[0];
+    $i=0;
+    while ($class) {
+      last if ($i >= scalar @all_classes);
+	  last if (SynSemClass_multi::Sort_all::sort_class_lemmas(lc($item),lc($class->[$class_attr]), $class->[2])<=0);
+	  $i++;
+      $class = $all_classes[$i];
+    }
+	$i-- if ($i == scalar @all_classes);
+    $milestone = $i;
+    $before = $slen;
+    $after = $slen;
+  }
+  push @classes, $all_classes[$milestone];
+  # get before list
+  $i=0;
+  my $j=$milestone-1;
+  while ( $j >= 0 and $i<$before) {
+    unshift @classes, $all_classes[$j];
+      $i++;
+	$j--;
+  }
+
+  # get after list
+  $i=0;
+  my $j=$milestone+1;
+  while ($j<scalar @all_classes and $i<$after) {
+    push @classes, $all_classes[$j];
+    $i++;
+	$j++;
+  }
+
+  return @classes;
+}
+
+sub getClassList {
+  my ($self, $sort_by)=@_;
+  $sort_by = "ces_class_name" unless $sort_by;
+  my %roles=();
+  my $sroles_count=0;
+  if ($sort_by =~ /^class_roles/){
+  	my ($null, $roles_s) = split(":", $sort_by);
+	foreach my $role (split(";", $roles_s)){
+		$role=~s/^ //; $role=~s/ *$//;
+		next if ($role eq "");
+		$roles{$role}=1;
+		$sroles_count++;
+	}
+  }
+  my $data_main = $self->main;
+  my $lang_for_name = $data_main->first_lang;
+  if ($sort_by =~ /^(.*)_class_name/){
+  	$lang_for_name = $1;
+  }
+  my $data_cms = $self->lang_cms($lang_for_name);
+  my %lang_class_names = ();
+  my $lang_class = $data_cms->getFirstClassNode();
+
+  while ($lang_class){
+  	my $id = $lang_class->getAttribute("id");
+	my $lemma = $lang_class->getAttribute("lemma");
+	$lang_class_names{$id}=$lemma;
+	$lang_class=$data_cms->getNextClassNode($lang_class);
+  }
+
+  my @classes=();
+  my $class = $data_main->getFirstClassNode();
+  while ($class) {
+    my $id = $class->getAttribute ("id");
+    my $status = $class->getAttribute ("status");
+	my $langname = $lang_class_names{$id} || "";
+	if ($sroles_count){
+		my @class_roles = $data_main->getCommonRolesSLs($class);
+		my $fitted=0;
+		foreach my $r (@class_roles){
+			$fitted++ if ($roles{$r});
+		}
+		if ($fitted eq $sroles_count){
+			my $diff_r = scalar @class_roles - $fitted;
+			push @classes, [$class,$id,$lang_for_name,$langname,$status, $diff_r];
+		}
+
+	}else{
+		push @classes, [$class,$id,$lang_for_name, $langname,$status, 0];
+	}
+    $class=$data_main->getNextClassNode($class);
+  }
+
+  if($sort_by eq "class_id"){
+	return sort SynSemClass_multi::Sort_all::sort_veclass_by_ID @classes;
+  }elsif($sort_by =~/^class_roles/){
+	return sort SynSemClass_multi::Sort_all::sort_veclass_by_roles @classes;
+  }else{
+	return sort SynSemClass_multi::Sort_all::sort_veclass_by_lang_name @classes;
+  }
+}
+
+sub getForbiddenIds {
+  my ($self)=@_;
+  my $doc=$self->main->doc();
+  return {} unless $doc;
+  my $docel=$doc->documentElement();
+  my ($tail)=$docel->getChildElementsByTagName("tail");
+  return {} unless $tail;
+  my %ids;
+  foreach my $ignore ($tail->getChildElementsByTagName("forbid")) {
+    $ids{$ignore->getAttribute("id")}=1;
+  }
+  return \%ids;
+}
+
+sub generateNewClassId {
+  my ($self)=@_;
+  my $i=0;
+  my $forbidden=$self->getForbiddenIds();
+  foreach ($self->getClassList) {
+    if ($_->[1]=~/^vec([0-9]+)/ and $i<$1) {
+      $i=$1;
+    }
+  }
+  $i++;
+  my $user=$self->main->user;
+  $user=~s/^v-//;
+  my $id_cand = "vec" . sprintf("%05d", $i) . "_$user";
+  while ($forbidden->{$id_cand}){
+  	$i++;
+  	$id_cand = "vec" . sprintf("%05d", $i) . "_$user";
+  }
+  if ($user eq "SYS"){
+  	return "vec" . sprintf("%05d", $i);
+  }else{
+	  return $id_cand;
+  }
+}
+
+sub addClass {
+  my ($self,@lang_lemmas)=@_;
+  my %lemmas =();
+  foreach my $ll (@lang_lemmas){
+  	my ($lang, $lemma)=split("#", $ll);
+	$lemmas{$lang} = $lemma;
+	print "lemma pro $lang je $lemma\n";
+  }
+  my $new_id = $self->generateNewClassId();
+  return 0 unless defined($new_id);
+
+  my $doc_main=$self->main->doc();
+  my $root_main=$doc_main->documentElement();
+  my ($body_main)=$root_main->getChildElementsByTagName("body");
+  return 0 unless $body_main;
+  my $class_main=$doc_main->createElement("veclass");
+  $body_main->appendChild($class_main);
+  $class_main->setAttribute("id",$new_id);
+  $class_main->setAttribute("status","");
+
+  my $classdef=$doc_main->createElement("class_definition");
+  $class_main->appendChild($classdef);
+  my $commonroles=$doc_main->createElement("commonroles");
+  $class_main->appendChild($commonroles);
+  my $classnote=$doc_main->createElement("classnote");
+  $class_main->appendChild($classnote);
+  $self->main->set_change_status(1);
+
+  foreach my $lang (@{$self->languages()}){
+	my $data_lang = $self->lang_cms($lang);
+  	my $doc_lang=$data_lang->doc();
+  	my $root_lang=$doc_lang->documentElement();
+	my ($body_lang)=$root_lang->getChildElementsByTagName("body");
+	return 0 unless $body_lang;
+	my $class_lang=$doc_lang->createElement("veclass");
+	$body_lang->appendChild($class_lang);
+	$class_lang->setAttribute("id",$new_id);
+	$class_lang->setAttribute("lemma", $lemmas{$lang} || "");
+    my $classlangdef=$doc_lang->createElement("class_definition");
+	$class_lang->appendChild($classlangdef);
+    my $cms_lang=$doc_lang->createElement("classmembers");
+	$class_lang->appendChild($cms_lang);
+
+  	$data_lang->set_change_status(1);
+  }
+  
+  print "Added class: $new_id, " . join(":", @lang_lemmas) . "\n";
+  return $class_main;
+}
+
 sub classReviewed {
   my ($self, $class_id)=@_;
 
   my $not_touched=0;
-	foreach my $lang ($self->get_lang_c()){
+  foreach my $lang (@{$self->languages()}){
 	my $data_cms = $self->lang_cms($lang);
 	my $lang_class = $data_cms->getClassByID($class_id);  
   	next unless ref($lang_class);
@@ -179,7 +363,7 @@ sub usedRole{
   my $roleid=$role->getAttribute("idref");
   my $classid=$class->getAttribute("id");
 
-  foreach my $lang ($self->get_lang_c()){
+  foreach my $lang (@{$self->languages()}){
 	my $data_cms = $self->lang_cms($lang);
 	my $lang_class = $data_cms->getClassByID($classid);  
   	next unless ref($lang_class);
@@ -204,7 +388,7 @@ sub modifyRoleInClassMembersForClass{
   my $oldRoleRef=$self->main->getRoleDefByShortLabel($oldRole)->[0];
   my $newRoleRef=$self->main->getRoleDefByShortLabel($newRole)->[0];
   
-  foreach my $lang ($self->get_lang_c()){
+  foreach my $lang (@{$self->languages()}){
 	my $data_cms = $self->lang_cms($lang);
 	my $lang_class = $data_cms->getClassByID($classid);  
   	next unless ref($lang_class);
@@ -226,7 +410,7 @@ sub deleteClass {
   do { warn "Class not specified"; return 0; }  unless $classid && $classid ne "";
   
   my $active_cms=0;
-  foreach my $lang ($self->get_lang_c()){
+  foreach my $lang (@{$self->languages()}){
 	my $data_cms = $self->lang_cms($lang);
 	my $lang_class = $data_cms->getClassByID($classid);  
   	next unless ref($lang_class);
@@ -248,18 +432,6 @@ sub deleteClass {
   return 1;
 }
 
-sub setClassLangNames {
-  my ($self, $classid, $lemma, $lang)=@_;
-  
-  my $class_main = $self->main->getClassByID($classid);
-  $self->main->setClassLangName($class_main, $lemma, $lang);
-
-  my $data_cms = $self->lang_cms($lang);
-  my $class_cms = $data_cms->getClassByID($classid);
-  $data_cms->setClassLemma($class_cms, $lemma);
-  
-}
-
 sub findClassMemberForClass {
   my ($self,$class,$find)=@_;
   
@@ -277,7 +449,7 @@ sub findClassMemberForClass {
 
   foreach my $classmember ($data_cms->getClassMembersNodes($lang_class)) {
     my $cmidref = $classmember->getAttribute("idref");
-    return $classmember if (SynSemClass_multi::Sort::equal_lemmas($cmidref, $idref));
+    return $classmember if (SynSemClass_multi::Sort_all::equal_lemmas($cmidref, $idref));
   }
   return undef;
 }
@@ -304,13 +476,13 @@ sub getClassMemberForClassByIdref{
   return unless ref($class);
   
   my $class_id = $class->getAttribute("id");
-  foreach my $lang ($self->get_lang_c()){
+  foreach my $lang (@{$self->languages()}){
 	my $data_cms = $self->lang_cms($lang);
 	my $lang_class = $data_cms->getClassByID($class_id);  
   	next unless ref($lang_class);
 
   	foreach ($data_cms->getClassMembersNodes($lang_class)){
-  		return $_ if (SynSemClass_multi::Sort::equal_lemmas($_->getAttribute("idref"), $idref));
+  		return ($lang, $_) if (SynSemClass_multi::Sort_all::equal_lemmas($_->getAttribute("idref"), $idref));
 	}
   }
   return undef;
@@ -596,8 +768,8 @@ sub addClassMember {
   $classmember->setAttribute("status", $status);
   $classmember->setAttribute("lang", $lang);
   $classmember->setAttribute("lexidref", $lexidref);
-  $idref=$idref . $id if ($lexidref eq "synsemclass"); #for those classmembers that are not from PDT-Vallex/EngVallex/Vallex 
-  													  #is idref CzEngVallex-ID-<id>, where <id> is classmember id in synsemclass.xml
+  $idref="SYNSEMCLASS-ID-" . $id if ($lexidref eq "synsemclass"); #for those classmembers that are not from PDT-Vallex/EngVallex/Vallex 
+  													  #is idref SYNSEMCLASS-ID-<id>, where <id> is classmember id in synsemclass.xml
   $classmember->setAttribute("idref", $idref);
   $classmember->setAttribute("lemma", $lemma);
  
@@ -695,7 +867,7 @@ sub register_multi_as_data_client {
 
   $data->main->register_client($self);
 
-  foreach my $lang ($data->get_lang_c()){
+  foreach my $lang (@{$data->languages}){
 	if ($data->lang_cms($lang)) {
      	  $data->lang_cms($lang)->register_client($self);
 	}
@@ -707,7 +879,7 @@ sub unregister_multi_data_client {
   my $data = $self->data;
 
   $data->main->unregister_client($self);
-  foreach my $lang ($data->get_lang_c){
+  foreach my $lang (@{$data->languages}){
 	if ($data->lang_cms($lang)) {
       $data->lang_cms($lang)->unregister_client($self);
 	}

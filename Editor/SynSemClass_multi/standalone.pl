@@ -18,7 +18,7 @@ use FindBin;
 my $binDir=$FindBin::RealBin;
 my $tkLibDir = "../";
 
-push @INC,$tkLibDir, "/net/work/projects/perlbrew/Ubuntu/14.04/x86_64/perls/perl-5.18.2/lib/site_perl/5.18.2/";
+push @INC,$tkLibDir; 
 
 use Tk;
 use Tk::Wm;
@@ -69,8 +69,9 @@ setlocale(LC_COLLATE, "cs_CZ.utf8");
 setlocale(LANG, "cs_CZ.utf8");
 
 SynSemClass_multi::Config->loadConfig();
+SynSemClass_multi::Config->loadCodeTable();
 
-my @langs= split(',',SynSemClass_multi::Config->getLanguages());
+my @langs= SynSemClass_multi::Config->getLanguages();
 
 my %data_files=();
 my $data_multi=$Data_multi->new();
@@ -83,15 +84,19 @@ $data_multi->set_main($XMLData_main->new($data_files{main},1));
 $data_multi->main->set_languages(@langs);
 
 foreach my $lang (@langs){
-	my ($lang_c,$lang_n) = split(":", $lang);
-	my $file = "synsemclass_" . $lang_c . "_cms.xml";
-	$data_files{$lang_c} = (defined $ARGV[0] ? $ARGV[0] . "/" . $file : SynSemClass_multi::Config->getFromResources($file));
-	die ("Can not read file $file") unless (-e $data_files{$lang_c});
-	$data_multi->set_lang_cms($lang_c, $XMLData_cms->new($data_files{$lang_c},1));
-	$data_multi->lang_cms($lang_c)->set_user($data_multi->main->user);
-	$data_multi->lang_cms($lang_c)->set_languages($lang);
+	my $file = "synsemclass_" . $lang . "_cms.xml";
+	$data_files{$lang} = (defined $ARGV[0] ? $ARGV[0] . "/" . $file : SynSemClass_multi::Config->getFromResources($file));
+	die ("Can not read file $file") unless (-e $data_files{$lang});
+	$data_multi->set_lang_cms($lang, $XMLData_cms->new($data_files{$lang},1));
+	$data_multi->lang_cms($lang)->set_user($data_multi->main->user);
+	$data_multi->lang_cms($lang)->set_languages($lang);
 
-	read_lang_resources($lang_c);
+	my $p = "SynSemClass_multi::" . uc($lang) . "::Resources";
+	eval "require $p";
+	if ($@) {
+		die $@;
+	}
+	$p->read_resources();
 }
 
 
@@ -131,7 +136,7 @@ while ($opt_c--) {
 					  $fe_conf);
     $vallex->subwidget_configure($vallex_conf);
     $vallex->pack(qw/-expand yes -fill both -side left/);
-    $top->title("SynEd: ".$data_multi->main->getUserName($data_multi->main->user()));
+    $top->title("SynEd: ".$data_multi->lang_cms($data_multi->get_priority_lang)->getUserName($data_multi->main->user()));
 
     my $bottom_frame = $top->Frame()->pack(qw/-expand no -fill x -side bottom/);
 
@@ -208,78 +213,4 @@ while ($opt_c--) {
 
 1;
 
-sub read_lang_resources{
-	my ($lang)=@_;
-
-	if ($lang eq "cs"){
-		read_cs_resources();
-	}elsif ($lang eq "en"){
-		read_en_resources();
-	}elsif ($lang eq "de"){
-		read_de_resources();
-	}
-}
-
-sub read_cs_resources{
-	require SynSemClass_multi::LibXMLVallex;
-	require SynSemClass_multi::LibXMLCzEngVallex;
-	require SynSemClass_multi::CS::Links;
-
-	my $pdtvallex_file = SynSemClass_multi::Config->getFromResources("CS/vallex_cz.xml");
-	die ("Can not read file vallex_cz.xml") if ($pdtvallex_file eq "0");
-	$SynSemClass_multi::LibXMLVallex::pdtvallex_data=SynSemClass_multi::LibXMLVallex->new($pdtvallex_file,1);
-
-	my $substituted_pairs_file = SynSemClass_multi::Config->getFromResources("CS/substitutedPairs.txt");
-	die ("Can not read file substutedPairs.txt") if ($substituted_pairs_file eq "0");
-	$SynSemClass_multi::LibXMLVallex::substituted_pairs=SynSemClass_multi::LibXMLVallex->getSubstitutedPairs($substituted_pairs_file);
-
-	unless ($SynSemClass_multi::LibXMLCzEngVallex::czengvallex_data){
-		my $czengvallex_file = SynSemClass_multi::Config->getFromResources("CS/frames_pairs.xml");
-		die ("Can not read file vallex_cz.xml") if ($czengvallex_file eq "0");
-		$SynSemClass_multi::LibXMLCzEngVallex::czengvallex_data=SynSemClass_multi::LibXMLCzEngVallex->new($czengvallex_file,1);
-	}
-
-	my $vallex4_0_mapping_file = SynSemClass_multi::Config->getFromResources("CS/vallex4.0_mapping.txt");
-	die ("Can not read file vallex4.0_mapping.xml") if ($vallex4_0_mapping_file eq "0");
-	$SynSemClass_multi::CS::LexLink::vallex4_0_mapping=SynSemClass_multi::CS::LexLink->getMapping("vallex4.0",$vallex4_0_mapping_file);
-
-	my $pdtval_val3_mapping_file = SynSemClass_multi::Config->getFromResources("CS/pdtval_val3_mapping.txt");
-	die ("Can not read file pdtval_val3_mapping.xml") if ($pdtval_val3_mapping_file eq "0");
-	$SynSemClass_multi::CS::LexLink::pdtval_val3_mapping=SynSemClass_multi::CS::LexLink->getMapping("pdtval_val3",$pdtval_val3_mapping_file);
-
-}
-
-sub read_en_resources{
-	require SynSemClass_multi::LibXMLVallex;
-	require SynSemClass_multi::LibXMLCzEngVallex;
-	require SynSemClass_multi::EN::Links;
-
-	my $engvallex_file = SynSemClass_multi::Config->getFromResources("EN/vallex_en.xml");
-	die ("Can not read file vallex_en.xml") if ($engvallex_file eq "0");
-	$SynSemClass_multi::LibXMLVallex::engvallex_data=SynSemClass_multi::LibXMLVallex->new($engvallex_file,1);
-
-	unless ($SynSemClass_multi::LibXMLCzEngVallex::czengvallex_data){
-		my $czengvallex_file = SynSemClass_multi::Config->getFromResources("EN/frames_pairs.xml");
-		die ("Can not read file vallex_cz.xml") if ($czengvallex_file eq "0");
-		$SynSemClass_multi::LibXMLCzEngVallex::czengvallex_data=SynSemClass_multi::LibXMLCzEngVallex->new($czengvallex_file,1);
-	}
-
-	my $fn_mapping_file = SynSemClass_multi::Config->getFromResources("EN/framenet_mapping.txt");
-	die ("Can not read file framenet_mapping.xml") if ($fn_mapping_file eq "0");
-	$SynSemClass_multi::EN::LexLink::framenet_mapping=SynSemClass_multi::EN::LexLink->getMapping("framenet",$fn_mapping_file);
-
-}
-
-sub read_de_resources{
-	require SynSemClass_multi::DE::Links;
-
-	my $gup_mapping_file = SynSemClass_multi::Config->getFromResources("DE/gup_mapping.txt");
-	die ("Can not read file gup_mapping.txt") if ($gup_mapping_file eq "0");
-	$SynSemClass_multi::DE::LexLink::gup_mapping=SynSemClass_multi::DE::LexLink->getMapping("gup",$gup_mapping_file);
-
-	my $valbu_mapping_file = SynSemClass_multi::Config->getFromResources("DE/valbu_mapping.txt");
-	die ("Can not read file valbu_mapping.txt") if ($valbu_mapping_file eq "0");
-	$SynSemClass_multi::DE::LexLink::valbu_mapping=SynSemClass_multi::DE::LexLink->getMapping("valbu",$valbu_mapping_file);
-
-}
 

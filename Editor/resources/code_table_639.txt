@@ -1,0 +1,7 @@
+639-3	639-2/639-5	639-1	Lang Name
+ces	cze	cs	Czech
+ces	ces	cs	Czech
+deu	deu	de	German
+deu	ger	de	German
+eng	eng	en	English
+spa	spa	es	Spanish

@@ -70,7 +70,7 @@ use base qw(SynSemClass_multi::FramedWidget);
 use utf8;
 require Tk::HList;
 require Tk::ItemStyle;
-require SynSemClass_multi::Sort;
+require SynSemClass_multi::Sort_all;
 sub create_widget {
   my ($self, $data, $parent_frame, $top, $label, @conf) = @_;
 

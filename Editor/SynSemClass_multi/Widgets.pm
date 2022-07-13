@@ -108,6 +108,7 @@ sub configure {
 sub openurl{
   my ($self, $url)=@_;
 
+  $url=~s/%26/&/g;
   my $platform = $^O;
   use URI::Encode qw(uri_encode uri_decode);
 
@@ -305,7 +306,7 @@ sub create_widget {
 		  },$w,$self ]);
 
   $w->configure(@conf) if (@conf);
-  $w->configure(-command => [\&open_grouping_link, $self]);
+  $w->configure(-command => [\&open_verb_info_link, $self]);
   $common_style=[] unless (ref($common_style) eq "ARRAY");
   $w->BindMouseWheelVert() if $w->can('BindMouseWheelVert');
   $w->headerCreate(0,-itemtype=>'text', -text=>' ');
@@ -444,8 +445,8 @@ sub fetch_data {
   $t->columnWidth(1,'');
   $t->columnWidth(2,'');
   my $class_id=$self->data->main->getClassId($class);
-  foreach my $lang_c ($self->data->get_lang_c()){
-	my $data_cms = $self->data->lang_cms($lang_c);
+  foreach my $lang (@{$self->data->languages()}){
+	my $data_cms = $self->data->lang_cms($lang);
 	my $class_lang = $data_cms->getClassByID($class_id);
 	foreach my $entry ($data_cms->getClassMembersList($class_lang)) {
       next if (!$self->show_deleted() and $entry->[3] eq 'deleted');
@@ -454,11 +455,11 @@ sub fetch_data {
       next if (!$self->show_no() and $entry->[3] eq 'no');
       next if (!$self->show_rather_no() and $entry->[3] eq 'rather_no');
       next if (!$self->show_not_touched() and $entry->[3] eq 'not_touched');
-      $e = $t->add($entry->[1],-data => [$lang_c, $entry->[0]]);
+      $e = $t->add($entry->[1],-data => [$lang, $entry->[0]]);
 	  $t->itemCreate($e, 0, -itemtype => 'imagetext',
 		  				    -image => $self->pixmap($entry->[3]));
 	  $t->itemCreate($e, 1, -itemtype=>'imagetext',
-							-text=> $lang_c,
+							-text=> $lang,
 							-style => $self->style($entry->[3]));
 	  $t->itemCreate($e, 2, -itemtype=>'imagetext',
 							-text=> $entry->[2]." (" .$entry->[1]. ")",
@@ -552,82 +553,22 @@ sub focused_classmember {
   return undef;
 }
 
-sub open_grouping_link{
+sub open_verb_info_link{
   my ($self)=@_;
   my $w=$self->widget();
   my $item=$w->infoAnchor();
   return unless defined($item);
 			  
-  my $cm=$w->infoData($item);
-  my $lang= $self->data()->getClassMemberAttribute($cm, "lang");
+  my ($lang, $cm)=$w->infoData($item);
   
   my $address="";
-  if ($lang eq "en"){
-	  my @on_links=$self->data()->getClassMemberOntoNotesLinks($cm);
-	  my $lemma = "";
-	  my $sense = "";
-	  if (scalar @on_links > 0){
-		  $lemma=$on_links[0]->[1];
-		  $sense=$on_links[0]->[2];
-	  }else{
-		  $lemma= $self->data()->getClassMemberAttribute($cm, "lemma");
-	  }
 
-	  $address=$self->data()->getLexBrowsing("on");
-	  if ($address eq "-1"){
-		SynSemClass_multi::Editor::warning_dialog($self, "Can not open groupings link for this classmember.\n There is no directory 'groupings' in resources!");
-		return;
-	  }
-	  if ($lemma eq ""){
-	  	$address .= "html_index.html";
-	  }elsif($sense ne ""){
-		$address .= $lemma ."-v.html#" . $sense;	  
-	  }else{
-	  	$address .= $lemma . "-v.html";
-	  }
-  }elsif ($lang eq "cs"){
-	  my $lemma = "";
-	  my $idref = "";
-	  my @pdt_links=$self->data()->getClassMemberPDTVallexLinks($cm);
-	  if (scalar @pdt_links > 0){
-	  	$lemma=$pdt_links[0]->[2];
-	  	$idref=$pdt_links[0]->[1];
-	  }else{
-	    $lemma=$self->data()->getClassMemberAttribute($cm, "lemma");
-		$idref=$self->data()->getClassMemberAttribute($cm, "idref");
-		$idref=~s/PDT-Vallex-ID-//;
-	  }
-	  $address=$self->data()->getLexBrowsing("pdtvallex");
-  	  return if ($address eq "" or $lemma eq "" or $idref eq "");
-  	  $address .= 'verb=' . $lemma . '#' . $idref;
-  }elsif ($lang eq "de"){
-	  my $idref = $self->data()->getClassMemberAttribute($cm, "idref");
-	  my $lexidref = $self->data()->getClassMemberAttribute($cm, "lexidref");
-	  if ($lexidref eq "gup"){
-	  	$idref=~s/GUP-ID-//;
-		$idref=~s/-/./;
-		$address = SynSemClass_multi::DE::LexLink::get_gup_address($self, $idref);
-		#	  	my $lemma=$SynSemClass_multi::DE::LexLink::gup_mapping->{roleset_id}->{$idref}->{lemma} || "";
-		#my $div=$SynSemClass_multi::DE::LexLink::gup_mapping->{roleset_id}->{$idref}->{div} || "";
-		#$address = $self->data()->getLexBrowsing("gup");
-		#return if ($address eq "" or $lemma eq "" or $div eq "");
-		#$address .=$lemma . ".html#" . $div;
-	  }elsif ($lexidref eq "valbu"){
-	  	$idref=~s/VALBU-ID-//;
-		$idref=~s/-/\//;
-		$address = $self->data()->getLexBrowsing("valbu");
-		return if ($address eq "" or $idref eq "");
-		$address .= $idref;
-	  }elsif ($lexidref eq "synsemclass"){
-	    $lemma=$self->data()->getClassMemberAttribute($cm, "lemma");	
-		$address = $self->data()->getLexBrowsing("woxikon");
-		return if ($address eq "" or $lemma eq "");
-		$address .= $lemma . ".php";
-	  }
-  }else{
-  	return;
-  }
-  $self->openurl($address);
+  my $linkspackage = "SynSemClass_multi::" . uc($lang) . "::Links";
+  my $data_cms = $self->data->lang_cms($lang);
+  
+  $address = $linkspackage->get_verb_info_link_address($self, $cm, $data_cms) || "";
+
+  $self->openurl($address) if ($address ne "");
 #  eval { system("firefox $address"); }; warn $@ if $@;
 }
 
@@ -653,8 +594,7 @@ sub create_widget {
   my $l_sb = $sb_f->Label(-text => "Search by: ",-underline => 3)->pack(qw/-side left/);
   my $be_sb = $sb_f->BrowseEntry(-background => white, -autolimitheight => true, -browsecmd => [\&search_by_changed, $self, \$search_by_value], -variable => \$search_by_value)->pack(qw/-side top -expand yes -fill x/);
   #$be_sb->icursor('end');
-  my @lang_names_s = map { $_ . " class name" } $self->data->get_lang_n();
- 
+  my @lang_names_s = map { SynSemClass_multi::Config->getLangName($_) . " class name" } @{$self->data->languages()};
   $search_by_value=$lang_names_s[0];
   my $sb_string=lc($search_by_value);
   $sb_string =~ s/ /_/g;
@@ -672,7 +612,7 @@ sub create_widget {
   my $b_search = $search_f->Button(-text => "Search",-underline=>4, -command => [\&search_class, $self])->pack(qw/-side right/);
   $top->toplevel->bind('<Alt-c>',sub { $b_search->invoke(); Tk->break() });
   	  
-  ## Class List
+  # Class List
   my $w = $frame->Scrolled(qw/HList -columns 3 -background white
                               -selectmode browse
                               -scrollbars osoe
@@ -768,7 +708,7 @@ sub fetch_data {
 
   my $search_by = $self->get_search_by;
   if (not defined $search_by or $search_by eq ""){
-  	my $f_lang_n = $self->data->main->first_lang_n || "czech";
+  	my $f_lang_n = SynSemClass_multi::Config->getLangName($self->data->main->first_lang) || "czech";
 	$search_by = lc($f_lang_n) . "_class_name";
   }
   $exact_search = 0 unless $exact_search;
@@ -777,22 +717,22 @@ sub fetch_data {
   $t->headerCreate(0,-itemtype=>'text', -text=>' ');
   $header1_text = "ID";
   foreach my $lang (@{$self->data->languages}){
-  	my ($lang_c, $lang_n)=split(":", $lang);
+	$lang_n = SynSemClass_multi::Config->getLangName($lang);
 	$lang_n = lc($lang_n) . "_class_name";
 	if ($search_by eq $lang_n){
-		$header1_text = $lang_c . " name";
-		$search_csl_by = $lang_c . "_class_name";
+		$header1_text = $lang . " name";
+		$search_csl_by = $lang . "_class_name";
 	}
   }
   $t->headerCreate(1,-itemtype=>'text', -text=>$header1_text);
-  my $f_lang_c = $self->data->main->first_lang_c || "xx";
-  my $header2_text = ($search_by !~ "(class_id|class_roles)"? "ID" : $f_lang_c . " name");
+  my $f_lang = $self->data->main->first_lang || "xxx";
+  my $header2_text = ($search_by !~ "(class_id|class_roles)"? "ID" : $f_lang . " name");
   $t->headerCreate(2,-itemtype=>'text', -text=>$header2_text);
   $t->columnWidth(0,'');
   $t->columnWidth(1,'');
    
   my $class_style=$self->style(); 
-  foreach my $entry ($self->data->main->getClassSubList
+  foreach my $entry ($self->data->getClassSubList
 		     ($class, $search_csl_by, $exact_search, $self->max_surrounding())) {
 	my $reviewed;
 	if ($entry->[4] ne "merged"){
@@ -805,7 +745,7 @@ sub fetch_data {
 		$class_style->configure(-background => "white");
 	}
     $t->itemCreate($e, 0, -itemtype=>'text',
-		   -text=> ($entry->[4] eq "merged" ? "-" : ($reviewed ? "*" : "")),
+		   -text=> ($entry->[4] eq "merged" ? "-" : ($entry->[4] eq "deleted" ? "x" :($reviewed ? "*" : ""))),
 		   -style => $class_style);
 	
 	my $text1_value=$entry->[3];
@@ -945,6 +885,7 @@ sub create_widget {
 
   $roles->configure(@conf);
   $roles->pack(qw/-side left -fill both -padx 6 -pady 4 -expand yes/);
+  my $roles_balloon=$roles_frame->Balloon( -balloonposition => 'mouse');
   $roleadd_button=$rolesbutton_frame->Button(-text=>'Add',	
 	  										-underline=>0,  
 	  										-command => [\&roleadd_button_pressed,$self]);
@@ -968,10 +909,11 @@ sub create_widget {
 	frame => $roles_frame,
 	roles => $roles,
 	label => $roles_label,
+	balloon => $roles_balloon,
 	addbutton => $roleadd_button,
 	deletebutton => $roledelete_button,
 	modifybutton => $rolemodify_button
-	}, "","";
+	}, "",""; 
 }
 
 sub set_editor_frame{
@@ -999,6 +941,7 @@ sub forget_data_pointers {
   if ($t) {
     $t->delete('all');
   }
+  $self->subwidget('balloon')->detach($t);
 }
 
 sub fetch_data {
@@ -1007,18 +950,29 @@ sub fetch_data {
   my $t=$self->widget();
   my $e;
   $t->delete('all');
+  $self->subwidget('balloon')->detach($t);
   return unless ref($class);
 
   my @roles=$self->data->main->getCommonRolesList($class);
+  my %balloon_msg;
+  my $priority_lang = $self->data->get_priority_lang;
   foreach my $entry (@roles){
     $e= $t->addchild("",-data => $entry->[0]);
     $t->itemCreate($e, 0, -itemtype=>'text',
-		   -text=> $entry->[1]);
+		   -text=> $entry->[2]);
     $t->itemCreate($e, 1, -itemtype=>'text',
-		   -text=> $entry->[3]);
+		   -text=> $entry->[5]);
     $t->itemCreate($e, 3, -itemtype=>'text',
-		   -text=> ( $entry->[2] eq "fn" ? "fn" : "" ));
+		   -text=> ( $entry->[4] eq "fn" ? "fn" : "" ));
+
+
+	$balloon_msg{$e} = $self->data->lang_cms($priority_lang)->getRoleDefinition($entry->[1]); #role definition from the priority lang lexicon
+	$balloon_msg{$e}=$entry->[3] if ($balloon_msg{$e} eq "");  #if is not defined, take the role label from the main lexicon
+
   }
+  $self->subwidget('balloon')->attach($t, -msg => \%balloon_msg);
+
+
 }
 
 sub roleadd_button_pressed{
@@ -1953,28 +1907,18 @@ sub show_pair_editor_dialog{
   my %frameArgs;
 
 
-  my $lexidref=$data_cms->getClassMemberAttribute($classmember, 'lexidref');
-  my $idref=$data_cms->getClassMemberAttribute($classmember, 'idref');
-  $idref=~s/^.*-ID-//;
-  if ($lexidref eq "gup"){
-	  $idref=~s/-/./;
-	  my (@args)=@{$SynSemClass_multi::LexLink::gup_mapping->{roleset_id}->{$idref}->{args}};
-	  foreach my $arg (@args){
-		$arg=~s/:.*$//;
-	  	$argfrom->insert("end", $arg);
-		$frameArgs{$arg}=1;
-	  }
-  
-  }else{
-	  foreach (SynSemClass_multi::LibXMLVallex::getLexiconFrameElementsByFrameID($lexidref, $idref)){
-		  my (@ftors)=split(/\|/, $_->[1]);
-		  foreach my $ftor (@ftors){
-		  	$ftor=~s/^\?//;
-  			$argfrom->insert("end", $ftor);
-			$frameArgs{$ftor}=1;  
-		  }
-	  }
+  my $linkspackage = "SynSemClass_multi::" . uc($lang) . "::Links";
+  my @frame_elements = $linkspackage->get_frame_elements($data_cms, $classmember);
+
+  foreach my $fr_el (@frame_elements){
+  	$fr_el=~s/[ :].*$//;
+	$fr_el=~s/^\?//;
+   	$argfrom->insert("end", $fr_el);
+  	$frameArgs{$fr_el}=1;
   }
+
+  my $lexidref=$data_cms->getClassMemberAttribute($classmember, 'lexidref');
+  
   $argfrom->insert("end", "");
   foreach ($data_cms->getDefArgsSLsForLexicon($lexidref)){
   	$argfrom->insert("end", $_) if !$frameArgs{$_};
@@ -2006,7 +1950,7 @@ sub show_pair_editor_dialog{
   my $dialog_return = SynSemClass_multi::Widget::ShowDialog($d, $focused_entry);
   if ($dialog_return =~ /OK/){
    my $new_argfrom=$data_cms->trim($argfrom_value);
-   $new_argfrom=uc($new_argfrom) if ($new_argfrom !~ /^#/);
+   #   $new_argfrom=uc($new_argfrom) if ($new_argfrom !~ /^#/);
    my $new_argto=$data_main->trim($argto_value);
    my $new_form=$data_cms->trim($form->get());
    my $new_spec=$data_cms->trim($spec->get());
@@ -2238,7 +2182,7 @@ sub fetch_data {
   $self->set_no_example_sentences($data_cms->getNoExampleSentences($classmember));
 
   $self->reload_examples($lang, $classmember);
-  if (($lang eq "en") or ($lang eq "cs")){
+  if (($lang eq "eng") or ($lang eq "ces")){
 	$self->subwidget('all_tred_button')->configure(-state => 'normal');
 	$self->subwidget('one_tred_button')->configure(-state => 'normal');
   }else{
@@ -2251,6 +2195,7 @@ sub reload_examples{
   my ($self, $lang, $classmember)=@_;
 
   my $data_cms = $self->data->lang_cms($lang);
+  my $examplespackage = "SynSemClass_multi::" . uc($lang) . "::Examples";
 
   my $t=$self->subwidget('examples_list');
 
@@ -2324,8 +2269,11 @@ sub reload_examples{
   $t->insert('end', @header);
 
   my $i=0;
- foreach my $entry ($data_cms->getAllExamples($classmember)) {
-	next if ($self->show_only_lexicon() and !$entry->[2]);
+ foreach my $entry ($examplespackage->getAllExamples($data_cms, $classmember)) {
+	my ($ecorpref, $enodeID, $epair, $elang, $testData)=split("##", $entry->[0]);
+	$testData=0 unless $testData;
+	my $lexEx = ($lang ne $elang ? 0 : ($data_cms->isLexExample($classmember, $epair, $enodeID, $ecorpref) ? 1 : 0));  
+	next if ($self->show_only_lexicon() and !$lexEx);
 	$i++; last if ($i>100);
 	$t->configure(
 	 -borderwidth => 0, -highlightthickness => 0, 
@@ -2336,24 +2284,24 @@ sub reload_examples{
 	 -takefocus=>0);
 
 	my @pom=();
-	push @pom, (($entry->[2] ? "   *   \t" : "       \t"), "ns");
-	push @pom, ("<".$entry->[1].">", "invisible");
-	my $test = $entry->[3];
-	my $text=$entry->[4];
+	push @pom, (($lexEx ? "   *   \t" : "       \t"), "ns");
+	push @pom, ("<".$entry->[0].">", "invisible");
+
+	my $text=$entry->[1];
 	while ($text ne ""){
 		my $i=index($text, "<start_");
 		my $j=index($text, "<end_");
 
 		if ($i > -1){
 			my $left=substr($text, 0, $i);
-			if ($test){
+			if ($testData || ($elang ne $lang)){
 			  push @pom, ($left, "ns_test") if $left ne "";
 			}else{
 			  push @pom, ($left, "ns") if $left ne "";
 			}
 			my $middle=substr($text, $i, $j-$i);
 			$middle=~s/^<start_([^>]*)>//;
-			if ($test){
+			if ($testData || ($elang ne $lang)){
 			  push @pom, ($middle, $1 . "_test");
 		    }else{
 			  push @pom, ($middle, $1);
@@ -2361,7 +2309,7 @@ sub reload_examples{
 			$text = substr($text, $j);
 			$text =~ s/^<end_[^>]*>//;
 		}else{
-			if ($test){
+			if ($testData || ($elang ne $lang)){
 			  push @pom, ($text, "ns_test");
 		    }else{
 			  push @pom, ($text, "ns");
@@ -2385,10 +2333,11 @@ sub all_tred_button_pressed{
   }
  
   my $data_cms = $self->data->lang_cms($lang);
+  my $examplespackage = "SynSemClass_multi::" . uc($lang) . "::Examples";
   my @example_nodes=();
-  foreach my $example ($data_cms->getAllExamples($classmember)){
-  	my ($corpref, $exId, $pair)=split("#",$example->[1],3);
-	push @example_nodes, $exId if ($corpref eq "pcedt");
+  foreach my $example ($examplespackage->getAllExamples($data_cms, $classmember)){
+	my ($ecorpref, $enodeID, $epair, $elang, $testData)=split("##", $example->[0]);
+	push @example_nodes, $enodeID if ($ecorpref eq "pcedt");
   }
 
   if (scalar @example_nodes == 0){
@@ -2416,16 +2365,15 @@ sub one_tred_button_pressed{
 	return;
   }  
   
-  if ($selected=~/^[ *]{7}\t<([^#>]*)#([^#>]*)#[^>]*>.*/){
-	my $corpref = $1;
-  	my $nodeid=$2;
-	if ($corpref ne "pcedt"){
-	    SynSemClass_multi::Editor::warning_dialog($self,"This sentence is from $corpref, so it can not be opened in TrEd!");
+  if ($selected=~/^[ *]{7}\t<([^>]*)>.*/){
+	  my ($ecorpref, $enodeID, $epair, $elang, $testData) = split("##", $1);
+	if ($ecorpref ne "pcedt"){
+	    SynSemClass_multi::Editor::warning_dialog($self,"This sentence is from $ecorpref, so it can not be opened in TrEd!");
 	}else{
-		$self->openTrEdForFileNodes($nodeid);
+		$self->openTrEdForFileNodes($enodeID);
 	}
   }else{
-    SynSemClass_multi::Editor::warning_dialog($self,"Bad node ID for opening TrEd ($nodeid)!");
+    SynSemClass_multi::Editor::warning_dialog($self,"Bad node ID for opening TrEd ($enodeID)!");
   }
 
 }
@@ -2440,6 +2388,7 @@ sub add_button_pressed{
   }  
 
   my $data_cms = $self->data->lang_cms($lang);
+  my $examplespackage = "SynSemClass_multi::" . uc($lang) . "::Examples";
   my $t=$self->subwidget('examples_list');
   my $selected=$t->getSelected;
   if ($selected =~ /^ *$/){
@@ -2447,59 +2396,45 @@ sub add_button_pressed{
 	return;
   }  
  
-  if ($selected=~/^[ ]{7}\t<([^#>]*)#([^#>]*)#([^>]*)>.*/){
-	my $corpref=$1;
-  	my $nodeid=$2;
-	my $pair = $3;
-
-	if ($nodeid =~ /T-wsj(|_)2/){
-  		SynSemClass_multi::Editor::warning_dialog($self, "Can not add this sentence ($nodeid) to the Lexicon! It is from the test section.");
+  if ($selected=~/^[ *]{7}\t<([^>]*)>.*/){
+	  my ($ecorpref, $enodeID, $epair, $elang, $testData) = split("##", $1);
+	  $testData = 0 unless ($testData);
+	
+	  if ($testData){
+  		SynSemClass_multi::Editor::warning_dialog($self, "Can not add this sentence ($enodeID) to the Lexicon! It is from the test section.");
 		return;
 	}
-	my $llang = $pair; 
-	$llang =~ s/^.*(...)$/\1/;
-	if ($llang =~ /-(en|de)/){
-		$llang =~ s/-//;
-	}else{
-		$llang = $lang;
-	}
-	if ($llang ne $lang){
-  		SynSemClass_multi::Editor::warning_dialog($self, "Can not add this sentence ($nodeid-$llang) to the Lexicon! It is only the translation of previous sentence.");
+	
+	if ($elang ne $lang){
+  		SynSemClass_multi::Editor::warning_dialog($self, "Can not add this sentence ($enodeID-$elang) to the Lexicon! It is only the translation of previous sentence.");
 		return;
 	}
-  }  
+    
 
-  if ($data_cms->getNoExampleSentences($classmember)){
-  	my $answer = SynSemClass_multi::Editor::question_dialog($self,"Do you want to unset no_example_sentences?", "Yes");
-	if ($answer eq "Yes"){
-  		$self->set_no_example_sentences(0);
-	}else{
-		SynSemClass_multi::Editor::warning_dialog($self, "You can not add sentence to the lexicon");
+  	if ($data_cms->getNoExampleSentences($classmember)){
+  		my $answer = SynSemClass_multi::Editor::question_dialog($self,"Do you want to unset no_example_sentences?", "Yes");
+		if ($answer eq "Yes"){
+  			$self->set_no_example_sentences(0);
+		}else{
+			SynSemClass_multi::Editor::warning_dialog($self, "You can not add sentence to the lexicon");
+			return;
+		}  	
+  	}
+
+	if ($data_cms->isLexExample($classmember, $epair, $enodeID, $ecorpref)){
+  		SynSemClass_multi::Editor::warning_dialog($self, "This sentence is already in Lexicon!");
 		return;
-	}  	
-  }
+  	}
 
-  if ($selected =~ /^   \*/){
-  	SynSemClass_multi::Editor::warning_dialog($self, "This sentence is already in Lexicon!");
-	return;
-  }
-
-  #add sentence to lexicon
-  if ($selected=~/^[ ]{7}\t<([^#>]*)#([^#>]*)#([^>]*)>.*/){
-	my $corpref=$1;
-  	my $sid=$2;
-  	my $pair=$3;
-
-	if ($pair =~ /-(de|en)$/){
-		$pair =~s/-(de|en)$//;
-	}
-  	my $retval=$data_cms->addLexExample($classmember, $pair, $sid, $corpref);
+	#add sentence to lexicon
+  	
+	my $retval=$data_cms->addLexExample($classmember, $epair, $enodeID, $ecorpref);
   	if (!$retval){
-  		SynSemClass_multi::Editor::warning_dialog($self, "Can not add this sentence ($sid) to the Lexicon!");
+  		SynSemClass_multi::Editor::warning_dialog($self, "Can not add this sentence ($enodeID) to the Lexicon!");
 		return;
   	}
   	if ($retval == 2){
-  		SynSemClass_multi::Editor::warning_dialog($self, "This sentence ($sid) is already in Lexicon!");
+  		SynSemClass_multi::Editor::warning_dialog($self, "This sentence ($enodeID) is already in Lexicon!");
   	}
     my $lineno=$t->index('sel.first');
     $lineno=~s/\..*$/.0/;
@@ -2507,9 +2442,9 @@ sub add_button_pressed{
     $t->delete("$lineno", "$lineno+7c");
     $t->insert("$lineno","   *   ", "ns");
     $self->selectCurrentSent($t);
-  
+	  
   }else{
-    SynSemClass_multi::Editor::warning_dialog($self,"Bad sentence identificator ($selected)!");
+    	SynSemClass_multi::Editor::warning_dialog($self,"Bad sentence identificator ($selected)!");
   }
 }
 
@@ -2530,28 +2465,27 @@ sub remove_button_pressed{
 	return;
   }  
   
-  if ($selected =~ /^    /){
-  	SynSemClass_multi::Editor::warning_dialog($self, "This sentence is not in Lexicon!");
-	return;
-  }
+  if ($selected=~/^[ *]{7}\t<([^>]*)>.*/){
+	my ($ecorpref, $enodeID, $epair, $elang, $testData) = split("##", $1);
 
-  
-  #remove sentence from lexicon
-  if ($selected=~/^[ *]{7}\t<([^#>]*)#([^#>]*)#([^>]*)>.*/){
-	my $corpref=$1;
-  	my $sid=$2;
-  	my $pair=$3;
-
-	if ($pair =~ /-(de|en)$/){
-		$pair =~s/-(de|en)$//;
+	if ($lang ne $elang){
+  		SynSemClass_multi::Editor::warning_dialog($self, "This sentence is not in Lexicon! It is only translation of previous sentence.");
+		return;	
 	}
-	my $retval=$data_cms->removeLexExample($classmember, $pair, $sid, $corpref);
+	
+	if (!$data_cms->isLexExample($classmember, $epair, $enodeID, $ecorpref)){
+  		SynSemClass_multi::Editor::warning_dialog($self, "This sentence is not in Lexicon!");
+		return;
+	}  
+
+  	#remove sentence from lexicon
+	my $retval=$data_cms->removeLexExample($classmember, $epair, $enodeID, $ecorpref);
 	if (!$retval){
-		SynSemClass_multi::Editor::warning_dialog($self, "Can not remove this sentence ($sid) from Lexicon!");
+		SynSemClass_multi::Editor::warning_dialog($self, "Can not remove this sentence ($enodeID) from Lexicon!");
 		return;
 	}
 	if ($retval == 2){
-		SynSemClass_multi::Editor::warning_dialog($self, "This sentence ($sid) is not in Lexicon!");
+		SynSemClass_multi::Editor::warning_dialog($self, "This sentence ($enodeID) is not in Lexicon!");
 	}else{
   		my $lineno=$t->index('sel.first');
 		if ($self->show_only_lexicon()){
@@ -2564,25 +2498,13 @@ sub remove_button_pressed{
 	}
   }
 
-  if (!$data_cms->someLexExamples($self->selectedClassMember)){
+  if (!$data_cms->someLexExamples($classmember)){
   	my $answer = SynSemClass_multi::Editor::question_dialog($self,"It was last sentence in lexicon. Do you want to set no_example_sentences?", "Yes");
 	if ($answer eq "Yes"){
   		$self->set_no_example_sentences(1);
 	}
   }
 }
-
-sub convert_czech_strings{
-  my $string=shift;
-
-  $string=~s/ /_/g;
-  $string=~s/([žščřďťňáéěíóúůýŽŠČŘĎŤŇÁÉĚÍÓÚŮÝ])/\1_/g;
-  $string=~tr/[žščřďťňáéěíóúůýŽŠČŘĎŤŇÁÉĚÍÓÚŮÝ]/[zscrdtnaeeiouuyZSCRDTNAEEIOUUY]/;
-									
-  return $string;
-}
-
-
 
 #
 # EBrowseEntry - expanded browse entry widget
@@ -2790,8 +2712,12 @@ sub fetch_class_data {
   }
 
   my $data_main = $self->data->main;
-
+  my $priority_lang = $self->data->get_priority_lang;
+  my $data_priority = $self->data->lang_cms($priority_lang);
   my $c_id=$data_main->getClassId($class);
+  
+  my $c_lemma=$data_priority->getClassLemmaByID($c_id);
+
   my $c_status=$data_main->getClassStatus($class);
   if ($c_status eq "merged"){
   	my $c_merged_with = $data_main->getClassMergedWith($class);
@@ -2809,14 +2735,15 @@ sub fetch_classmember_data {
     return;
   }
 
-  my $priority_lang = $self->data->get_lang_c->[0];
+  my $priority_lang = $self->data->get_priority_lang;
   my $data_cms = $self->data->lang_cms($lang);
+  my $data_priority = $self->data->lang_cms($priority_lang);
   my $data_main = $self->data->main;
 
   my $lang_class=$data_cms->getLangClassForClassMember($classmember);
   my $c_id=$data_cms->getClassId($lang_class);
   my $main_class=$data_main->getClassByID($c_id);
-  my $c_lemma=$data_main->getClassLangName($main_class, $priority_lang);
+  my $c_lemma=$data_priority->getClassLemmaByID($c_id);
   my $c_status=$data_main->getClassStatus($main_class);
   my $text = "Class: $c_lemma($c_id) class_status: $c_status";
   if ($c_status eq "merged"){

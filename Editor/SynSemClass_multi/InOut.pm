@@ -391,22 +391,22 @@ sub parseCSV{
 
 		if ($line[2] ne ""){
 			if ($line[2] =~ /^(.*)\((.*)\)$/){
-				$cmlang = "cs";
+				$cmlang = "ces";
 #						push @{$data{ERROR}}, "INFO: $1 - cmlemma a $2 cmid";
 				$cmlemma=$1;
 				$cmid=$2;
 			}else{
-				$cmlang = "en";
+				$cmlang = "eng";
 				($cmlemma, $cmid)=split(/ /,$line[2]);
 				#					push @{$data{ERROR}}, "INFO: $cmlemma a $cmid";
 			}
 
-			if ($cmlang eq "cs" and ($pdtvallexLemmas{$cmid} ne $cmlemma)){
+			if ($cmlang eq "ces" and ($pdtvallexLemmas{$cmid} ne $cmlemma)){
 				if (defined $pdtvallexLemmas{$cmid}){
 					push @{$data{ERROR}}, "WARNING: $cmlemma is not valid lemma for $cmid";
 					$cmlemma=$pdtvallexLemmas{$cmid};
 				}elsif(defined $engvallexLemmas{$cmid}){
-					$cmlang = "en";
+					$cmlang = "eng";
 					if ($cmlemma ne $engvallexLemmas{$cmid}){
 						push @{$data{ERROR}}, "WARNING: $cmlemma is not valid lemma for $cmid";
 						$cmlemma=$engvallexLemmas{$cmid};
@@ -414,12 +414,12 @@ sub parseCSV{
 				}
 			}
 
-			if ($cmlang eq "en" and ($engvallexLemmas{$cmid} ne $cmlemma)){
+			if ($cmlang eq "eng" and ($engvallexLemmas{$cmid} ne $cmlemma)){
 				if (defined $engvallexLemmas{$cmid}){
 					push @{$data{ERROR}}, "WARNING: $cmlemma is not valid lemma for $cmid";
 					$cmlemma=$engvallexLemmas{$cmid};
 				}elsif(defined $pdtvallexLemmas{$cmid}){
-					$cmlang = "cs";
+					$cmlang = "ces";
 					if ($cmlemma ne $pdtvallexLemmas{$cmid}){
 						push @{$data{ERROR}}, "WARNING: $cmlemma is not valid lemma for $cmid";
 						$cmlemma=$pdtvallexLemmas{$cmid};
@@ -428,7 +428,7 @@ sub parseCSV{
 			}
 
 			my @czengvallex_links=();
-			if ($cmlang eq "cs"){
+			if ($cmlang eq "ces"){
 				if ($line[3] =~ /^(.*)\((.*)\)$/){
 					my $enlemma=$1;
 					my $enid=$2;
@@ -453,7 +453,7 @@ sub parseCSV{
 		
 			my $idref;
 			my $lexidref;
-			if ($cmlang eq "cs"){
+			if ($cmlang eq "ces"){
 				$idref = "PDT-Vallex-ID-".$cmid;
 				$lexidref="pdtvallex";
 				if (not defined $data{$class_lemma}{$idref}){
@@ -595,9 +595,9 @@ use vars qw($framenet_mapping);
 				}
 			}
 			my @pevlink_value = split(/:/,$cm_values{pdt_or_engvallex_links});
-			if ($lang eq "cs"){
+			if ($lang eq "ces"){
 				push @extlexes, ["pdtvallex", \@pevlink_value];
-			}elsif ($lang eq "en"){
+			}elsif ($lang eq "eng"){
 				push @extlexes, ["engvallex", \@pevlink_value];
 			}
 			push @messages, "\t\tpdt_or_engvallex links: $pevlink_value[1] ($pevlink_value[0])";
@@ -697,14 +697,10 @@ sub exportData{
   	@exportingClasses=($selectedClass);
   }
 
-  my @languages = $data_main->get_lang_c;
+  my @languages = $data_main->languages;
   foreach my $class (@exportingClasses){
 	my $class_id = $data_main->getClassId($class);
-	my @classLemmas=();
-	foreach (@languages){
-		push @classLemmas, $data_main->getClassLangName($class, $_);
-	}
-	print "\texporting class $classLemmas[0] ($class_id) ...\n";
+	print "\texporting class $class_id ...\n";
 	my @commonRoles = $data_main->getCommonRolesSLs($class);
 
 	my %rolesOrder;
@@ -724,9 +720,6 @@ sub exportData{
 	
 	my $classNote=$data_main->getClassNote($class);
 
-	for (my $i=0; $i<scalar @languages; $i++){
-		print OUT $classLemmas[$i] . " (" . $languages[$i] . ")\n";
-	}
 	print OUT "\n\t\t\t\t";
 	foreach (@commonRoles){
 		print OUT "$_\t";
@@ -738,6 +731,8 @@ sub exportData{
 	foreach my $lang (@languages){
 	  my $data_cms = $self->data->lang_cms($lang);
 	  my $class_lang = $data_cms->getClassByID($class_id);
+      my $class_lemma = $data_cms->getClassLemma($class_lang);
+	  print OUT "$class_lemma ($lang)\n";
 	  foreach my $cm ($data_cms->getClassMembersNodes($class_lang)){
 
 		my $lemma = $data_cms->getClassMemberAttribute($cm, 'lemma');
@@ -800,8 +795,8 @@ sub exportData{
 				}elsif($ln_type eq "wn"){
 					print OUT $_->[3] . "#" . $_->[4];
 				}elsif($ln_type eq "czengvallex"){
-					print OUT $_->[5] . "(" . $_->[4] . "):" . $_->[7] . "(" . $_->[6] . ")" if ($lang eq "en");
-					print OUT $_->[7] . "(" . $_->[6] . "):" . $_->[5] . "(" . $_->[4] . ")" if ($lang eq "cs");
+					print OUT $_->[5] . "(" . $_->[4] . "):" . $_->[7] . "(" . $_->[6] . ")" if ($lang eq "eng");
+					print OUT $_->[7] . "(" . $_->[6] . "):" . $_->[5] . "(" . $_->[4] . ")" if ($lang eq "ces");
 				}elsif($ln_type eq "pdtvallex" or $ln_type eq "engvallex"){
 					print OUT $_->[4] . "(" . $_->[3] . ")";
 				}elsif($ln_type eq "vallex"){

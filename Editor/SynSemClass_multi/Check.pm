@@ -151,7 +151,7 @@ sub check_synsemclass_links_step2{
 		print OUT "\n\nprocessing $classLemma\n";
 		foreach my $cm ($self->data()->getClassMembersNodes($class)){
 			my $cmLang=$cm->getAttribute("lang");
-			next if ($cmLang ne "cs");
+			next if ($cmLang ne "ces");
 			my $cmLemma=$cm->getAttribute("lemma");
 			my $cmId=$cm->getAttribute("idref");
 			$cmId =~ s/^.*-ID-//;

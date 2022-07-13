@@ -62,7 +62,40 @@ sub isValidArg{
   return 0;
 }
 
-#class 
+#roles
+sub getRoleDefinition{
+  my ($self, $roleid)=@_;
+  my $doc=$self->doc();
+  my $root=$doc->documentElement();
+  my ($header)=$root->getChildElementsByTagName("header");
+  my ($roles)=$header->getChildElementsByTagName("role_definitions");
+
+  return "" unless $roles;
+  my $role = "";
+  foreach ($roles->getChildElementsByTagName("role")){
+  	if ($_->getAttribute("id") eq $roleid){
+		$role=$_;
+		last;
+	}
+  } 
+
+  if ($role eq ""){
+  	return "";
+  }else{
+	  my ($definition)=$role->getChildElementsByTagName("definition");
+	  return $definition->getText();
+  }
+}
+
+#class
+sub getClassLemmaByID{
+  my ($self, $classid)=@_;
+  return unless $classid;
+
+  my $class = $self->getClassByID($classid);
+  return $self->getClassLemma($class);
+}
+
 sub getClassLemma {
   my ($self,$class)=@_;
   return unless ref($class);
@@ -83,7 +116,7 @@ sub getClassByLemma{
   my ($body)=$docel->getChildElementsByTagName("body");
   return undef unless $body;
   foreach ($body->getChildElementsByTagName("veclass")){
-  	return $_ if (SynSemClass_multi::Sort::equal_lemmas($self->getClassLemma($_), $lemma));
+  	return $_ if (SynSemClass_multi::Sort_all::equal_lemmas($self->getClassLemma($_), $lemma));
   }
 
   $lemma=~s/^.*\(/(/;
@@ -91,7 +124,7 @@ sub getClassByLemma{
   foreach ($body->getChildElementsByTagName("veclass")){
   	my $veclass_lemma=$self->getClassLemma($_);
 	  $veclass_lemma=~s/^.*\(/(/;
-	  return $_ if (SynSemClass_multi::Sort::equal_lemmas($veclass_lemma, $lemma));
+	  return $_ if (SynSemClass_multi::Sort_all::equal_lemmas($veclass_lemma, $lemma));
    }
   return undef;
 }
@@ -100,8 +133,8 @@ sub findClassByLemma {
   my ($self,$find,$nearest)=@_;
   foreach my $class ($self->getClassNodes()) {
     my $lemma = $class->getAttribute("lemma");
-#    return $class if (($nearest and index($lemma,$find)==0) or SynSemClass_multi::Sort::equal_lemmas($lemma,$find));
-    return $class if (SynSemClass_multi::Sort::equal_lemmas($lemma,$find));
+#    return $class if (($nearest and index($lemma,$find)==0) or SynSemClass_multi::Sort_all::equal_lemmas($lemma,$find));
+    return $class if (SynSemClass_multi::Sort_all::equal_lemmas($lemma,$find));
   }
   return undef;
 }
@@ -112,6 +145,7 @@ sub getClassForClassMember {
   return $classmember->getParentNode()->getParentNode();
 
 }
+
 #classmembers
 
 sub getClassMembersNodes {
@@ -122,13 +156,24 @@ sub getClassMembersNodes {
   return $members->getChildElementsByTagName ("classmember");
 }
 
+sub getClassMemberForClassByLemmaIdref{
+  my ($self, $class, $lemma, $idref)=@_;
+  return unless ref($class);
+
+  foreach ($self->getClassMembersNodes($class)){
+  	return $_ if (SynSemClass_multi::Sort_all::equal_lemmas($_->getAttribute("lemma"), $lemma) and
+		SynSemClass_multi::Sort_all::equal_lemmas($_->getAttribute("idref"), $idref));
+  }
+  return undef;
+}
+
 sub getClassMemberForClassByLemmaLexidref{
   my ($self, $class, $lemma, $lexidref)=@_;
   return unless ref($class);
 
   foreach ($self->getClassMembersNodes($class)){
-  	return $_ if (SynSemClass_multi::Sort::equal_lemmas($_->getAttribute("lemma"), $lemma) and
-		SynSemClass_multi::Sort::equal_lemmas($_->getAttribute("lexidref"), $lexidref));
+  	return $_ if (SynSemClass_multi::Sort_all::equal_lemmas($_->getAttribute("lemma"), $lemma) and
+		SynSemClass_multi::Sort_all::equal_lemmas($_->getAttribute("lexidref"), $lexidref));
   }
   return undef;
 }
@@ -183,7 +228,7 @@ sub getClassMember {
 sub getClassMembersList {
   my ($self,$class)=@_;
   return unless $class;
-  return sort SynSemClass_multi::Sort::sort_classmembers_by_lang_name map { $self->getClassMember($_) } $self->getClassMembersNodes($class);
+  return sort SynSemClass_multi::Sort_all::sort_classmembers_by_lang_name map { $self->getClassMember($_) } $self->getClassMembersNodes($class);
 }
 
 sub getClassMemberRestrict{
@@ -362,7 +407,7 @@ sub getClassMemberForLink{
 sub getExtLexForClassMemberByIdref{
 	my ($self, $classmember, $idref)=@_;
 	foreach ($classmember->getChildElementsByTagName("extlex")){
-		if(SynSemClass_multi::Sort::equal_lemmas($_->getAttribute("idref"), $idref)){
+		if(SynSemClass_multi::Sort_all::equal_lemmas($_->getAttribute("idref"), $idref)){
 			return($_);
 		}
 	}
@@ -390,7 +435,7 @@ sub getClassMemberLinksForType{
 	push @links, \@link;
   }
   
-  return sort SynSemClass_multi::Sort::sort_links @links;
+  return sort SynSemClass_multi::Sort_all::sort_links @links;
 }
 
 sub getClassMemberLinkValues {
@@ -398,7 +443,7 @@ sub getClassMemberLinkValues {
 
 	return () unless $link;
 
-	my ($lang)=$self->get_lang_c;
+	my ($lang)=@{$self->languages};
   	my $extlex_package = "SynSemClass_multi::" . uc($lang) . "::Links";
 
 	my @lv=();
@@ -461,7 +506,7 @@ sub isValidLink{
 	  my $diffs=0;
 	  my $i=0;
 	  foreach (@$attr){
-	  	if (!SynSemClass_multi::Sort::equal_values($link->getAttribute($_), $value[$i])){
+	  	if (!SynSemClass_multi::Sort_all::equal_values($link->getAttribute($_), $value[$i])){
 			$diffs=1;
 			last;
 		} 
@@ -577,8 +622,16 @@ sub set_no_mapping{
   return 0 unless ref($classmember);
   return 0 unless $link_type;
 
-  my $extlex = $self->getExtLexForClassMemberByIdref($classmember, $link_type);
-  return 0 unless $extlex;
+  my $extlex = $self->getExtLexForClassMemberByIdref($classmember, $link_type) || "";
+  if ($extlex eq ""){
+  	$extlex=$self->doc()->createElement("extlex");
+	$extlex->setAttribute("idref", $link_type);
+	my ($prevnode)=$classmember->getChildElementsByTagName("cmnote");
+	($prevnode)=$classmember->getChildElementsByTagName("maparg") if ($prevnode eq "");
+	$classmember->insertAfter($extlex,$prevnode);
+	my $links_node=$self->doc()->createElement("links");	
+	$extlex->appendChild($links_node);
+  }
 
   $extlex->setAttribute("no_mapping", $nm);
   $self->set_change_status(1);
@@ -644,169 +697,9 @@ sub getNoExampleSentences{
   return ($examples_node->getAttribute("no_example_sentences") || 0);
 }
 
-
-sub getAllExamples{
-  my ($self, $classmember) = @_;
-  return () unless ref($classmember);
-  my @sents=();
-  my $lang=$classmember->getAttribute("lang");
-
-  my $corpref="";
-  if (($lang eq "en") or ($lang eq "cs")){ 
-	  my $extlex = getExtLexForClassMemberByIdref($self, $classmember, "czengvallex");
-	  $corpref = "pcedt";
-	  my %processed_pairs=();
-	  my @pairs=();
-	  if ($extlex){
-  		my ($links) = $extlex->getChildElementsByTagName("links");
-	  	foreach my $link ($links->getChildElementsByTagName("link")){
-  		  my $enid = $link->getAttribute("enid");
-		  my $csid = $link->getAttribute("csid");
-    	  $csid = $SynSemClass_multi::LibXMLVallex::substituted_pairs->{$csid} if (defined $SynSemClass_multi::LibXMLVallex::substituted_pairs->{$csid});
-		  push @pairs, $enid . "#" . $csid;
-	    }
-	  }
-	  if (scalar @pairs == 0){
-  		if ($lang eq "en"){
-		  my $enid = $classmember->getAttribute("idref");
-		  $enid =~ s/EngVallex-ID-//;
-		  push @pairs, $enid . "#.*";
-		}elsif ($lang eq "cs"){
-		  my $csid = $classmember->getAttribute("idref");
-		  if ($csid =~ /^PDT-Vallex-ID-/){
-			  $csid =~ s/PDT-Vallex-ID-//;
-		      $csid = $SynSemClass_multi::LibXMLVallex::substituted_pairs->{$csid} if (defined $SynSemClass_multi::LibXMLVallex::substituted_pairs->{$csid});
-			  push @pairs, ".*#" . $csid;
-		  }elsif ($csid =~ /^Vallex-ID-/){
-		  	my $pdtvallexlex = getExtLexForClassMemberByIdref($self, $classmember, "pdtvallex");
-	  		if ($pdtvallexlex){
-		  		my ($pdtlinks) = $pdtvallexlex->getChildElementsByTagName("links");
-				foreach my $pdtlink ($pdtlinks->getChildElementsByTagName("link")){
-		  		  my $pdtref = $pdtlink->getAttribute("idref");
-		    	  $pdtref = $SynSemClass_multi::LibXMLVallex::substituted_pairs->{$pdtref} if (defined $SynSemClass_multi::LibXMLVallex::substituted_pairs->{$pdtref});
-				  push @pairs, ".*#" . $pdtref;
-			    }
-		  	}
-		  }
-		}
-	  }
-  
-	  foreach my $pair (@pairs){  #ugly hack for substituted frames (files with sentences are for active/reviewed frames, but in czengvallex can be pairs
-		  							#with substituted frame, active frame or both - subsituted and active - we need to avoid duplicity
-		next if ($processed_pairs{$pair});
-		$processed_pairs{$pair}=1;
-
-		my ($enid, $csid)=split('#', $pair);
-		my $examplesFile= uc($lang) . "/example_sentences/Vtext_" . $lang;
-		if ($lang eq "en"){
-			$examplesFile .= "." . $enid;
-		}elsif ($lang eq "cs"){
-			$examplesFile .= "." . $csid;
-		}
-		$examplesFile .= ".php"; 
-		my $sentencesPath=SynSemClass_multi::Config->getFromResources($examplesFile);
-		if (!$sentencesPath){
-			if ($lang eq "cs"){
-				for my $corpus ('pdt', 'pcedt', 'faust', 'pdtsc'){	
-					$examplesFile = "CS/example_sentences/Vtext_cs_" . $corpus . "_" . $csid . ".txt";
-					$sentencesPath=SynSemClass_multi::Config->getFromResources($examplesFile);
-					if ($sentencesPath){
-						$corpref = $corpus;
-						last;
-					}
-				}
-				if (!$sentencesPath){
-					print "getAllExamples: There is not sentencesPath for $examplesFile\n";
-					next;
-				}
-			}else{
-				print "getAllExamples: There is not sentencesPath for $examplesFile\n";
-				next;
-			}
-		}
-
-		if (not open (IN,"<:encoding(UTF-8)", $sentencesPath)){
-			print "getAllExamples: Cann't open $sentencesPath file for $examplesFile\n";
-			next;
-		}
-
-		while(<IN>){
-			chomp($_);
-			next if ($_!~/^<[^>#]*#([^>]*)><([^>]*)> (.*)$/);
-			my $nodeID=$1;
-		
-			my $frpair=$2;
-			my $text=$3;
-			next if ($frpair !~ /^$enid\.$csid$/);
-	
-			my $lexEx=($self->isLexExample($classmember, $frpair, $nodeID, $corpref) ? 1 : 0);
-			my $testData=($nodeID =~ /wsj(|_)2/ ? 1 : 0);
-	 		push @sents, [$_, $corpref."#".$nodeID."#".$frpair, $lexEx, $testData,  $text]
-		}
-		close IN;
-	  }
-  } #sentences for cs and en cms from pcedt2.0
-
-  if (($lang eq "de") or ($lang eq "en")){
-	  #nacist vety podle dvojic z paracrawl_ge
-	  $corpref = "paracrawl_ge";
-	  my $extlex = getExtLexForClassMemberByIdref($self, $classmember, $corpref);
-	  my @pairs=();
-	  if ($extlex){
-  		my ($links) = $extlex->getChildElementsByTagName("links");
-	  	foreach my $link ($links->getChildElementsByTagName("link")){
-  		  my $enlemma = $link->getAttribute("enlemma");
-		  my $gelemma = $link->getAttribute("gelemma");
-		  $gelemma =~ s/ /_/g;
-	    
-	  	  my $examplesFile = uc($lang) . "/example_sentences/Vtext_" . $lang . "_";
-		  if ($lang eq "en"){
-		  	$examplesFile .= $enlemma;
-		  }elsif ($lang eq "de"){
-		  	$examplesFile .= $gelemma;
-			$examplesFile =~ s/(ö|ä|ß|ü|ë)/_\1_/g;
-			$examplesFile =~ tr/öäßüë/oasue/;
-		  }
-		  $examplesFile .=".php";
-		  my $sentencesPath=SynSemClass_multi::Config->getFromResources($examplesFile);
-		  if (!$sentencesPath){
-			print "getAllExamples: There is not sentencesPath for $examplesFile\n";
-			next;
-		  }
-	
-		  if (not open (IN,"<:encoding(UTF-8)", $sentencesPath)){
-			print "getAllExamples: Cann't open $sentencesPath file for $examplesFile\n";
-			next;
-		  }
-
-		  while(<IN>){
-			chomp($_);
-			next if ($_!~/^<([^>]*)><([^>]*)><(de|en)> (.*)$/);
-			my $sentID=$1;
-		
-			my $lpair=$2;
-			my $llang=$3;
-			my $text=$4;
-			next if ($lpair !~ /^$enlemma\.$gelemma$/);
-	
-			my $lexEx=($lang eq $llang and $self->isLexExample($classmember, $lpair, $sentID, $corpref) ? 1 : 0);
-			my $pairedLang=($lang eq $llang ? 0 : 1);
-	 		push @sents, [$_, $corpref."#".$sentID."#".$lpair."-".$llang, $lexEx, $pairedLang,  $text]
-		}
-		close IN;
-
-	  	}
-	  }
-  } #sentences from paracrawl_ge for de and en cms
-
-
-  return @sents ;
-}
-
 sub isLexExample{
   my ($self, $classmember, $pair, $id, $corpref)=@_;
   return 0 unless ref($classmember);
-
   my ($examples_node)=$classmember->getChildElementsByTagName("examples");
   return 0 if ($examples_node eq "");
   foreach my $example ($examples_node->getChildElementsByTagName("example")){

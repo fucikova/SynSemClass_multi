@@ -19,6 +19,7 @@ require Tk::Optionmenu;
 require Tk::NoteBook;
 require Tk::Pane;
 require Tk::BrowseEntry;
+require Tk::Balloon;
 
 sub limit { 100 }
 $LINK_DELIMITER = "::";
@@ -75,8 +76,7 @@ sub create_widget {
   my $cbutton_frame=$classes_frame->Frame(-takefocus => 0);
   $cbutton_frame->pack(qw/-side top -fill x/);
 
-  if ($self->data()->main->user_is_annotator() or
-       $self->data()->main->user_is_reviewer()) {
+  if ($self->data()->main->user_can_modify()) {
     my $addclass_button=$cbutton_frame->Button(-text => 'Add',
 					     -command => [\&addclass_button_pressed,
 							  $self]);
@@ -108,22 +108,31 @@ sub create_widget {
   my $classnamesframes_frame=();
   my %classnames_frames=();
   my %classnames_button=();
+  my %classnames_balloon=();
+  my %balloon_msg=();
   my $classnamesframes_frame=$classes_frame->Frame(-takefocus => 0);
   $classnamesframes_frame->pack(qw/-side top -fill x/);
   foreach my $lang (@{$data->languages()}){
-	my ($lang_c, $lang_n)=split(":", $lang);
-    $classnames_frames{$lang_c} = SynSemClass_multi::TextView->new($data->lang_cms($lang_c), undef, $classnamesframes_frame, "$lang_n Class Name",
+	my $lang_name = SynSemClass_multi::Config->getLangName($lang);
+	$balloon_msg{$lang} = "Class definition for $lang_name is not specified";
+    $classnames_frames{$lang} = SynSemClass_multi::TextView->new($data->lang_cms($lang), undef, $classnamesframes_frame, "$lang_name Class Name",
 						qw/ -height 1
 							-width 20
 						    -spacing3 5
 						    -wrap word
 						    -scrollbars oe /);
-  	$classnames_frames{$lang_c}->pack(qw/-fill x/);
-    $classnames_button{$lang_c}=$classnames_frames{$lang_c}->subwidget('button_frame')->Button(-text=>'Set',
+  	$classnames_frames{$lang}->pack(qw/-fill x/);
+    $classnames_button{$lang}=$classnames_frames{$lang}->subwidget('button_frame')->Button(-text=>'Set',
 	  		-underline=>0,
-	   		-command => [\&classlangname_button_pressed,$self,$lang_c]);
-	$classnames_button{$lang_c}->pack(qw/-side left -fill x/);
-  	$classnames_frames{$lang_c}->subwidget("text")->bind('<s>', sub { $self->classlangname_button_pressed($lang_c)});
+	   		-command => [\&classlangname_button_pressed,$self,$lang]);
+	$classnames_button{$lang}->pack(qw/-side left -fill x/);
+  	$classnames_frames{$lang}->subwidget("text")->bind('<s>', sub { $self->classlangname_button_pressed($lang)});
+	$classnames_balloon{$lang}=$classnamesframes_frame->Balloon(
+														    -balloonposition => 'mouse'
+    													);
+
+	$classnames_balloon{$lang}->attach($classnames_frames{$lang}->subwidget("text"),
+           -balloonmsg => \$balloon_msg{$lang});
 	
   }
  
@@ -157,23 +166,20 @@ sub create_widget {
   my $cmbutton_frame=$classmembers_frame->Frame(-takefocus => 0);
   $cmbutton_frame->pack(qw/-side top -fill x/);
 
-#  if ($self->data()->user_is_annotator() or
-#      $self->data()->user_is_reviewer()) {
-    my $addclassmember_button=$cmbutton_frame->Button(-text => 'Add',
+  my $addclassmember_button=$cmbutton_frame->Button(-text => 'Add',
 					     -command => [\&addclassmember_button_pressed,
 							  $self]);
-    $addclassmember_button->pack(qw/-padx 5 -side left/);
-    my $modifyclassmember_button=$cmbutton_frame->Button(-text => 'Modify',
+  $addclassmember_button->pack(qw/-padx 5 -side left/);
+  my $modifyclassmember_button=$cmbutton_frame->Button(-text => 'Modify',
 				  	        -command => [\&modifyclassmember_button_pressed,
 							  $self],
 					        );
-    $modifyclassmember_button->pack(qw/-padx 5 -side left/);
-	my $copycmlinks_button=$cmbutton_frame->Button(-text => 'Copy links',
+  $modifyclassmember_button->pack(qw/-padx 5 -side left/);
+  my $copycmlinks_button=$cmbutton_frame->Button(-text => 'Copy links',
 							-command => [\&copycmlinks_button_pressed,
 							 $self],
 					 		);
-	$copycmlinks_button->pack(qw/-padx 5 -side right/); 
-#  }
+  $copycmlinks_button->pack(qw/-padx 5 -side right/); 
   
   # List of members
   my $classmemberslist =
@@ -266,9 +272,9 @@ sub create_widget {
   $classmemberslist->widget()->bind('<d>', sub {$mif_synsem_frame->subwidget('cm_status_delete_bt')->invoke(); Tk->break();});
 
 
-  my $priority_lang_c = $self->data->get_priority_lang_c;
-  my $extlex_package = "SynSemClass_multi::" . uc($priority_lang_c) . "::Links";
-  my $mif_links_frame=$extlex_package->new($data->lang_cms($priority_lang_c), undef, $mif_links, qw/-relief raised/);
+  my $priority_lang = $self->data->get_priority_lang;
+  my $extlex_package = "SynSemClass_multi::" . uc($priority_lang) . "::Links";
+  my $mif_links_frame=$extlex_package->new($data->lang_cms($priority_lang), undef, $mif_links, qw/-relief raised/);
   $mif_links_frame->set_editor_frame($self);
   my $mif_examples_frame=SynSemClass_multi::Examples->new_multi($data, undef, $mif_examples, qw/-relief raised/);
   $mif_examples_frame->set_editor_frame($self);
@@ -282,6 +288,7 @@ sub create_widget {
 	     classmemberslist    => $classmemberslist,
 	     classlist     => $classlist,
 	     classnames_frames     => \%classnames_frames,
+	     classnames_balloon     => \%classnames_balloon,
 	     classroles     => $classroles,
 	     classnote     => $classnote,
 	     infoline     => $info_line,
@@ -292,7 +299,7 @@ sub create_widget {
 	     classlistitemstyle  => $classlist_item_style,
 	     memberslistitemstyle  => $memberslist_item_style,
              search_params => ['',0],
-	    },$fe_confs;
+	    },$fe_confs, \%balloon_msg;
 }
 
 #sub destroy {
@@ -309,6 +316,16 @@ sub create_widget {
 
 sub frame_editor_confs {
   return $_[0]->[4];
+}
+
+sub get_balloon_msg{
+	my ($self, $lang) = @_;
+	return $self->[5]->{$lang};
+}
+
+sub set_balloon_msg{
+	my ($self, $lang, $value) = @_;
+	$self->[5]->{$lang} = $value;
 }
 
 sub refresh_data {
@@ -401,13 +418,23 @@ sub classlist_item_changed {
   $self->subwidget('classlist')->focus_index($item);
 
   my $classId = $self->subwidget('classlist')->data->main->getClassId($class);
-
+  my $main_class_def = $self->subwidget('classlist')->data->main->getClassDefinition($class);
   my $ref_classnames_frames = $self->subwidget('classnames_frames');
   my %classnames_frames = %$ref_classnames_frames;
+
+  my $ref_classnames_balloon = $self->subwidget('classnames_balloon');
+  my %classnames_balloon = %$ref_classnames_balloon;
 
   foreach my $lang (sort keys (%classnames_frames)){
 	my $lang_class = $classnames_frames{$lang}->data()->getClassByID($classId);
 	$classnames_frames{$lang}->set_data($classnames_frames{$lang}->data()->getClassLemma($lang_class));
+	
+	my $class_lang_def ="";
+	$class_lang_def = $classnames_frames{$lang}->data()->getClassDefinition($lang_class)|| $main_class_def || "";
+	if ($class_lang_def eq ""){
+		$class_lang_def = "Class definition for $lang is not specified";
+	}
+	$self->set_balloon_msg($lang,$class_lang_def); 
   }
 
   $self->subwidget('classroles')->fetch_data($class);
@@ -421,7 +448,7 @@ sub classlist_item_changed {
 sub update_title {
   my ($self)=@_;
   $self->widget->toplevel->title("SynEd: ".
-				 $self->data->main->getUserName($self->data->main->user()).
+				 $self->data->lang_cms($self->data->get_priority_lang)->getUserName($self->data->main->user()).
 				 ($self->data->changed() ? " (modified)" : ""));
 }
 
@@ -463,7 +490,7 @@ sub classmemberslist_item_changed {
   my $h=$self->subwidget('classmemberslist')->widget();
   my $e;
   my ($lang, $classmember);
-  $lang = $self->data->get_priority_lang_c;; 
+  $lang = $self->data->get_priority_lang; 
   ($lang, $classmember)=$h->infoData($item) if defined($item);
   $self->subwidget('classmemberslist')->focus_index($item) if defined ($item);;
   $classmember=undef unless ref($classmember);
@@ -537,7 +564,7 @@ sub addclass_button_pressed {
   if (SynSemClass_multi::Widget::ShowDialog($d,$ed) =~ /OK/) {
     my $result=$ed->get();
 
-    my $class=$self->data->main->addClass($result);
+    my $class=$self->data->addClass($result);
     if ($class) {
       $self->subwidget('classlist')->fetch_data($result);
       $self->classlist_item_changed($self->subwidget('classlist')->focus($class));
@@ -591,7 +618,6 @@ sub addclassmember_button_pressed {
   if ($ok) {
     my $new=$self->data()->addClassMember($class,$status, $lang,$lemma,$idref,$lexidref,"",\@maparg,"",\@extlexes,\@examples);
 	$self->data->lang_cms($lang)->addClassMemberLocalHistory($new, "adding classmember");
-	$self->data->main->addClassLocalHistory($class, "adding classmember");
     $self->subwidget('classmemberslist')->fetch_data($class);
     $self->classlist_item_changed($self->subwidget('classlist')->focus($class));
     $self->classmemberslist_item_changed($self->subwidget('classmemberslist')->focus($new));
@@ -676,19 +702,14 @@ sub copycmlinks_button_pressed{
   	my $orig_lemma = $lemma;
 	$lemma =~ s/_.*$//;
 
-	next if (!SynSemClass_multi::Sort::equal_lemmas($cmlemma, $lemma));
+	next if (!SynSemClass_multi::Sort_all::equal_lemmas($cmlemma, $lemma));
 
 	print "copying links from classmember $orig_cmlemma ($cmidref) to classmember $orig_lemma ($idref) ...\n";
 
-	my @types=();
-	if ($cmlang eq "en"){
-		@types = ('on', 'fn', 'vn', 'pb', 'wn');
-	}elsif ($cmlang eq "cs"){
-		@types = ("vallex");
-	}elsif ($cmlang eq "de"){
-		@types = ("fnd");
-	}
-	foreach my $link_type(@types){
+  	my $pack = "SynSemClass_multi::" . uc($cmlang) . "::Links";
+	my @links_for_copy =  $pack->get_links_for_copy;
+	
+	foreach my $link_type(@links_for_copy){
 		if ($data_cms->copyLinks($link_type, $cm, $classcm)){
 			print "\t$link_type - ok\n";
 			$data_cms->addClassMemberLocalHistory($classcm, "copy $link_type links");
@@ -736,64 +757,47 @@ sub get_classmember_basic_data{
 		}
 	  }else{
 	  	if ($vallex_id eq ""){
-  			$self->warning_dialog("Fill the IdRef!\n(IdRef can not be empty only for SynSemClass Lexicon)");
+  			$self->warning_dialog("Fill the IdRef!\n(Only cms from SynSemClass Lexicon can have empty IdRef)");
 	  		($ok,$status, $lang, $lexidref, $idref, $lemma)= $self->show_classmember_editor_dialog($title, $status, $lang,$lexidref, $idref, $lemma, "idref");
 			next;
 		}
-		if ($lang eq "cs" and $lexidref eq "engvallex"){
-  			$self->warning_dialog("Wrong Lexicon or Lang!\n!");
-	  		($ok,$status, $lang, $lexidref, $idref, $lemma)= $self->show_classmember_editor_dialog($title, $status, $lang,$lexidref, $idref, $lemma, "lang");
-			next;
-		}
-		if ($lang eq "en" and ($lexidref eq "pdtvallex" or $lexidref eq "vallex")){
-  			$self->warning_dialog("Wrong Lexicon or Lang!\n");
-	  		($ok,$status, $lang, $lexidref, $idref, $lemma)= $self->show_classmember_editor_dialog($title, $status, $lang,$lexidref, $idref, $lemma, "lang");
-			next;
-		}
 	
-		if ($lexidref eq "engvallex" or $lexidref eq "pdtvallex"){
-			if (!SynSemClass_multi::LibXMLVallex::isValidLexiconFrameID($lexidref, $vallex_id)){
-  				$self->warning_dialog("$vallex_id is not valid FrameId in selected Lexicon!\n");
-		  		($ok,$status, $lang, $lexidref, $idref, $lemma)= $self->show_classmember_editor_dialog($title, $status, $lang,$lexidref, $idref, $lemma, "lexicon");
-				next;
-			}
+  		my $pack = "SynSemClass_multi::" . uc($lang) . "::Links";
+		my ($ret_val, @msg) = $pack->check_new_cm_values($lexidref, $vallex_id, $lemma);
 
-			my $vallex_lemma = SynSemClass_multi::LibXMLVallex::getLemmaByFrameID($lexidref, $vallex_id);
-			if ($vallex_lemma ne $lemma){
- 				my $answer= $self->question_dialog("Wrong lemma!\nLemma for frame $vallex_id is $vallex_lemma (you typed $lemma).\nDo you want to change it?", 'Yes');
-				if ($answer eq "Yes"){
-					$lemma = $vallex_lemma;
-				}
-	  			($ok,$status, $lang, $lexidref, $idref, $lemma)= $self->show_classmember_editor_dialog($title, $status, $lang,$lexidref, $idref, $lemma, "lemma");
-				next;
+		if ($ret_val == 3){
+			$self->warning_dialog("$vallex_id and $lemma are not valid values in the selected Lexicon!\n");
+		  	($ok,$status, $lang, $lexidref, $idref, $lemma)= $self->show_classmember_editor_dialog($title, $status, $lang,$lexidref, $idref, $lemma, "lexicon");
+			next;
+		}elsif ($ret_val == 2){
+			my $text = "Wrong Lemma!\n";
+			my @lemmas = @msg;
+			if (scalar @lemmas > 1){
+				$text .= "Lemmas for IdRef $vallex_id are " . join(", ", @lemmas);
+			}else{
+				$text .= "Lemma for IdRef $vallex_id is @lemmas[0]"
 			}
-		}
-		if ($lexidref eq "vallex"){
-			unless ($SynSemClass_multi::CS::LexLink::vallex4_0_mapping->{id}->{$vallex_id}->{validid}){
-  				$self->warning_dialog("$vallex_id is not valid FrameId in selected Lexicon!\n");
-		  		($ok,$status, $lang, $lexidref, $idref, $lemma)= $self->show_classmember_editor_dialog($title, $status, $lang,$lexidref, $idref, $lemma, "lexicon");
-				next;			
+			$text .= " (you typed $lemma).\n";
+			$self->warning_dialog($text);
+  			($ok,$status, $lang, $lexidref, $idref, $lemma)= $self->show_classmember_editor_dialog($title, $status, $lang,$lexidref, $idref, $lemma, "lemma");
+			next;
+		}elsif ($ret_val == 1){
+			my $text = "Wrong IdRef !\n";
+			my @idrefs = @msg;
+			if (scalar @idrefs > 1){
+				$text .= "IdRefs for Lemma $lemma are " . join(", ", @idrefs);
+			}else{
+				$text .= "IdRef for Lemma $lemma is @idrefs[0]"
 			}
-
-			my $idpref = $SynSemClass_multi::CS::LexLink::vallex4_0_mapping->{id}->{$vallex_id}->{idpref};
-			unless ($SynSemClass_multi::CS::LexLink::vallex4_0_mapping->{idpref}->{$idpref}->{lemmas}->{$lemma}){
-				my @vallex_lemmas = sort keys (%{$SynSemClass_multi::CS::LexLink::vallex4_0_mapping->{idpref}->{$idpref}->{lemmas}});
-				my $text = "Wrong lemma!\n";
-				if (scalar @vallex_lemmas > 1){
-					$text .= "Lemmas for frame $vallex_id are " . join(", ", @vallex_lemmas);
-				}else{
-					$text .= "Lemma for frame $vallex_id is @vallex_lemmas[0]"
-				}
-				$text .= " (you typed $lemma).\n";
-  				$self->warning_dialog($text);
-	  			($ok,$status, $lang, $lexidref, $idref, $lemma)= $self->show_classmember_editor_dialog($title, $status, $lang,$lexidref, $idref, $lemma, "lemma");
-				next;
-			}
+			$text .= " (you typed $vallex_id).\n";
+			$self->warning_dialog($text);
+  			($ok,$status, $lang, $lexidref, $idref, $lemma)= $self->show_classmember_editor_dialog($title, $status, $lang,$lexidref, $idref, $lemma, "idref");
+			next;
+		
 		}
 
 		my $cm_forIdref=$self->data()->getClassMemberForClassByIdref($class, $idref);
-		my $cmid_forIdref=$self->data()->getClassMemberAttribute($cm_forIdref, 'id') || "";
-		if ($cmid_forIdref ne "" and $cmid_forIdref ne $cmid){
+		if (defined $cm_forIdref){
   			$self->warning_dialog("Classmember with this IdRef already exists!\n");
 	  		($ok,$status, $lang, $lexidref, $idref, $lemma)= $self->show_classmember_editor_dialog($title, $status, $lang,$lexidref, $idref, $lemma, "idref");
 			next;
@@ -808,12 +812,12 @@ sub get_classmember_basic_data{
 sub show_classmember_editor_dialog{
   my ($self, $title,$status,$lang, $lexidref, $idref, $lemma, $focused)=@_;
 
-  my @lang_codes = $self->data->get_lang_c;
+  my @langs = @{$self->data->languages};
   my %lexmap=();
   my %lexidrefmap=();
   my %sourcelexicons=();
 
-  foreach my $l (@lang_codes){
+  foreach my $l (@langs){
   	my $pack = "SynSemClass_multi::" . uc($l) . "::Links";
 	@{$sourcelexicons{$l}} = @{$pack->get_cms_source_lexicons};
 	foreach my $lex (@{$sourcelexicons{$l}}){
@@ -821,8 +825,6 @@ sub show_classmember_editor_dialog{
 		$lexidrefmap{$l}{$lex->[1]} = $lex->[0];
 	}
   }
-  # my %lexmap=("pdtvallex"=>"PDT-Vallex", "engvallex"=>"EngVallex", "vallex"=>"Vallex", "synsemclass"=>"SynSemClass", "valbu"=>"VALBU", "gup"=>"GUP");
-  #my %lexidrefmap=("PDT-Vallex"=>"pdtvallex", "EngVallex"=>"engvallex", "Vallex"=>"vallex", "SynSemClass"=>"synsemclass", "VALBU"=>"valbu", "GUP"=>"gup");
   my $top=$self->widget()->toplevel;
   my $d=$top->DialogBox(-title => $title,
 	  			-cancel_button => "Cancel",
@@ -850,9 +852,9 @@ sub show_classmember_editor_dialog{
 
   my $l_null=$d->Label(-text=>'   ')->grid(qw/-row 0 -column 6 -sticky w/);
   my $l_lang=$d->Label(-text=>'Language')->grid(qw/-row 2 -column 7 -columnspan 4 -sticky w/);
-  $lang=$lang_codes[0] if ($lang eq "");
+  $lang=$langs[0] if ($lang eq "");
   my $be_lang = $d->BrowseEntry(-state=>'readonly', -autolimitheight=>1,-width=>20,-disabledforeground => 'black', -disabledbackground=>'white', -variable => \$lang)->grid(qw/-row 3 -column 7 -columnspan 4 -sticky w/);
-  foreach (@lang_codes){
+  foreach (@langs){
     $be_lang->insert("end", $_);
   }
 
@@ -902,7 +904,7 @@ sub show_classmember_editor_dialog{
 sub classlangname_button_pressed{
   my ($self, $lang)=@_;
 		
-  my $lang_name = $self->data->get_lang_name_for_c($lang);
+  my $lang_name = SynSemClass_multi::Config->getLangName($lang);
 
   if (not $self->data->lang_cms($lang)->user_can_modify()){
   	my $text = "You can not modify $lang_name records (you are not annotator or reviewer of the " . lc($lang_name) . " lexicon)!";
@@ -932,7 +934,7 @@ sub classlangname_button_pressed{
 			$cmlemma = $1;
 			$cmidref = $2;
 		}
-		$cmidref=~s/^.*-ID-// if (($lang eq "en") or ($lang eq "cs"));
+		$cmidref=~s/^.*-ID-// if (($lang eq "eng") or ($lang eq "ces"));
 		my $newName=$cmlemma . " (" . $cmidref . ")";
 		if (($oldName ne "") and ($oldName ne $newName)){
 			my $text = "Do you want to change $lang_name class name from $oldName to $newName?";
@@ -941,9 +943,8 @@ sub classlangname_button_pressed{
 				return 0;
 			}
 		}
-		$self->data->setClassLangNames($cid, $newName, $lang);
+		$data_cms->setClassLemma($class_cms, $newName);
 		$data_cms->addClassLocalHistory($class_cms, "setting $lang_name class name");
-		$self->data->main->addClassLocalHistory($class, "setting $lang_name class name");
 
 	    my $ref_classnames_frames = $self->subwidget('classnames_frames');
 	    my %classnames_frames = %$ref_classnames_frames;

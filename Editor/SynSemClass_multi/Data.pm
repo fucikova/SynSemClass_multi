@@ -5,7 +5,7 @@
 ##############################################
 
 package SynSemClass_multi::Data;
-require SynSemClass_multi::Sort;
+require SynSemClass_multi::Sort_all;
 
 use strict;
 use utf8;
@@ -63,8 +63,7 @@ sub loadListOfUsers {
 	$users->{$user->getAttribute("id")} =
 	  [
 	   $user->getAttribute("name"),
-	   $user->getAttribute("annotator") eq "YES",
-	   $user->getAttribute("reviewer") eq "YES"
+	   $user->getAttribute("can_modify") eq "YES",
 	  ]
       }
     }
@@ -97,40 +96,11 @@ sub languages {
   return $_[0]->[7];
 }
 
-sub get_lang_c {
+sub first_lang {
   my ($self)=@_;
-  my @codes=();
   my @langs = @{$self->languages};
-  foreach (@langs){ 
-	  $_=~s/:.*$//;
-	  push @codes, $_;
-  }
-  return @codes;
-}
 
-sub get_lang_n {
-  my ($self)=@_;
-  my @names=();
-  my @langs = @{$self->languages};
-  foreach (@langs){ 
-	  $_=~s/^.*://;
-	  push @names, $_;
-  }
-  return @names;
-}
-
-sub first_lang_c {
-  my ($self)=@_;
-  my @codes = $self->get_lang_c;
-
-  return $codes[0];
-}
-
-sub first_lang_n {
-  my ($self)=@_;
-  my @names = $self->get_lang_n;
-
-  return $names[0];
+  return $langs[0];
 }
 
 sub dispose_node {
@@ -159,25 +129,13 @@ sub reload {
 
 sub get_user_info {
   my ($self,$user)=@_;
-  return exists($self->[4]->{$user}) ? $self->[4]->{$user} : ["unknown user",0,0];
-}
-
-sub user_is_reviewer {
-  my ($self)=@_;
-  return undef unless ref($self);
-  return $self->get_user_info($self->user())->[2];
-}
-
-sub user_is_annotator {
-  my ($self)=@_;
-  return undef unless ref($self);
-  return $self->get_user_info($self->user())->[1];
+  return exists($self->[4]->{$user}) ? $self->[4]->{$user} : ["unknown user",0];
 }
 
 sub user_can_modify {
   my ($self)=@_;
   return undef unless ref($self);
-  return ($self->user_is_annotator or $self->user_is_reviewer);
+  return $self->get_user_info($self->user())->[1];
 }
 
 sub getUserName {
@@ -398,6 +356,29 @@ sub getFirstClassNode {
   }
   return $n;
 }
+
+sub getNextClassNode {
+  my ($self, $n)=@_;
+
+  $n=$n->nextSibling();
+  while ($n){
+  	last if ($n->nodeName() eq 'veclass');
+	$n=$n->nextSibling();
+  }
+
+  return $n;
+}
+sub getClassDefinition{
+  my ($self, $class)=@_;
+
+  return "" unless ref($class);
+  my ($class_def)=$class->getChildElementsByTagName("class_definition");
+  return "" unless $class_def;
+
+  my $text=$class_def->getText() || "";
+  return $text;
+}
+
 sub getClassByID{
   my ($self, $ID)=@_;
   my $doc=$self->doc();

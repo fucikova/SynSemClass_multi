@@ -158,9 +158,10 @@ sub getLanguages{
 	my ($self)=@_;
 
 	if ($languages{valid}){
-		return "$languages{value}";
+		my @langs = map { $self->getCode3($_) } split(',', $languages{value});
+		return @langs;
 	}else{
-		return "cs:Czech,en:English";
+		return ("ces","eng");
 	}
 }
 
@@ -175,10 +176,38 @@ sub getGeometry{
 		
 }
 	
+#Language codes and names
+my %codes3=();
+my %langNames=();
+sub loadCodeTable{
+	my ($self)=@_;
+	my $code_table = $self->getFromResources("code_table_639.txt");
+	if ($code_table eq "" or not open (IN, $code_table)){
+		print "CAN NOT OPEN code_table_639.txt for language codes and names!!!\n";
+		return;
+	}
+
+	while(<IN>){
+		chomp($_);
+		my ($c3, $c2, $c1, $lname) = split('\t', $_);
+		next if ($lname eq "Lang Name");
+		$codes3{$c2} = $c3;
+		$codes3{$c1} = $c3;
+		$langNames{$c3} = $lname;
+	}
+}
 
 
+sub getCode3{
+	my ($self, $lang) = @_;
 
+	return $codes3{$lang} || $lang;
+}
 
+sub getLangName{
+	my ($self, $lang) = @_;
+	my $code3=$self->getCode3($lang);
+	return $langNames{$code3} || $lang;
+}
 
-
-
+1;
