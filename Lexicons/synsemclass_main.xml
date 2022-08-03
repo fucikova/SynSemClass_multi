@@ -25,17 +25,17 @@
       </role>
       <role id="vecroleAbsorber">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sb/sth absorbing, consuming or taking in sth.</label>
+        <label>Sb/sth absorbing, consuming or taking in sth.</label>
         <shortlabel>Absorber</shortlabel>
       </role>
       <role id="vecroleAbused">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sb/sth treated in a violent, illegal or unfair way.</label>
+        <label>Sb/Sth treated in a violent, illegal or unfair way.</label>
         <shortlabel>Abused</shortlabel>
       </role>
       <role id="vecroleAbuser">
         <comesfrom lexicon="fn"/>
-        <label>Sb treating sb/sth in a violent, illegal or unfair way.</label>
+        <label>Sb treating sb/sth in a violent, illegal or unfair way.</label>
         <shortlabel>Abuser</shortlabel>
       </role>
       <role id="vecroleAccused">
@@ -80,22 +80,22 @@
       </role>
       <role id="vecroleActivity">
         <comesfrom lexicon="fn"/>
-        <label>Sth that sb is spending time with (usually for enjoyment).</label>
+        <label>Sth that sb is spending time with (usually for enjoyment).</label>
         <shortlabel>Activity</shortlabel>
       </role>
       <role id="vecroleAdjusted">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sb/sth changed in order to be more correct, effective, suitable or in accordance with a norm.</label>
+        <label>Sb/sth changed in order to be more correct, effective, suitable or in accordance with a norm.</label>
         <shortlabel>Adjusted</shortlabel>
       </role>
       <role id="vecroleAdjusting">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sb/sth changing sb/sth in order to be  more correct, effective, suitable or in accordance with a norm.</label>
+        <label>Sb/sth changing sb/sth in order to be more correct, effective, suitable or in accordance with a norm.</label>
         <shortlabel>Adjusting</shortlabel>
       </role>
       <role id="vecroleAdmitted">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sth revealed or acknowledged by sb who admits a mistake or wrongdoing.</label>
+        <label>Sth revealed or acknowledged by sb who admits mistake or wrongdoing.</label>
         <shortlabel>Admitted</shortlabel>
       </role>
       <role id="vecroleAdvertised">
@@ -115,7 +115,7 @@
       </role>
       <role id="vecroleAffector">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sb/sth that activates  or influences an event, may be realized more specifically as an Agent, Cause or Stimulus.</label>
+        <label>Sb/sth that activates or influences an event, may be realized more specifically as an Agent, Cause or Stimulus.</label>
         <shortlabel>Affector</shortlabel>
       </role>
       <role id="vecroleAffected">
@@ -235,7 +235,7 @@
       </role>
       <role id="vecroleBasis">
         <comesfrom lexicon="fn"/>
-        <label>The underlying support or foundation for an idea, argument, or process from which something is developed.</label>
+        <label>The underlying support or foundation for an idea, argument, or process from which something is developed.</label>
         <shortlabel>Basis</shortlabel>
       </role>
       <role id="vecroleBoaster">
@@ -300,7 +300,7 @@
       </role>
       <role id="vecroleCelebrated">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sb/sth much spoken of; famous; renowned for some special quality or ability.</label>
+        <label>Sb/sth much spoken of; famous; renowned for some special quality or ability.</label>
         <shortlabel>Celebrated</shortlabel>
       </role>
       <role id="vecroleCelebrating">
@@ -330,7 +330,7 @@
       </role>
       <role id="vecroleClaimant">
         <comesfrom lexicon="fn"/>
-        <label>Sb/sth making a claim/requirement.</label>
+        <label>A person making a claim.</label>
         <shortlabel>Claimant</shortlabel>
       </role>
       <role id="vecroleCognizer">
@@ -400,12 +400,12 @@
       </role>
       <role id="vecroleComponent">
         <comesfrom lexicon="fn"/>
-        <label>One of several or many self-contained units/parts of a larger entity of which sth is composed or into which it is divisible;  constituent element of a whole.</label>
+        <label>One of several or many self-contained units/parts of a larger entity of which sth is composed or into which it is divisible; constituent element of a whole.</label>
         <shortlabel>Component</shortlabel>
       </role>
       <role id="vecroleConclusion">
         <comesfrom lexicon="synsemclass"/>
-        <label>The final  outcome/result of mental action (opinion or decision).</label>
+        <label>The final outcome/result of mental action (opinion or decision).</label>
         <shortlabel>Conclusion</shortlabel>
       </role>
       <role id="vecroleConfuser">
@@ -465,7 +465,7 @@
       </role>
       <role id="vecroleCry">
         <comesfrom lexicon="synsemclass"/>
-        <label>A shouted statement, usually one that is intended to attract someone's attention.</label>
+        <label>A shouted statement, usually one that is intended to attract someone's attention.</label>
         <shortlabel>Cry</shortlabel>
       </role>
       <role id="vecroleCulminating">
@@ -495,12 +495,12 @@
       </role>
       <role id="vecroleDefended">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sb/sth being protected by sb against sb/sth.</label>
+        <label>Sb/sth being protected by sb against sb/sth.</label>
         <shortlabel>Defended</shortlabel>
       </role>
       <role id="vecroleDefender">
         <comesfrom lexicon="fn"/>
-        <label>Sb who protects sb/sth against sb/sth.</label>
+        <label>Sb who protects sb/sth against sb/sth.</label>
         <shortlabel>Defender</shortlabel>
       </role>
       <role id="vecroleDescribed">
@@ -530,12 +530,12 @@
       </role>
       <role id="vecroleDestination">
         <comesfrom lexicon="synsemclass"/>
-        <label>The place where sb is journeying or is taken, worthy of travel.</label>
+        <label>The place where sb is journeying or is taken, worthy of travel.</label>
         <shortlabel>Destination</shortlabel>
       </role>
       <role id="vecroleDestroyed">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sb/sth being changed so badly that it cannot be used, that it no longer exists or can never return to its normal state.</label>
+        <label>Sb/sth being changed so badly that it cannot be used, that it no longer exists or can never return to its normal state.</label>
         <shortlabel>Destroyed</shortlabel>
       </role>
       <role id="vecroleDestroyer">
@@ -585,7 +585,7 @@
       </role>
       <role id="vecroleDistributor">
         <comesfrom lexicon="fn"/>
-        <label>Sb who shares or spreads sth among people, or spreads or scatters sth over an area.</label>
+        <label>Sb who shares or spreads sth among people, or spreads or scatters sth over an area.</label>
         <shortlabel>Distributor</shortlabel>
       </role>
       <role id="vecroleDocument">
@@ -620,7 +620,7 @@
       </role>
       <role id="vecroleEmerging">
         <comesfrom lexicon="synsemclass"/>
-        <label>Entity starting to exist.</label>
+        <label>Entity starting to exist.</label>
         <shortlabel>Emerging</shortlabel>
       </role>
       <role id="vecroleEmotion">
@@ -655,7 +655,7 @@
       </role>
       <role id="vecroleEntity_2">
         <comesfrom lexicon="fn"/>
-        <label>Sth that exists by itself as a particular and discrete unit, separate from other things, distinct from  Entity_1</label>
+        <label>Sth that exists by itself as a particular and discrete unit, separate from other things, distinct from Entity_1</label>
         <shortlabel>Entity_2</shortlabel>
       </role>
       <role id="vecroleEscapee">
@@ -675,7 +675,7 @@
       </role>
       <role id="vecroleEvent">
         <comesfrom lexicon="fn"/>
-        <label>Anything that happens.</label>
+        <label>Anything that happens.</label>
         <shortlabel>Event</shortlabel>
       </role>
       <role id="vecroleEvent_expected">
@@ -695,7 +695,7 @@
       </role>
       <role id="vecroleExperiencer">
         <comesfrom lexicon="fn"/>
-        <label>Sb who lives through a particular event, process or phenomenon, which often involves emotional or psychological circumstances.</label>
+        <label>Sb who lives through a particular event, process or phenomenon, which often involves an emotional or psychological circumstances.</label>
         <shortlabel>Experiencer</shortlabel>
       </role>
       <role id="vecroleExplosive">
@@ -740,7 +740,7 @@
       </role>
       <role id="vecroleFilling">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sb/sth putting as much as can be held into sth.</label>
+        <label>Sb/sth puting as much as can be held into sth.</label>
         <shortlabel>Filling</shortlabel>
       </role>
       <role id="vecroleFinished">
@@ -755,7 +755,7 @@
       </role>
       <role id="vecroleFocused">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sb/sth that gets a lot of attention, time, effort, etc. from sb/sth.</label>
+        <label>Sb/sth that gets a lot of attention, time, effort, etc. from sb/sth.</label>
         <shortlabel>Focused</shortlabel>
       </role>
       <role id="vecroleFocusing">
@@ -770,7 +770,7 @@
       </role>
       <role id="vecroleFound">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sth/sb discovered or perceived after looking for it. </label>
+        <label>Sth/sb discovered or perceived after looking for it.</label>
         <shortlabel>Found</shortlabel>
       </role>
       <role id="vecroleFunction">
@@ -880,7 +880,7 @@
       </role>
       <role id="vecroleHeld">
         <comesfrom lexicon="synsemclass"/>
-        <label>Anything that is kept or detained  by sb.</label>
+        <label>Anything that is kept or detained by sb.</label>
         <shortlabel>Held</shortlabel>
       </role>
       <role id="vecroleHelper">
@@ -910,12 +910,12 @@
       </role>
       <role id="vecroleIdiom">
         <comesfrom lexicon="synsemclass"/>
-        <label>An expression whose meaning is different from the meaning of the individual words.</label>
+        <label>An expression whose meaning is different from the meaning of the individual words.</label>
         <shortlabel>Idiom</shortlabel>
       </role>
       <role id="vecroleIgnited">
         <comesfrom lexicon="synsemclass"/>
-        <label>Entity that underwent a change of quality when set afire.</label>
+        <label>Entity that underwent a change of quality, sth set afire.</label>
         <shortlabel>Ignited</shortlabel>
       </role>
       <role id="vecroleIgniter">
@@ -975,7 +975,7 @@
       </role>
       <role id="vecroleInfluence">
         <comesfrom lexicon="fn"/>
-        <label>A power affecting  the character, development, or behaviour of sb/sth.</label>
+        <label>A power affecting the character, development, or behaviour of sb/sth.</label>
         <shortlabel>Influence</shortlabel>
       </role>
       <role id="vecroleInfluenced">
@@ -1010,7 +1010,7 @@
       </role>
       <role id="vecroleInnovator">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sb who introduces new methods, ideas, or products.</label>
+        <label>Sb who introduces new methods, ideas, or products.</label>
         <shortlabel>Innovator</shortlabel>
       </role>
       <role id="vecroleInspected">
@@ -1040,17 +1040,17 @@
       </role>
       <role id="vecroleItem_profiled">
         <comesfrom lexicon="synsemclass"/>
-        <label>A particular entity on a scale compared to another entity with standard value on this scale.</label>
+        <label>A particular entity on a scale compared to another entity with standard value on this scale.</label>
         <shortlabel>Item_profiled</shortlabel>
       </role>
       <role id="vecroleItem_standard">
         <comesfrom lexicon="synsemclass"/>
-        <label>A particular entity of a standard value on a scale compared to another entity on this scale.</label>
+        <label>A particular entity of a standard value on a scale compared to another entity on this scale.</label>
         <shortlabel>Item_standard</shortlabel>
       </role>
       <role id="vecroleJudgment">
         <comesfrom lexicon="fn"/>
-        <label>Considered decision after thinking about sb/sth.</label>
+        <label>Considered decision of thinking about sb/sth</label>
         <shortlabel>Judgment</shortlabel>
       </role>
       <role id="vecroleKnowledge">
@@ -1070,7 +1070,7 @@
       </role>
       <role id="vecroleLender">
         <comesfrom lexicon="fn"/>
-        <label>Sb/sth that makes sth available to sb/sth with the expectation that it will be given back.</label>
+        <label>Sb/sth that makes sth available to sb/sth with the expectation that it will be given back.</label>
         <shortlabel>Lender</shortlabel>
       </role>
       <role id="vecroleLoser">
@@ -1145,7 +1145,7 @@
       </role>
       <role id="vecroleMusic">
         <comesfrom lexicon="synsemclass"/>
-        <label>A pattern of sounds made by sb/sth, intended to be listened.</label>
+        <label>A pattern of sounds made by sb/sth, intended to be listened.</label>
         <shortlabel>Music</shortlabel>
       </role>
       <role id="vecroleName">
@@ -1175,12 +1175,12 @@
       </role>
       <role id="vecroleNew">
         <comesfrom lexicon="fn"/>
-        <label>Sb/sth never existing before; existing for the first time, opposed to old.</label>
+        <label>Sb/sth never existing before; existing for the first time, opposed to old.</label>
         <shortlabel>New</shortlabel>
       </role>
       <role id="vecroleNorm">
         <comesfrom lexicon="fn"/>
-        <label>An accepted standard or a way of behaving or doing things that most people agree with.</label>
+        <label>An accepted standard or a way of behaving or doing things that most people agree with.</label>
         <shortlabel>Norm</shortlabel>
       </role>
       <role id="vecroleNoSr">
@@ -1235,7 +1235,7 @@
       </role>
       <role id="vecroleOld">
         <comesfrom lexicon="fn"/>
-        <label>Sb/sth being of an earlier date,  already existing, opposed to new.</label>
+        <label>Sb/sth being of an earlier date, already existing, opposed to new.</label>
         <shortlabel>Old</shortlabel>
       </role>
       <role id="vecroleOmitted">
@@ -1290,12 +1290,12 @@
       </role>
       <role id="vecroleOutcome">
         <comesfrom lexicon="fn"/>
-        <label>Final result referring to sth that follows and is caused by some previous event, action or situation.</label>
+        <label>Final result referring to sth that follows and is caused by some previous event, action or situation.</label>
         <shortlabel>Outcome</shortlabel>
       </role>
       <role id="vecroleOviparous">
         <comesfrom lexicon="synsemclass"/>
-        <label>An animal producing eggs that mature and hatch after being expelled from the body, as birds, most reptiles and fishes, and the monotremes.</label>
+        <label>Sb producing eggs that mature and hatch after being expelled from the body, as birds, most reptiles and fishes, and the monotremes.</label>
         <shortlabel>Oviparous</shortlabel>
       </role>
       <role id="vecroleOwner">
@@ -1365,7 +1365,7 @@
       </role>
       <role id="vecrolePayment">
         <comesfrom lexicon="fn"/>
-        <label>An amount of money paid.</label>
+        <label>An amount of money paid.</label>
         <shortlabel>Payment</shortlabel>
       </role>
       <role id="vecrolePerceived">
@@ -1425,7 +1425,7 @@
       </role>
       <role id="vecrolePlanned">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sth proposed or intended, arranged, organized, or done in accordance with a plan.</label>
+        <label>Sth proposed or intended, arranged, organized, or done in accordance with a plan.</label>
         <shortlabel>Planned</shortlabel>
       </role>
       <role id="vecrolePossibilities">
@@ -1450,7 +1450,7 @@
       </role>
       <role id="vecrolePreserver">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sb who is keeping  sth in its original state or in good condition, or  safe from harm or loss, or decaying.</label>
+        <label>Sb who is keeping sth in its original state or in good condition, or safe from harm or loss, or decaying.</label>
         <shortlabel>Preserver</shortlabel>
       </role>
       <role id="vecrolePretended">
@@ -1475,7 +1475,7 @@
       </role>
       <role id="vecroleProject">
         <comesfrom lexicon="fn"/>
-        <label>The object or idea that undergoes change due to the efforts of the agent, a planned undertaking.</label>
+        <label>The object or idea that undergoes change due to the efforts of the agent, a planned undertaking.</label>
         <shortlabel>Project</shortlabel>
       </role>
       <role id="vecroleProjectile">
@@ -1500,7 +1500,7 @@
       </role>
       <role id="vecroleProposer">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sb who suggests a subject for discussion or consideration.</label>
+        <label>Sb who suggests a subject for discussion or consideration.</label>
         <shortlabel>Proposer</shortlabel>
       </role>
       <role id="vecroleProtagonist">
@@ -1605,7 +1605,7 @@
       </role>
       <role id="vecroleRemainder">
         <comesfrom lexicon="fn"/>
-        <label>Sth that is still left to be processed after the event is finished.  </label>
+        <label>Sth that is still left to be processed after the event is finished.</label>
         <shortlabel>Remainder</shortlabel>
       </role>
       <role id="vecroleRemoved">
@@ -1680,7 +1680,7 @@
       </role>
       <role id="vecroleScrounger">
         <comesfrom lexicon="synsemclass"/>
-        <label>A person who systematically borrows from or lives off other.</label>
+        <label>A person who borrows from or lives off others.</label>
         <shortlabel>Scrounger</shortlabel>
       </role>
       <role id="vecroleSecuring">
@@ -1695,7 +1695,7 @@
       </role>
       <role id="vecroleSeller">
         <comesfrom lexicon="fn"/>
-        <label>Sb who gives goods or other property for money to a buyer (purchaser).</label>
+        <label>Sb who gives goods or other property for money to a buyer (purchaser).</label>
         <shortlabel>Seller</shortlabel>
       </role>
       <role id="vecroleSender">
@@ -1715,12 +1715,12 @@
       </role>
       <role id="vecroleSituation_harmful">
         <comesfrom lexicon="synsemclass"/>
-        <label>The set of negative things that are happening and the conditions that exist at a particular time and place.</label>
+        <label>The set of negative things that are happening and the conditions that exist at a particular time and place.</label>
         <shortlabel>Situation_harmful</shortlabel>
       </role>
       <role id="vecroleSituation_undesirable">
         <comesfrom lexicon="synsemclass"/>
-        <label>The set of unwanted things that are happening and the conditions that exist at a particular time and place.</label>
+        <label>The set of unwanted things that are happening and the conditions that exist at a particular time and place.</label>
         <shortlabel>Situation_undesirable</shortlabel>
       </role>
       <role id="vecroleSkill">
@@ -1795,12 +1795,12 @@
       </role>
       <role id="vecroleState_mental">
         <comesfrom lexicon="synsemclass"/>
-        <label>A condition that arises spontaneously rather than through conscious effort and is often accompanied by physiological changes.</label>
+        <label>A condition that arises spontaneously rather than through conscious effort and is often accompanied by physiological changes.</label>
         <shortlabel>State_mental</shortlabel>
       </role>
       <role id="vecroleState_of_affairs">
         <comesfrom lexicon="synsemclass"/>
-        <label>Event, state, situation or set of circumstances that the agent wants to believe have occurred or hold, or in which one finds oneself.</label>
+        <label>Event, state, situation or set of circumstances that the agent wants to believe have occurred or hold, or in which one finds oneself.</label>
         <shortlabel>State_of_affairs</shortlabel>
       </role>
       <role id="vecroleStimulus">
@@ -1880,12 +1880,12 @@
       </role>
       <role id="vecroleThinker">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sb who spends a lot of time thinking and has a particular opinion, belief, or idea about sb/sth.</label>
+        <label>Sb who spends a lot of time thinking and has a particular opinion, belief, or idea about sb/sth.</label>
         <shortlabel>Thinker</shortlabel>
       </role>
       <role id="vecroleTime">
         <comesfrom lexicon="fn"/>
-        <label>The part of existence that is measured in minutes, days, years, etc.</label>
+        <label>The part of existence that is measured in minutes, days, years, etc.</label>
         <shortlabel>Time</shortlabel>
       </role>
       <role id="vecroleTopic">
@@ -1905,17 +1905,17 @@
       </role>
       <role id="vecroleTransported">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sb/sth moved from one place to another.</label>
+        <label>Sb/sth moved from one place to another.</label>
         <shortlabel>Transported</shortlabel>
       </role>
       <role id="vecroleTransporter">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sb/sth moving, taking sb/sth  from one place to another.</label>
+        <label>Sb/sth moving, taking sb/sth from one place to another.</label>
         <shortlabel>Transporter</shortlabel>
       </role>
       <role id="vecroleUndergoer">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sb/sth affected by an event, does not have control over the way the event occurs, is characterized as being in a certain position or condition throughout the state.</label>
+        <label>Sb/sth affected by an event, does not have control over the way the event occurs, is characterized as being in a certain position or condition throughout the event.</label>
         <shortlabel>Undergoer</shortlabel>
       </role>
       <role id="vecroleUndertaking">
@@ -1935,7 +1935,7 @@
       </role>
       <role id="vecroleValue">
         <comesfrom lexicon="fn"/>
-        <label>An amount that sth is worth, measured especially in money, or  the material  worth of sth.</label>
+        <label>An amount that sth is worth, measured especially in money, or the material worth of sth.</label>
         <shortlabel>Value</shortlabel>
       </role>
       <role id="vecroleValued">
@@ -1945,12 +1945,12 @@
       </role>
       <role id="vecroleValue_final">
         <comesfrom lexicon="synsemclass"/>
-        <label>A final amount that sth is worth, measured especially in money, or  the material  worth of sth.</label>
+        <label>A final amount that sth is worth, measured especially in money, or the material worth of sth.</label>
         <shortlabel>Value_final</shortlabel>
       </role>
       <role id="vecroleValue_initial">
         <comesfrom lexicon="synsemclass"/>
-        <label>An initial amount that sth is worth, measured especially in money, or  the material  worth of sth.</label>
+        <label>An initial amount that sth is worth, measured especially in money, or the material worth of sth.</label>
         <shortlabel>Value_initial</shortlabel>
       </role>
       <role id="vecroleVehicle">
@@ -1960,7 +1960,7 @@
       </role>
       <role id="vecroleVictim">
         <comesfrom lexicon="fn"/>
-        <label>Sb who has been hurt, damaged, or killed or has suffered, either because of the actions of sb else, or because of illness or chance.</label>
+        <label>Sb who has been hurt, damaged, or killed or has suffered, either because of the actions of sb else, or because of illness or chance.</label>
         <shortlabel>Victim</shortlabel>
       </role>
       <role id="vecroleViolating">
@@ -1970,7 +1970,7 @@
       </role>
       <role id="vecroleVisited">
         <comesfrom lexicon="synsemclass"/>
-        <label>A place where sb goes in order to look at it, or to spend time there.</label>
+        <label>A place where sb goes in order to look at it, or to spend time there.</label>
         <shortlabel>Visited</shortlabel>
       </role>
       <role id="vecroleVisitor">
@@ -1990,12 +1990,12 @@
       </role>
       <role id="vecroleWasted">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sth (money, substances, time, energy, abilities, etc.) used unnecessarily or wrongly.</label>
+        <label>Sth (money, substances, time, energy, abilities, etc.) used unnecessary or wrongly.</label>
         <shortlabel>Wasted</shortlabel>
       </role>
       <role id="vecroleWasting">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sb who uses money, substances, time, energy, abilities, etc unnecessarily or wrongly.</label>
+        <label>Sb who uses money, substances, time, energy, abilities, etc. unnecessary or wrongly.</label>
         <shortlabel>Wasting</shortlabel>
       </role>
       <role id="vecroleWatcher">
@@ -2005,7 +2005,7 @@
       </role>
       <role id="vecroleWeakened">
         <comesfrom lexicon="synsemclass"/>
-        <label>Sb/sth that  becomes less strong, powerful, determined, or effective.</label>
+        <label>Sb/sth that becomes less strong, powerful, determined, or effective.</label>
         <shortlabel>Weakened</shortlabel>
       </role>
       <role id="vecroleWearer">
