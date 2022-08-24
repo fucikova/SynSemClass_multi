@@ -1392,7 +1392,7 @@
         <comesfrom lexicon="synsemclass"/>
         <label>Sb/sth that has been allowed.</label>
         <shortlabel>Permitted</shortlabel>
-      </role>
+      </role><role id="vecrolePermittee"><comesfrom lexicon="synsemclass"/><label>Sb who is allowed to do sth.</label><shortlabel>Permittee</shortlabel></role>
       <role id="vecrolePerpetrator">
         <comesfrom lexicon="fn"/>
         <label>Sb who carries out a harmful, illegal, or immoral act.</label>
@@ -2108,7 +2108,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00009" status="5">
-      <class_definition>A Perpetrator does something not permitted by the law or something seen as undesirable.</class_definition>
+      <class_definition>A Perpetrator does something not permitted by the law or something seen as undesirable.</class_definition>
       <commonroles>
         <role idref="vecrolePerpetrator" spec=""/>
         <role idref="vecroleDeed" spec=""/>
@@ -2208,7 +2208,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00021" status="finished">
-      <class_definition>A Seeker looks for a Sought entity.</class_definition>
+      <class_definition>A Seeker looks for a Sought entity.</class_definition>
       <commonroles>
         <role idref="vecroleSeeker" spec=""/>
         <role idref="vecroleSought" spec=""/>
@@ -2289,7 +2289,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00030" status="finished">
-      <class_definition>The Owner_initial gives Entity_1 to the Owner_final  and receives Entity_2 in exchange.</class_definition>
+      <class_definition>The Owner_initial gives Entity_1 to the Owner_final and receives Entity_2 in exchange.</class_definition>
       <commonroles>
         <role idref="vecroleOwner_initial" spec=""/>
         <role idref="vecroleEntity_1" spec=""/>
@@ -2336,7 +2336,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00035" status="finished_de1">
-      <class_definition>A Buyer provides Payment to a Seller for Goods that will go to a Party_benefited .</class_definition>
+      <class_definition>A Buyer provides Payment to a Seller for Goods that will go to a Party_benefited .</class_definition>
       <commonroles>
         <role idref="vecroleBuyer" spec=""/>
         <role idref="vecroleGoods" spec=""/>
@@ -2374,7 +2374,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00039" status="5">
-      <class_definition>A Proposer suggests a Proposed entity to an Impactee.</class_definition>
+      <class_definition>A Proposer suggests a Proposed entity to an Impactee.</class_definition>
       <commonroles>
         <role idref="vecroleProposer" spec=""/>
         <role idref="vecroleProposed" spec=""/>
@@ -2753,7 +2753,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00083" status="5">
-      <class_definition>A Seller does business, sells Goods to a Buyer for a  Recompense.</class_definition>
+      <class_definition>A Seller does business, sells Goods to a Buyer for a recompense.</class_definition>
       <commonroles>
         <role idref="vecroleSeller" spec=""/>
         <role idref="vecroleGoods" spec=""/>
@@ -2908,7 +2908,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00101" status="finished">
-      <class_definition>A Comparator examines and compares the similarities or differences of an Item_standard to an  Item_profiled.</class_definition>
+      <class_definition>A Comparator examines and compares the similarities or differences of an Item_standard to an Item_profiled.</class_definition>
       <commonroles>
         <role idref="vecroleComparator" spec=""/>
         <role idref="vecroleItem_standard" spec=""/>
@@ -2917,7 +2917,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00102" status="5">
-      <class_definition>A Protagonist reacts to a Stimulus in a Manner. </class_definition>
+      <class_definition>A Protagonist reacts to a Stimulus in a Manner.</class_definition>
       <commonroles>
         <role idref="vecroleProtagonist" spec=""/>
         <role idref="vecroleStimulus" spec=""/>
@@ -3411,7 +3411,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00159" status="5">
-      <class_definition>An Assessor examines a Phenomenon to figure out its Value. </class_definition>
+      <class_definition>An Assessor examines a Phenomenon to figure out its Value.</class_definition>
       <commonroles>
         <role idref="vecroleAssessor" spec=""/>
         <role idref="vecrolePhenomenon" spec=""/>
@@ -3692,7 +3692,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00191" status="finished">
-      <class_definition>A Recipient obtains an Acquired entity, such as control, permission, access, rights,  from a Source (LVC).</class_definition>
+      <class_definition>A Recipient obtains an Acquired entity, such as control, permission, access, rights, from a Source (LVC).</class_definition>
       <commonroles>
         <role idref="vecroleRecipient" spec=""/>
         <role idref="vecroleSource" spec=""/>
@@ -4837,7 +4837,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00326" status="finished">
-      <class_definition>A Protagonist declares an Enforced entity  resolutely.</class_definition>
+      <class_definition>A Protagonist declares an Enforced entity resolutely.</class_definition>
       <commonroles>
         <role idref="vecroleProtagonist" spec=""/>
         <role idref="vecroleEnforced" spec=""/>
@@ -5174,7 +5174,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00365" status="5">
-      <class_definition>A Cognizer deprives a Victim of life.</class_definition>
+      <class_definition>A Cause deprives a Victim of life.</class_definition>
       <commonroles>
         <role idref="vecroleCause" spec=""/>
         <role idref="vecroleVictim" spec=""/>
@@ -5571,7 +5571,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00411" status="finished_de1">
-      <class_definition>A Protagonist affords or dares to take an Action.</class_definition>
+      <class_definition>An Agent affords or dares to take an Action.</class_definition>
       <commonroles>
         <role idref="vecroleAgent" spec=""/>
         <role idref="vecroleAction" spec=""/>
@@ -5604,7 +5604,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00415" status="finished">
-      <class_definition>A  Competitor_1 plays against a Competitor_2 in a Competition for a Targeted entity.</class_definition>
+      <class_definition>A Competitor_1 plays against a Competitor_2 in a Competition for a Targeted entity.</class_definition>
       <commonroles>
         <role idref="vecroleCompetitor_1" spec=""/>
         <role idref="vecroleCompetition" spec=""/>
@@ -6205,7 +6205,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00485" status="finished">
-      <class_definition>An Authority calls an Undergoer for a Goal_Destination in an official matter.</class_definition>
+      <class_definition>An Authority calls an Undergoer for a Goal in an official matter.</class_definition>
       <commonroles>
         <role idref="vecroleAuthority" spec=""/>
         <role idref="vecroleUndergoer" spec=""/>
@@ -6214,7 +6214,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00486" status="5">
-      <class_definition>An Influencing entity slows down an Influenced entity.</class_definition>
+      <class_definition>An Authority slows down an Action.</class_definition>
       <commonroles>
         <role idref="vecroleAuthority" spec=""/>
         <role idref="vecroleAction" spec=""/>
@@ -6231,7 +6231,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00488" status="5">
-      <class_definition>A Speaker refers to an Entity with a Label.</class_definition>
+      <class_definition>A Speaker refers to an Entity with a Name.</class_definition>
       <commonroles>
         <role idref="vecroleSpeaker" spec=""/>
         <role idref="vecroleEntity" spec=""/>
@@ -6351,7 +6351,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00502" status="5">
-      <class_definition>An Agent organizes an Arranged entity by systematic planning and united effort.</class_definition>
+      <class_definition>An Agent organizes a Planned entity by systematic planning and united effort.</class_definition>
       <commonroles>
         <role idref="vecroleAgent" spec=""/>
         <role idref="vecrolePlanned" spec=""/>
@@ -6616,7 +6616,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00533" status="finished">
-      <class_definition>A Protagonist accomplishes a Deed with a Focused entity.</class_definition>
+      <class_definition>An Agent accomplishes a Deed with a Focused entity.</class_definition>
       <commonroles>
         <role idref="vecroleAgent" spec=""/>
         <role idref="vecroleFocused" spec=""/>
@@ -8378,7 +8378,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00743" status="5">
-      <class_definition>A Protagonist forces an Undesirable entity on a Recipient.</class_definition>
+      <class_definition>An Agent forces an Undesirable entity on a Recipient.</class_definition>
       <commonroles>
         <role idref="vecroleAgent" spec=""/>
         <role idref="vecroleUndesirable" spec=""/>
@@ -8709,7 +8709,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00783" status="finished">
-      <class_definition>A Protagonist refrains from an Action.</class_definition>
+      <class_definition>An Agent refrains from an Action.</class_definition>
       <commonroles>
         <role idref="vecroleAgent" spec=""/>
         <role idref="vecroleAction" spec=""/>
@@ -8906,7 +8906,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00807" status="finished">
-      <class_definition>An Authority raduces a Protagonist in rank from a State_initialt to a State_final.</class_definition>
+      <class_definition>An Authority reduces a Protagonist in rank from a State_initialt to a State_final.</class_definition>
       <commonroles>
         <role idref="vecroleAuthority" spec=""/>
         <role idref="vecroleProtagonist" spec=""/>
@@ -8990,7 +8990,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00817" status="finished">
-      <class_definition>An Agent flirts with an Entity.</class_definition>
+      <class_definition>A Protagonist flirts with an Entity.</class_definition>
       <commonroles>
         <role idref="vecroleProtagonist" spec=""/>
         <role idref="vecroleEntity" spec=""/>
@@ -9337,7 +9337,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec00859" status="5">
-      <class_definition>An Authority directs a Focused  entity to a Goal.</class_definition>
+      <class_definition>An Authority directs a Focused entity to a Goal.</class_definition>
       <commonroles>
         <role idref="vecroleAuthority" spec=""/>
         <role idref="vecroleFocused" spec=""/>
@@ -10779,7 +10779,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec01034" status="finished">
-      <class_definition>An Oviparous entity lays Egg.</class_definition>
+      <class_definition>An Oviparous entity lays eggs.</class_definition>
       <commonroles>
         <role idref="vecroleOviparous" spec=""/>
         <role idref="vecroleCreated" spec=""/>
@@ -10795,7 +10795,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec01036" status="finished">
-      <class_definition>A Comparator confronts a Compared_1 with  a Compared_2 entity.</class_definition>
+      <class_definition>A Comparator confronts a Compared_1 with a Compared_2 entity.</class_definition>
       <commonroles>
         <role idref="vecroleComparator" spec=""/>
         <role idref="vecroleCompared_1" spec=""/>
@@ -10952,7 +10952,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec01055" status="finished">
-      <class_definition>A Protagonist inhabits/is physically in or is a resident of a Place.</class_definition>
+      <class_definition>An Agent inhabits/is physically in or is a resident of a Place.</class_definition>
       <commonroles>
         <role idref="vecroleAgent" spec=""/>
         <role idref="vecrolePlace" spec=""/>
@@ -11662,7 +11662,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec01140" status="5">
-      <class_definition>A Protagonist vacates a Place.</class_definition>
+      <class_definition>An Agent vacates a Place.</class_definition>
       <commonroles>
         <role idref="vecroleAgent" spec=""/>
         <role idref="vecroleVacated" spec=""/>
@@ -11804,7 +11804,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec01157" status="finished">
-      <class_definition>A Protagonist beats a retreat (Idiom).</class_definition>
+      <class_definition>An Agent beats a retreat (Idiom).</class_definition>
       <commonroles>
         <role idref="vecroleAgent" spec=""/>
         <role idref="vecroleIdiom" spec=""/>
@@ -12073,7 +12073,7 @@
       <classnote/>
     </veclass>
     <veclass id="vec01189" status="finished">
-      <class_definition>A Creator reconstructs a Source into a Result.</class_definition>
+      <class_definition>A Creator reconstructs a Source into a result.</class_definition>
       <commonroles>
         <role idref="vecroleCreator" spec=""/>
         <role idref="vecroleCreated" spec=""/>
