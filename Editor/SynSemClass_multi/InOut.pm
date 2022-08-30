@@ -715,7 +715,7 @@ sub exportData{
 		print OUT "Role/Functor\t";
 	}
 	print OUT "\t";
-	print OUT "Note\tRestrict\t\tOntoNotes\tFrameNet\tWordNet\tCzEngVallex\tPDTVallex\tEngVallex\tVallex\tVerbNet\tPropBank\tFrameNet Des Deutschen\tGUP\tVALBU\tWoxikon\tParaCrawl German\n\n";
+	print OUT "Note\tRestrict\t\tOntoNotes\tFrameNet\tWordNet\tCzEngVallex\tPDTVallex\tEngVallex\tVallex\tVerbNet\tPropBank\tFrameNet Des Deutschen\tGUP\tVALBU\tParaCrawl German\n\n";
 
 	
 	my $classNote=$data_main->getClassNote($class);
@@ -763,7 +763,7 @@ sub exportData{
 		}
 
 		my %links=();
-		foreach my $ln_type ("on", "fn", "wn", "czengvallex", "pdtvallex", "engvallex", "vallex", "vn", "pb", "fnd", "gup", "valbu", "woxikon", "paracrawl_ge"){
+		foreach my $ln_type ("on", "fn", "wn", "czengvallex", "pdtvallex", "engvallex", "vallex", "vn", "pb", "fnd", "gup", "valbu", "paracrawl_ge"){
 			@{$links{$ln_type}} = $data_cms->getClassMemberLinksForType($cm, $ln_type);
 		}
 
@@ -776,7 +776,7 @@ sub exportData{
 		print OUT "$note\t$restrict\t\t";
 
 		my $not_first = 0;
-		foreach my $ln_type ("on", "fn", "wn", "czengvallex", "pdtvallex", "engvallex", "vallex", "vn", "pb", "fnd", "gup", "valbu", "woxikon", "paracrawl_ge"){
+		foreach my $ln_type ("on", "fn", "wn", "czengvallex", "pdtvallex", "engvallex", "vallex", "vn", "pb", "fnd", "gup", "valbu", "paracrawl_ge"){
 			$not_first =0;
 			if ($data_cms->get_no_mapping($cm, $ln_type)){
 				print OUT "NM";
@@ -812,8 +812,6 @@ sub exportData{
 					print OUT $_->[5] ."/" . $_->[3] . "." . $_->[4];
 				}elsif($ln_type eq "valbu"){
 					print OUT $_->[3] ." " . $_->[4] . "/" . $_->[5];
-				}elsif($ln_type eq "woxikon"){
-					print OUT $_->[3] . " " . $_->[4];
 				}elsif($ln_type eq "paracrawl_ge"){
 					print OUT $_->[4] . " " . $_->[3];
 				}

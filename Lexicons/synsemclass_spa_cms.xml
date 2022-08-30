@@ -134,13 +134,6 @@
         <argumentsused>
          </argumentsused>
       </lexicon>
-      <lexicon id="woxikon" name="woxikon">
-        <lexref>https://woxikon.es</lexref>
-        <lexbrowsing>https://sinonimos.woxikon.es/es/</lexbrowsing>
-        <lexsearching>https://sinonimos.woxikon.es</lexsearching>
-        <argumentsused>
-         </argumentsused>
-      </lexicon>
       <lexicon id="x_srl_es" name="x_srl_es">
         <lexref>https://catalog.ldc.upenn.edu/LDC2021T09</lexref>
         <lexbrowsing>https://catalog.ldc.upenn.edu/LDC2021T09</lexbrowsing>
@@ -974,7 +967,10 @@
       </role>
       <role id="vecrolePermitted">
         <definition>Aquel/aquello que ha sido permitido.</definition>
-      </role><role id="vecrolePermittee"><definition>Alguien al que se le permite hacer algo.</definition></role>
+      </role>
+      <role id="vecrolePermittee">
+        <definition>Alguien al que se le permite hacer algo.</definition>
+      </role>
       <role id="vecrolePerpetrator">
         <definition>Aquel que lleva a cabo un acto dañino, ilegal o inmoral.</definition>
       </role>
@@ -1396,9 +1392,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="colgar"/>
@@ -1425,9 +1418,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -1458,9 +1448,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -1487,9 +1474,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -1520,9 +1504,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -1549,9 +1530,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -1582,9 +1560,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -1611,9 +1586,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -1644,9 +1616,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -1673,9 +1642,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -1706,9 +1672,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -1735,9 +1698,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -1768,9 +1728,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -1797,9 +1754,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -1830,9 +1784,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -1859,9 +1810,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -1892,9 +1840,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -1921,9 +1866,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -1954,9 +1896,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -1983,9 +1922,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -2016,9 +1952,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -2045,9 +1978,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -2078,9 +2008,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -2107,9 +2034,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -2140,9 +2064,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -2169,9 +2090,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -2202,9 +2120,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -2231,9 +2146,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -2264,9 +2176,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -2293,9 +2202,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -2326,9 +2232,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -2355,9 +2258,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -2388,9 +2288,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -2417,9 +2314,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -2450,9 +2344,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -2479,9 +2370,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -2512,9 +2400,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -2541,9 +2426,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -2574,9 +2456,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -2603,9 +2482,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -2636,9 +2512,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -2665,9 +2538,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -2698,9 +2568,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -2727,9 +2594,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -2760,9 +2624,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -2789,9 +2650,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -2822,9 +2680,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -2851,9 +2706,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -2884,9 +2736,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -2913,9 +2762,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -2946,9 +2792,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -2975,9 +2818,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -3008,9 +2848,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -3037,9 +2874,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -3070,9 +2904,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -3099,9 +2930,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -3132,9 +2960,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -3161,9 +2986,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -3194,9 +3016,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -3223,9 +3042,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -3256,9 +3072,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -3285,9 +3098,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -3318,9 +3128,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -3347,9 +3154,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -3380,9 +3184,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -3409,9 +3210,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -3442,9 +3240,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="dar"/>
@@ -3471,9 +3266,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -3504,9 +3296,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="depender"/>
@@ -3535,9 +3324,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="devolver"/>
@@ -3564,9 +3350,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -3598,9 +3381,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="esperar"/>
@@ -3628,9 +3408,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -3662,9 +3439,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="esperar"/>
@@ -3692,9 +3466,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -3726,9 +3497,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="estar"/>
@@ -3755,9 +3523,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -3788,9 +3553,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="estar"/>
@@ -3817,9 +3579,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -3850,9 +3609,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="incluir"/>
@@ -3879,9 +3635,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -3912,9 +3665,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="obtener"/>
@@ -3941,9 +3691,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -3974,9 +3721,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="repatriar"/>
@@ -4003,9 +3747,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -4036,9 +3777,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="representar"/>
@@ -4067,9 +3805,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="expect" eslemma="retrasar"/>
@@ -4096,9 +3831,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -4130,9 +3862,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="tener"/>
@@ -4160,9 +3889,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -4194,9 +3920,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="tener"/>
@@ -4224,9 +3947,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -4258,9 +3978,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="tener"/>
@@ -4288,9 +4005,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -4322,9 +4036,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="tener"/>
@@ -4352,9 +4063,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -4386,9 +4094,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="tener"/>
@@ -4416,9 +4121,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -4450,9 +4152,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="tener"/>
@@ -4462,6 +4161,9 @@
           <examples/>
         </classmember>
       </classmembers>
+      <local_history>
+        <local_event time_stamp="30.8.2022 13:56:18" type_of_event="woxikon links removed" author="SYS"/>
+      </local_history>
     </veclass>
     <veclass id="vec00003" lemma="">
       <class_definition>Un Protagonista anticipa un Evento_esperado.</class_definition>
@@ -4485,9 +4187,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -4518,9 +4217,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="anticipate" eslemma="anticipar"/>
@@ -4547,9 +4243,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -4580,9 +4273,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="estimate" eslemma="calcular"/>
@@ -4611,9 +4301,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="estimate" eslemma="decir"/>
@@ -4640,9 +4327,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -4674,9 +4358,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="esperar"/>
@@ -4704,9 +4385,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -4738,9 +4416,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="esperar"/>
@@ -4768,9 +4443,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -4802,9 +4474,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="estar"/>
@@ -4832,9 +4501,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -4866,9 +4532,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="estar"/>
@@ -4896,9 +4559,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -4930,9 +4590,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="estimate" eslemma="estimar"/>
@@ -4959,9 +4616,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -4992,9 +4646,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="anticipate" eslemma="evitar"/>
@@ -5021,9 +4672,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -5054,9 +4702,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="wait" eslemma="pasar"/>
@@ -5083,9 +4728,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -5116,9 +4758,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="wait" eslemma="pasar"/>
@@ -5145,9 +4784,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -5178,9 +4814,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="wait" eslemma="pasar"/>
@@ -5207,9 +4840,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -5240,9 +4870,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="wait" eslemma="pasar"/>
@@ -5269,9 +4896,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -5302,9 +4926,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="wait" eslemma="pasar"/>
@@ -5331,9 +4952,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -5364,9 +4982,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="wait" eslemma="pasar"/>
@@ -5393,9 +5008,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -5426,9 +5038,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="wait" eslemma="pasar"/>
@@ -5455,9 +5064,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -5488,9 +5094,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="wait" eslemma="pasar"/>
@@ -5517,9 +5120,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -5550,9 +5150,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="wait" eslemma="pasar"/>
@@ -5579,9 +5176,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -5612,9 +5206,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="wait" eslemma="pasar"/>
@@ -5641,9 +5232,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -5674,9 +5262,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="wait" eslemma="pasar"/>
@@ -5703,9 +5288,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -5736,9 +5318,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="wait" eslemma="pasar"/>
@@ -5765,9 +5344,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -5798,9 +5374,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="wait" eslemma="poder"/>
@@ -5827,9 +5400,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -5860,9 +5430,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="wait" eslemma="poder"/>
@@ -5889,9 +5456,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -5922,9 +5486,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="repatriar"/>
@@ -5951,9 +5512,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -5984,9 +5542,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pend" eslemma="seguir"/>
@@ -6013,9 +5568,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -6046,9 +5598,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pend" eslemma="seguir"/>
@@ -6075,9 +5624,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -6108,9 +5654,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pend" eslemma="seguir"/>
@@ -6139,9 +5682,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="wait" eslemma="temer"/>
@@ -6168,9 +5708,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -6203,9 +5740,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="tener"/>
@@ -6234,9 +5768,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -6269,9 +5800,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="tener"/>
@@ -6300,9 +5828,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -6335,9 +5860,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="tener"/>
@@ -6366,9 +5888,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -6401,9 +5920,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="tener"/>
@@ -6432,9 +5948,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -6467,9 +5980,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="tener"/>
@@ -6498,9 +6008,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -6533,9 +6040,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="await" eslemma="tener"/>
@@ -6546,6 +6050,9 @@
           <examples/>
         </classmember>
       </classmembers>
+      <local_history>
+        <local_event time_stamp="30.8.2022 13:56:18" type_of_event="woxikon links removed" author="SYS"/>
+      </local_history>
     </veclass>
     <veclass id="vec00004" lemma="">
       <class_definition/>
@@ -6573,9 +6080,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -6606,9 +6110,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="date" eslemma="datar"/>
@@ -6635,9 +6136,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -6668,9 +6166,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="date" eslemma="remontar"/>
@@ -6697,9 +6192,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -6730,9 +6222,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="date" eslemma="tener"/>
@@ -6759,9 +6248,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -6792,9 +6278,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="date" eslemma="tener"/>
@@ -6821,9 +6304,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -6854,9 +6334,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="date" eslemma="tener"/>
@@ -6883,9 +6360,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -6916,9 +6390,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="date" eslemma="tener"/>
@@ -6945,9 +6416,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -6978,9 +6446,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="date" eslemma="tener"/>
@@ -7007,9 +6472,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -7040,9 +6502,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="date" eslemma="tener"/>
@@ -7051,6 +6510,9 @@
           <examples/>
         </classmember>
       </classmembers>
+      <local_history>
+        <local_event time_stamp="30.8.2022 13:56:18" type_of_event="woxikon links removed" author="SYS"/>
+      </local_history>
     </veclass>
     <veclass id="vec00006" lemma="">
       <class_definition>Un Evento le ocurre a un Paciente.</class_definition>
@@ -7074,9 +6536,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -7107,9 +6566,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="happen" eslemma="confiar"/>
@@ -7136,9 +6592,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -7169,9 +6622,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="happen" eslemma="ocurrir"/>
@@ -7198,9 +6648,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -7231,9 +6678,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="happen" eslemma="pasar"/>
@@ -7260,9 +6704,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -7293,9 +6734,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="happen" eslemma="pasar"/>
@@ -7322,9 +6760,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -7355,9 +6790,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="happen" eslemma="pasar"/>
@@ -7384,9 +6816,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -7417,9 +6846,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="happen" eslemma="pasar"/>
@@ -7446,9 +6872,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -7479,9 +6902,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="happen" eslemma="pasar"/>
@@ -7508,9 +6928,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -7541,9 +6958,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="happen" eslemma="pasar"/>
@@ -7570,9 +6984,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -7603,9 +7014,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="happen" eslemma="pasar"/>
@@ -7632,9 +7040,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -7665,9 +7070,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="happen" eslemma="pasar"/>
@@ -7694,9 +7096,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -7727,9 +7126,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="happen" eslemma="pasar"/>
@@ -7756,9 +7152,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -7789,9 +7182,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="happen" eslemma="pasar"/>
@@ -7818,9 +7208,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -7851,9 +7238,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="happen" eslemma="pasar"/>
@@ -7880,9 +7264,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -7913,9 +7294,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="happen" eslemma="pasar"/>
@@ -7942,9 +7320,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -7975,9 +7350,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="happen" eslemma="resultar"/>
@@ -8004,9 +7376,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -8037,9 +7406,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="happen" eslemma="suceder"/>
@@ -8068,9 +7434,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="happen" eslemma="suceder"/>
@@ -8079,6 +7442,9 @@
           <examples/>
         </classmember>
       </classmembers>
+      <local_history>
+        <local_event time_stamp="30.8.2022 13:56:18" type_of_event="woxikon links removed" author="SYS"/>
+      </local_history>
     </veclass>
     <veclass id="vec00007" lemma="">
       <class_definition/>
@@ -8112,9 +7478,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="commit" eslemma="cometer"/>
@@ -8141,9 +7504,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -8174,9 +7534,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="commit" eslemma="comprometer"/>
@@ -8203,9 +7560,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -8236,9 +7590,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="commit" eslemma="decir"/>
@@ -8265,9 +7616,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -8298,9 +7646,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="commit" eslemma="destinar"/>
@@ -8327,9 +7672,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -8360,9 +7702,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="blunder" eslemma="equivocar"/>
@@ -8389,9 +7728,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -8422,9 +7758,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="blunder" eslemma="meter"/>
@@ -8451,9 +7784,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -8484,9 +7814,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="blunder" eslemma="meter"/>
@@ -8513,9 +7840,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -8546,9 +7870,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="blunder" eslemma="meter"/>
@@ -8575,9 +7896,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -8608,9 +7926,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="commit" eslemma="procesar"/>
@@ -8637,9 +7952,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -8670,9 +7982,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="commit" eslemma="realizar"/>
@@ -8681,6 +7990,9 @@
           <examples/>
         </classmember>
       </classmembers>
+      <local_history>
+        <local_event time_stamp="30.8.2022 13:56:18" type_of_event="woxikon links removed" author="SYS"/>
+      </local_history>
     </veclass>
     <veclass id="vec00010" lemma="">
       <class_definition/>
@@ -9470,9 +8782,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="aceptar"/>
@@ -9499,9 +8808,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -9532,9 +8838,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="aliviar"/>
@@ -9563,9 +8866,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="argumentar"/>
@@ -9592,9 +8892,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -9626,9 +8923,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="encarcelar"/>
@@ -9655,9 +8949,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -9688,9 +8979,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="reason" eslemma="estar"/>
@@ -9717,9 +9005,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -9750,9 +9035,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="reason" eslemma="estar"/>
@@ -9779,9 +9061,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -9812,9 +9091,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="hacer"/>
@@ -9841,9 +9117,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -9874,9 +9147,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="hacer"/>
@@ -9903,9 +9173,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -9936,9 +9203,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="hacer"/>
@@ -9965,9 +9229,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -9998,9 +9259,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="hacer"/>
@@ -10027,9 +9285,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -10060,9 +9315,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="hacer"/>
@@ -10089,9 +9341,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -10122,9 +9371,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="hacer"/>
@@ -10151,9 +9397,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -10184,9 +9427,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="hacer"/>
@@ -10213,9 +9453,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -10246,9 +9483,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="hacer"/>
@@ -10275,9 +9509,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -10308,9 +9539,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="hacer"/>
@@ -10337,9 +9565,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -10370,9 +9595,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="hacer"/>
@@ -10399,9 +9621,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -10432,9 +9651,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="hacer"/>
@@ -10461,9 +9677,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -10494,9 +9707,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="hacer"/>
@@ -10523,9 +9733,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -10556,9 +9763,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="hacer"/>
@@ -10585,9 +9789,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -10618,9 +9819,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="hacer"/>
@@ -10647,9 +9845,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -10680,9 +9875,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="hacer"/>
@@ -10709,9 +9901,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -10742,9 +9931,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="hacer"/>
@@ -10771,9 +9957,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -10804,9 +9987,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="hacer"/>
@@ -10833,9 +10013,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -10866,9 +10043,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="hacer"/>
@@ -10895,9 +10069,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -10928,9 +10099,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="hacer"/>
@@ -10957,9 +10125,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -10990,9 +10155,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="hacer"/>
@@ -11019,9 +10181,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -11052,9 +10211,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="hacer"/>
@@ -11081,9 +10237,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -11114,9 +10267,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="presentar"/>
@@ -11143,9 +10293,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -11176,9 +10323,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="presentar"/>
@@ -11205,9 +10349,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -11238,9 +10379,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="presentar"/>
@@ -11267,9 +10405,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -11300,9 +10435,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="argue" eslemma="sostener"/>
@@ -11311,6 +10443,9 @@
           <examples/>
         </classmember>
       </classmembers>
+      <local_history>
+        <local_event time_stamp="30.8.2022 13:56:18" type_of_event="woxikon links removed" author="SYS"/>
+      </local_history>
     </veclass>
     <veclass id="vec00202" lemma="">
       <class_definition/>
@@ -12932,9 +12067,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="aprobar"/>
@@ -12961,9 +12093,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -12994,9 +12123,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="atravesar"/>
@@ -13023,9 +12149,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -13056,9 +12179,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="dejar"/>
@@ -13085,9 +12205,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -13118,9 +12235,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="dejar"/>
@@ -13147,9 +12261,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -13180,9 +12291,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="dejar"/>
@@ -13209,9 +12317,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -13242,9 +12347,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="dejar"/>
@@ -13271,9 +12373,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -13304,9 +12403,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="dejar"/>
@@ -13333,9 +12429,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -13366,9 +12459,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="dejar"/>
@@ -13395,9 +12485,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -13428,9 +12515,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="juzgar"/>
@@ -13457,9 +12541,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -13490,9 +12571,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="pasar"/>
@@ -13519,9 +12597,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -13552,9 +12627,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="pasar"/>
@@ -13581,9 +12653,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -13614,9 +12683,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="pasar"/>
@@ -13643,9 +12709,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -13676,9 +12739,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="pasar"/>
@@ -13705,9 +12765,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -13738,9 +12795,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="pasar"/>
@@ -13767,9 +12821,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -13800,9 +12851,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="pasar"/>
@@ -13829,9 +12877,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -13862,9 +12907,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="pasar"/>
@@ -13891,9 +12933,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -13924,9 +12963,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="pasar"/>
@@ -13953,9 +12989,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -13986,9 +13019,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="pasar"/>
@@ -14015,9 +13045,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -14048,9 +13075,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="pasar"/>
@@ -14077,9 +13101,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -14110,9 +13131,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="pasar"/>
@@ -14139,9 +13157,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -14172,9 +13187,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="pasar"/>
@@ -14201,9 +13213,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -14234,9 +13243,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="repercutir"/>
@@ -14263,9 +13269,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -14296,9 +13299,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="superar"/>
@@ -14325,9 +13325,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -14358,9 +13355,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="transferir"/>
@@ -14387,9 +13381,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -14420,9 +13411,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="transmitir"/>
@@ -14449,9 +13437,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -14482,9 +13467,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="volver"/>
@@ -14511,9 +13493,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -14544,9 +13523,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="volver"/>
@@ -14575,9 +13551,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="pass" eslemma="volver"/>
@@ -14586,6 +13559,9 @@
           <examples/>
         </classmember>
       </classmembers>
+      <local_history>
+        <local_event time_stamp="30.8.2022 13:56:18" type_of_event="woxikon links removed" author="SYS"/>
+      </local_history>
     </veclass>
     <veclass id="vec00602" lemma="">
       <class_definition>Un Agente dirige una entidad Comunicada a un Receptor.</class_definition>
@@ -14609,9 +13585,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -14642,9 +13615,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="dirigir"/>
@@ -14671,9 +13641,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -14704,9 +13671,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="dirigir"/>
@@ -14733,9 +13697,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -14766,9 +13727,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="dirigir"/>
@@ -14795,9 +13753,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -14828,9 +13783,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="enfrentar"/>
@@ -14857,9 +13809,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -14890,9 +13839,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="hacer"/>
@@ -14919,9 +13865,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -14952,9 +13895,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="hacer"/>
@@ -14981,9 +13921,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -15014,9 +13951,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="hacer"/>
@@ -15043,9 +13977,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -15076,9 +14007,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="hacer"/>
@@ -15105,9 +14033,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -15138,9 +14063,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="hacer"/>
@@ -15167,9 +14089,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -15200,9 +14119,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="hacer"/>
@@ -15229,9 +14145,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -15262,9 +14175,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="hacer"/>
@@ -15291,9 +14201,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -15324,9 +14231,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="hacer"/>
@@ -15353,9 +14257,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -15386,9 +14287,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="hacer"/>
@@ -15415,9 +14313,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -15448,9 +14343,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="hacer"/>
@@ -15477,9 +14369,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -15510,9 +14399,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="hacer"/>
@@ -15539,9 +14425,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -15572,9 +14455,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="hacer"/>
@@ -15601,9 +14481,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -15634,9 +14511,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="hacer"/>
@@ -15663,9 +14537,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -15696,9 +14567,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="hacer"/>
@@ -15725,9 +14593,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -15758,9 +14623,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="hacer"/>
@@ -15787,9 +14649,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -15820,9 +14679,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="hacer"/>
@@ -15849,9 +14705,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -15882,9 +14735,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="hacer"/>
@@ -15911,9 +14761,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -15944,9 +14791,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="hacer"/>
@@ -15973,9 +14817,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -16006,9 +14847,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="hacer"/>
@@ -16035,9 +14873,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -16068,9 +14903,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="hacer"/>
@@ -16097,9 +14929,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -16130,9 +14959,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="hacer"/>
@@ -16159,9 +14985,6 @@
             <links/>
           </extlex>
           <extlex idref="wn_es" no_mapping="0">
-            <links/>
-          </extlex>
-          <extlex idref="woxikon" no_mapping="0">
             <links/>
           </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
@@ -16192,9 +15015,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="address" eslemma="referir"/>
@@ -16203,6 +15023,9 @@
           <examples/>
         </classmember>
       </classmembers>
+      <local_history>
+        <local_event time_stamp="30.8.2022 13:56:18" type_of_event="woxikon links removed" author="SYS"/>
+      </local_history>
     </veclass>
     <veclass id="vec00603" lemma="">
       <class_definition>Un Empaquetador ordena una entidad Empaquetada en un Contenedor.</class_definition>
@@ -17020,9 +15843,6 @@
           <extlex idref="wn_es" no_mapping="0">
             <links/>
           </extlex>
-          <extlex idref="woxikon" no_mapping="0">
-            <links/>
-          </extlex>
           <extlex idref="x_srl_es" no_mapping="0">
             <links>
               <link enlemma="downplay" eslemma="minimizar"/>
@@ -17031,6 +15851,9 @@
           <examples/>
         </classmember>
       </classmembers>
+      <local_history>
+        <local_event time_stamp="30.8.2022 13:56:18" type_of_event="woxikon links removed" author="SYS"/>
+      </local_history>
     </veclass>
     <veclass id="vec00802" lemma="">
       <class_definition/>

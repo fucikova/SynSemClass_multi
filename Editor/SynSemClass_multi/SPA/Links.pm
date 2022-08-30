@@ -10,14 +10,13 @@ require Tk::HList;
 require Tk::ItemStyle;
 use utf8;
 
-my @ext_lexicons = ("fn_es", "adesse", "ancora", "sensem", "wn_es", "woxikon", "x_srl_es");
+my @ext_lexicons = ("fn_es", "adesse", "ancora", "sensem", "wn_es", "x_srl_es");
 my %ext_lexicons_attr=(
 		"fn_es" => ["framename", "luname", "luid"],
-		"adesse" => ["verb", "verbal_entry", "sense", "diccio_id"],
+		"adesse" => ["verb", "verbal_entry", "definition", "diccio_id", "sense"],
 		"ancora" => ["lemma", "sense", "file"],
 		"sensem" => ["verb", "sense", "verbo_es"],
 		"wn_es" => ["word", "sense"],
-		"woxikon" => ["lemma", "sense"],
 		"x_srl_es" => ["enlemma", "eslemma"]
 	);
 my $auxiliary_mapping_label = "English-Spanish Mapping";
@@ -60,12 +59,6 @@ sub create_widget {
 													qw/-height 3/);
   $wn_es_links->configure_links_widget("wn_es");
 
-  my $woxikon_frame=$w->Frame(-takefocus=>0);
-  $woxikon_frame->pack(qw/-fill x -padx 4/);
-  my $woxikon_links = SynSemClass_multi::SPA::LexLink->new($data, undef, $woxikon_frame, "Woxikon",
-													qw/-height 3/);
-  $woxikon_links->configure_links_widget("woxikon");
-
   my $x_srl_es_frame=$w->Frame(-takefocus=>0);
   $x_srl_es_frame->pack(qw/-fill x -padx 4/);
   my $x_srl_es_links = SynSemClass_multi::SPA::LexLink->new($data, undef, $x_srl_es_frame, "X-SRL",
@@ -78,7 +71,6 @@ sub create_widget {
    adesse_links=>$adesse_links,
    sensem_links=>$sensem_links,
    wn_es_links=>$wn_es_links,
-   woxikon_links=>$woxikon_links,
    x_srl_es_links=>$x_srl_es_links
   },"","";
 }
@@ -142,7 +134,6 @@ sub set_editor_frame{
   $self->subwidget('adesse_links')->set_editor_frame($eframe);
   $self->subwidget('sensem_links')->set_editor_frame($eframe);
   $self->subwidget('wn_es_links')->set_editor_frame($eframe);
-  $self->subwidget('woxikon_links')->set_editor_frame($eframe);
   $self->subwidget('x_srl_es_links')->set_editor_frame($eframe);
 
 }
@@ -191,7 +182,6 @@ sub fetch_data{
    $self->subwidget('adesse_links')->fetch_adesselinks($classmember);
    $self->subwidget('sensem_links')->fetch_sensemlinks($classmember);
    $self->subwidget('wn_es_links')->fetch_wn_eslinks($classmember);
-   $self->subwidget('woxikon_links')->fetch_woxikonlinks($classmember);
    $self->subwidget('x_srl_es_links')->fetch_x_srl_eslinks($classmember);
 }
 
@@ -274,8 +264,6 @@ sub fetch_links_for_type{
   	$self->fetch_sensemlinks($classmember);
   }elsif($link_type eq "wn_es"){
   	$self->fetch_wn_eslinks($classmember);
-  }elsif($link_type eq "woxikon"){
-  	$self->fetch_woxikonlinks($classmember);
   }elsif($link_type eq "x_srl_es"){
   	$self->fetch_x_srl_eslinks($classmember);
   }
@@ -322,7 +310,7 @@ sub fetch_adesselinks{
 	}elsif ($entry->[5] ne ""){
 		$text .= " ." . $entry->[5];
 	}
-	$text .=" (diccio ID: " . $entry->[6] . ")";
+	$text .=" (diccio ID: " . $entry->[6] . " / sense: " . $entry->[7] . ")";
 	$e= $t->addchild("",-data => $entry->[0]);
     $t->itemCreate($e, 0, -itemtype=>'text',
 		   -text=> $text );
@@ -377,23 +365,6 @@ sub fetch_wn_eslinks{
 	return;
   }
   foreach my $entry ($self->data()->getClassMemberLinksForType($classmember, 'wn_es')) {
-	$e= $t->addchild("",-data => $entry->[0]);
-    $t->itemCreate($e, 0, -itemtype=>'text',
-		   -text=> $entry->[3] . "#" . $entry->[4]);
-  }
-}
-sub fetch_woxikonlinks{
-  my ($self, $classmember)=@_;
-  my $t=$self->widget();
-  my $e;
-  $t->delete('all');
-  return unless $classmember;
-  $self->setSelectedClassMember($classmember);
-  if ($self->data()->get_no_mapping($classmember, "woxikon")){
-  	$self->fetch_no_mapping();
-	return;
-  }
-  foreach my $entry ($self->data()->getClassMemberLinksForType($classmember, 'woxikon')) {
 	$e= $t->addchild("",-data => $entry->[0]);
     $t->itemCreate($e, 0, -itemtype=>'text',
 		   -text=> $entry->[3] . "#" . $entry->[4]);
@@ -459,13 +430,19 @@ sub getNewLink{
 			($ok, @new_value) = $self->show_link_editor_dialog($action, $link_type, "verbal_entry", @new_value);
 			next;
 		}
-		if ($new_value[3] eq ""){
-			SynSemClass_multi::Editor::warning_dialog($self, "Fill the Diccio ID!");
+		if ($new_value[3] eq "" and $new_value[4] eq ""){
+			SynSemClass_multi::Editor::warning_dialog($self, "Fill the Diccio ID or Sense!");
 			($ok, @new_value) = $self->show_link_editor_dialog($action, $link_type, "diccio_id", @new_value);
 			next;
-		}elsif ($new_value[3] !~ /^[0-9]+$/){
+		}
+		if ($new_value[3] !~ /^[0-9]*$/){
 			SynSemClass_multi::Editor::warning_dialog($self, "Diccio ID must be a number!");
 			($ok, @new_value) = $self->show_link_editor_dialog($action, $link_type, "diccio_id", @new_value);
+			next;
+		}
+		if ($new_value[4] !~ /^[0-9]*$/){
+			SynSemClass_multi::Editor::warning_dialog($self, "Sense must be a number!");
+			($ok, @new_value) = $self->show_link_editor_dialog($action, $link_type, "sense", @new_value);
 			next;
 		}
 	}elsif($link_type eq "ancora"){
@@ -528,17 +505,6 @@ sub getNewLink{
 			($ok, @new_value) = $self->show_link_editor_dialog($action, $link_type, "sense", @new_value);
 			next;
 		}
-	}elsif($link_type eq "woxikon"){
-		if ($new_value[0] eq ""){
-			SynSemClass_multi::Editor::warning_dialog($self, "Fill the Lemma!");
-			($ok, @new_value) = $self->show_link_editor_dialog($action, $link_type, "lemma", @new_value);
-			next;
-		}
-		if ($new_value[1] eq ""){
-			SynSemClass_multi::Editor::warning_dialog($self, "Fill the Sense!");
-			($ok, @new_value) = $self->show_link_editor_dialog($action, $link_type, "sense", @new_value);
-			next;
-		}
 	}elsif($link_type eq "x_srl_es"){
 		if ($new_value[0] eq ""){
 			SynSemClass_multi::Editor::warning_dialog($self, "Fill the English lemma!");
@@ -566,7 +532,6 @@ sub show_link_editor_dialog{
 			  'ancora' => 'Ancora',
 			  'sensem' => 'SenSem',
 			  'wn_es' => 'Spanish WordNet',
-			  'woxikon' => 'Woxikon',
 			  'x_srl_es' => 'Spanish X-SRL');
 
   my $focused_entry;
@@ -608,8 +573,6 @@ sub show_link_editor_dialog{
   	return show_sensem_editor_dialog($self, $d, $action, $focused, @value);
   }elsif($link_type eq "wn_es"){
   	return show_wn_es_editor_dialog($self, $d, $action, $focused, @value);
-  }elsif($link_type eq "woxikon"){
-  	return show_woxikon_editor_dialog($self, $d, $action, $focused, @value);
   }elsif($link_type eq "x_srl_es"){
   	return show_x_srl_es_editor_dialog($self, $d, $action, $focused, @value);
   }else{
@@ -661,13 +624,15 @@ sub show_adesse_editor_dialog{
 	}
   	my $verb_l=$d->Label(-text=>'Verb')->grid(-row=>0, -column=>0,-sticky=>"w");
 	my $verb=$d->Entry(qw/-width 30 -background white/,-text=>$text)->grid(-row=>0, -column=>1,-sticky=>"we");
-  	my $verbal_entry_l=$d->Label(-text=>'Verbal entry')->grid(-row=>0, -column=>2,-sticky=>"w");
-	my $verbal_entry=$d->Entry(qw/-width 30 -background white/,-text=>$value[1])->grid(-row=>0, -column=>3,-sticky=>"we");
-  	my $sense_l=$d->Label(-text=>'Sense')->grid(-row=>1, -column=>0,-sticky=>"w");
-	my $sense=$d->Entry(qw/-width 30 -background white/,-text=>$value[2])->grid(-row=>1, -column=>1,-sticky=>"we");
-  	my $diccio_id_l=$d->Label(-text=>'Diccio ID')->grid(-row=>1, -column=>2,-sticky=>"w");
-	my $diccio_id=$d->Entry(qw/-width 30 -background white/,-text=>$value[3])->grid(-row=>1, -column=>3,-sticky=>"we");
-	$d->Subwidget("B_Show")->configure(-command=>[\&test_link, $self, 'adesse', $verb, $verbal_entry, $sense, $diccio_id]);
+  	my $verbal_entry_l=$d->Label(-text=>'Verbal entry')->grid(-row=>1, -column=>0,-sticky=>"w");
+	my $verbal_entry=$d->Entry(qw/-width 30 -background white/,-text=>$value[1])->grid(-row=>1, -column=>1,-sticky=>"we");
+  	my $definition_l=$d->Label(-text=>'Definition')->grid(-row=>2, -column=>0,-sticky=>"w");
+	my $definition=$d->Entry(qw/-width 30 -background white/,-text=>$value[2])->grid(-row=>2, -column=>1,-sticky=>"we");
+  	my $diccio_id_l=$d->Label(-text=>'Diccio ID')->grid(-row=>0, -column=>2,-sticky=>"w");
+	my $diccio_id=$d->Entry(qw/-width 30 -background white/,-text=>$value[3])->grid(-row=>0, -column=>3,-sticky=>"we");
+  	my $sense_l=$d->Label(-text=>'Sense')->grid(-row=>1, -column=>2,-sticky=>"w");
+	my $sense=$d->Entry(qw/-width 30 -background white/,-text=>$value[4])->grid(-row=>1, -column=>3,-sticky=>"we");
+	$d->Subwidget("B_Show")->configure(-command=>[\&test_link, $self, 'adesse', $verb, $verbal_entry, $definition, $diccio_id, $sense]);
 
 	if ($focused eq "sense"){
 		$focused_entry=$sense;
@@ -675,6 +640,8 @@ sub show_adesse_editor_dialog{
 		$focused_entry=$verbal_entry;
 	}elsif ($focused eq "diccio_id"){
 		$focused_entry=$diccio_id;
+	}elsif ($focused eq "definition"){
+		$focused_entry=$definition;
 	}else{
 		$focused_entry=$verb;
 	}
@@ -684,8 +651,9 @@ sub show_adesse_editor_dialog{
 	  my @new_value;
 	  $new_value[0]=$self->data()->trim($verb->get());
 	  $new_value[1]=$self->data()->trim($verbal_entry->get());
-	  $new_value[2]=$self->data()->trim($sense->get());
+	  $new_value[2]=$self->data()->trim($definition->get());
 	  $new_value[3]=$self->data()->trim($diccio_id->get());
+	  $new_value[4]=$self->data()->trim($sense->get());
    	  $d->destroy();
 	  return (2, @new_value) if ($dialog_return =~/Next/);
 	  return (1, @new_value);
@@ -799,39 +767,6 @@ sub show_wn_es_editor_dialog{
     }
 }
  
-sub show_woxikon_editor_dialog{
-	my ($self, $d, $action,$focused,@value)=@_;
-  	my $lemma_l=$d->Label(-text=>'Lemma')->grid(-row=>0, -column=>0,-sticky=>"w");
-	my $text=$value[0];
-	if ($value[0] eq "" and $action ne "edit"){
-  		$text = $self->data()->getClassMemberAttribute($self->selectedClassMember(), 'lemma');
-		$text=~s/_.*$//;
-	}
-	my $lemma=$d->Entry(qw/-width 50 -background white/,-text=>$text)->grid(-row=>0, -column=>1,-sticky=>"we");
-  	my $sense_l=$d->Label(-text=>'Sense')->grid(-row=>1, -column=>0,-sticky=>"w");
-	my $sense=$d->Entry(qw/-width 50 -background white/,-text=>$value[1])->grid(-row=>1, -column=>1,-sticky=>"we");
-	$d->Subwidget("B_Show")->configure(-command=>[\&test_link, $self, 'woxikon', $lemma, $sense]);
-  
-	if ($focused eq "lemma"){
-		$focused_entry=$lemma;
-	}else{
-		$focused_entry=$sense;
-	}
-  	my $dialog_return = SynSemClass_multi::Widget::ShowDialog($d, $focused_entry);
-	
-	if ($dialog_return =~ /OK/){
-	  my @new_value;
-	  $new_value[0]=$self->data()->trim($lemma->get());
-	  $new_value[1]=$self->data()->trim($sense->get());
-   	  $d->destroy();
-	  return (2, @new_value) if ($dialog_return =~/Next/);
-	  return (1, @new_value);
-  	}elsif ($dialog_return eq "NM"){
-		$d->destroy();
-		return (3, "");
-    }
-}
-
 sub show_x_srl_es_editor_dialog{
   my ($self, $d, $action,$focused,@value)=@_;
 	my $text=$value[1];
@@ -887,8 +822,6 @@ sub open_link{
   	$address=$self->get_sensem_link_address($link)
   }elsif($link_type eq "wn_es"){
   	$address=$self->get_wn_es_link_address($link)
-  }elsif($link_type eq "woxikon"){
-  	$address=$self->get_woxikon_link_address($link)
   }elsif($link_type eq "x_srl_es"){
   	$address=$self->get_x_srl_es_link_address($link)
   }
@@ -914,10 +847,11 @@ sub get_adesse_link_address{
 	my ($self, $link)=@_;
   	my $verb=$self->data()->getLinkAttribute($link, "verb");
   	my $verbal_entry=$self->data()->getLinkAttribute($link, "verbal_entry");
-  	my $sense=$self->data()->getLinkAttribute($link, "sense");
+  	my $definition=$self->data()->getLinkAttribute($link, "definition");
   	my $diccio_id=$self->data()->getLinkAttribute($link, "diccio_id");
+  	my $sense=$self->data()->getLinkAttribute($link, "sense");
     
-	return $self->get_adesse_address($verb, $verbal_entry, $sense, $diccio_id);
+	return $self->get_adesse_address($verb, $verbal_entry, $definition, $diccio_id, $sense);
 }
 
 sub get_ancora_link_address{
@@ -946,14 +880,6 @@ sub get_wn_es_link_address{
   	return $self->get_wn_es_address($word, $sense);
 }
  
-sub get_woxikon_link_address{
-	my ($self, $link)=@_;
-  	
-	my $lemma=$self->data()->getLinkAttribute($link, "lemma");
-	my $sense=$self->data()->getLinkAttribute($link, "sense");
-	return $self->get_woxikon_address($lemma, $sense);
-}
-
 sub get_x_srl_es_link_address{
 	my ($self, $link)=@_;
   	my $enlemma=$self->data()->getLinkAttribute($link, "enlemma");
@@ -976,8 +902,6 @@ sub test_link{
 	$address = $self->test_sensem_link(@values);
   }elsif($link_type eq "wn_es"){
 	$address = $self->test_wn_es_link(@values);
-  }elsif($link_type eq "woxikon"){
-	$address = $self->test_woxikon_link(@values);
   }elsif($link_type eq "x_srl_es"){
 	$address = $self->test_x_srl_es_link(@values);
   }
@@ -1030,8 +954,9 @@ sub test_adesse_link{
 	my ($self, @values)=@_;
 	my $verb=$self->data()->trim($values[0]->get());
 	my $verbal_entry=$self->data()->trim($values[1]->get());
-	my $sense=$self->data()->trim($values[2]->get());
+	my $definition=$self->data()->trim($values[2]->get());
 	my $diccio_id=$self->data()->trim($values[3]->get());
+	my $sense=$self->data()->trim($values[4]->get());
 
 	if ($verb eq ""){
 	  	SynSemClass_multi::Editor::warning_dialog($self, "Fill the Verb!");
@@ -1045,15 +970,21 @@ sub test_adesse_link{
 		return -2;
 	}
 
-	if ($diccio_id eq ""){
-	  	SynSemClass_multi::Editor::info_dialog($self, "Empty Diccio ID!");
-	}elsif ($diccio_id !~ /^[0-9]+$/){
+	if ($diccio_id eq "" and $sense eq ""){
+	  	SynSemClass_multi::Editor::info_dialog($self, "Empty Diccio ID and Sense!");
+	}
+	if ($diccio_id !~ /^[0-9]*$/){
 		SynSemClass_multi::Editor::warning_dialog($self, "Diccio ID must be a number!");
 		$values[3]->focusForce;
 		return -2;
 	}
+	if ($sense !~ /^[0-9]*$/){
+		SynSemClass_multi::Editor::warning_dialog($self, "Sense must be a number!");
+		$values[4]->focusForce;
+		return -2;
+	}
 
-  	return $self->get_adesse_address($verb, $verbal_entry, $sense, $diccio_id);
+  	return $self->get_adesse_address($verb, $verbal_entry, $definition, $diccio_id, $sense);
 }
 
 sub test_ancora_link{
@@ -1143,23 +1074,6 @@ sub test_wn_es_link{
   	return $self->get_wn_es_address($word, $sense);
 }
 
-sub test_woxikon_link{
-  	my ($self, @values)=@_;
-	my $lemma=$self->data()->trim($values[0]->get());
-	my $sense=$self->data()->trim($values[1]->get());
-
-	if ($lemma eq ""){
-	  	SynSemClass_multi::Editor::warning_dialog($self, "Fill the lemma!");
-		$values[0]->focusForce;
-		return -2;
-	}
-	if ($sense eq ""){
-	  	SynSemClass_multi::Editor::info_dialog($self, "Empty sense!");
-	}
-
-	return $self->get_woxikon_address($lemma, $sense);
-}
-
 sub test_x_srl_es_link{
 	my ($self, @values)=@_;
 	my $enlemma=$self->data()->trim($values[0]->get());
@@ -1200,15 +1114,19 @@ sub get_fn_es_address{
 }
 
 sub get_adesse_address{
-  my ($self, $verb, $verbal_entry, $sense, $diccio_id)=@_;
+  my ($self, $verb, $verbal_entry, $definition, $diccio_id, $sense)=@_;
   my $address="";
   $address=$self->data()->getLexBrowsing("adesse");
   return if $address eq "";
 
-  if ($diccio_id eq ""){
-  	$address .= "verbo=" . $verb; 
+  if ($sense eq ""){
+	  if ($diccio_id eq ""){
+  		$address .= "verbo=" . $verb; 
+	  }else{
+  		$address .= "diccio_id=" . $diccio_id; 
+  	  }
   }else{
-  	$address .= "diccio_id=" . $diccio_id; 
+	  $address .= "sense=" . $sense;
   }
   
   return $address;
@@ -1250,15 +1168,6 @@ sub get_wn_es_address{
 
   $address .= $word; 
   
-  return $address;
-}
-
-sub get_woxikon_address{
-  my ($self, $lemma, $sense)=@_;
-  my $address="";
-  $address=$self->data()->getLexBrowsing("woxikon");
-  return if ($address eq "");
-  $address .=$lemma;
   return $address;
 }
 
