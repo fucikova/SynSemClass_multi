@@ -110,6 +110,10 @@ sub reload {
 	}
 }
 
+sub compare {
+	return $_[1] cmp $_[2];
+}
+
 =item getClassSublist($item,$slen)
 
 Return $slen classes before and after given $item.
