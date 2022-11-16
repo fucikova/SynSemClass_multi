@@ -1,6 +1,6 @@
 ResourcePath="c:\\Users\\user_name\\Desktop\\SynSemClass_multi-main\\Lexicons,c:\\Users\\user_name\\Desktop\\SynSemClass_multi-main\\Editor\\resources"
 TrEdPath="c:\\Users\\user_name\\tred\\tred.bat"
-Languages="ces,eng,spa"
-
+Languages="ces,eng,deu,spa"
+ClassSearchBy="id"
 ;; Options changed by CzEngClass Editor on every close (DO NOT EDIT)
 Geometry = 1500x1500

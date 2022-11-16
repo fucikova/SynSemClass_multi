@@ -24,11 +24,13 @@ sub getAllExamples {
   			my $enlemma = $link->getAttribute("enlemma");
 		  	my $gelemma = $link->getAttribute("gelemma");
 		  	$gelemma =~ s/ /_/g;
+			$gelemma =~ s/\(/_lp_/;
+			$gelemma =~ s/\)/_rp_/;
 	  	  	
 			my $examplesFile = "DEU/example_sentences/Vtext_deu_";
 			$examplesFile .= $gelemma;
 			$examplesFile =~ s/(ö|ä|ß|ü|ë)/_\1_/g;
-			$examplesFile =~ tr/öäßüë/oasue/; 
+			$examplesFile =~ tr/öäßüë/oasue/;
 			$examplesFile .= ".php";
 		  
 			my $sentencesPath=SynSemClass_multi::Config->getFromResources($examplesFile);
@@ -50,9 +52,12 @@ sub getAllExamples {
 				my $lpair=$2;
 				my $lang=$3;
 				my $text=$4;
-				next if ($lpair !~ /^$enlemma\.$gelemma$/);
+				
+				my $lpair_f = $lpair;
+				$lpair_f =~ s/\(/_lp_/;
+				$lpair_f =~ s/\)/_rp_/;
+				next if ($lpair_f !~ /^$enlemma\.$gelemma$/);
 
-	
 		 		push @sents, [$corpref."##".$sentID."##".$lpair."##". SynSemClass_multi::Config->getCode3($lang)."##0", $text]
 			}
 			close IN;

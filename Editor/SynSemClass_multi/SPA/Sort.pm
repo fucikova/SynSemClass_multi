@@ -138,17 +138,28 @@ sub sort_by_lemmas{
 sub sort_by_ids{
   my $a=shift;
   my $b=shift;
+  my %priority=("AnCora", "2", "SynSemClass", "1");
 
-  $a=~s/^(.*)-ID-//;
-  $b=~s/^(.*)-ID-//;
-			
-  my ($a1,$a2) = $a=~/^(.*)-([0-9]+)$/;
-  my ($b1,$b2) = $b=~/^(.*)-([0-9]+)$/;
-			
-  if ($a1 eq $b1){
-	return $a2<=>$b2;
+  my ($a1, $a2)=$a=~/^(.*)-ID-(.*)$/;
+  my ($b1, $b2)=$b=~/^(.*)-ID-(.*)$/;
+
+  if ($priority{$a1} eq $priority{$b1}){
+	if ($a1 eq "SynSemClass"){
+			return $a2 cmp $b2;
+	}else{
+		my ($a21,$a22) = $a2=~/^(.*)-([0-9]+)$/;
+		my ($b21,$b22) = $b2=~/^(.*)-([0-9]+)$/;
+	
+		if ($a21 eq $b21){
+			return $a22<=>$b22;
+		}else{
+			if ($a1 eq "AnCora"){
+	    			return sort_by_lemmas($a21,$b21);
+			}
+		}
+	}
   }else{
-	return sort_by_lemmas($a1,$b1);
+	return $priority{$b1} <=> $priority{$a1};
   }
 }
 

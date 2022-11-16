@@ -165,21 +165,43 @@ sub create_widget {
   #class members frame
   my $cmbutton_frame=$classmembers_frame->Frame(-takefocus => 0);
   $cmbutton_frame->pack(qw/-side top -fill x/);
+  my $balloon=$cmbutton_frame->Balloon(
+									-balloonposition => 'mouse'
+    								);
 
   my $addclassmember_button=$cmbutton_frame->Button(-text => 'Add',
 					     -command => [\&addclassmember_button_pressed,
 							  $self]);
   $addclassmember_button->pack(qw/-padx 5 -side left/);
+  $balloon->attach($addclassmember_button, 
+	  -balloonmsg=>"Add new classmember for selected class"
+  );
   my $modifyclassmember_button=$cmbutton_frame->Button(-text => 'Modify',
 				  	        -command => [\&modifyclassmember_button_pressed,
 							  $self],
 					        );
   $modifyclassmember_button->pack(qw/-padx 5 -side left/);
+  $balloon->attach($modifyclassmember_button, 
+	  -balloonmsg=>"Modify selected classmember"
+  );
+  my $setstatusno_button=$cmbutton_frame->Button(-text => 'Set status no',
+							-command => [\&setstatusno_button_pressed,
+							 $self],
+					 		);
+  $setstatusno_button->pack(qw/-padx 5 -side right/); 
+
+  $balloon->attach($setstatusno_button, 
+	  -balloonmsg=>"Change status 'not_touched' -> 'no' for all classmembers with the identical language and lemma as selected classmember"
+  );
+
   my $copycmlinks_button=$cmbutton_frame->Button(-text => 'Copy links',
 							-command => [\&copycmlinks_button_pressed,
 							 $self],
 					 		);
   $copycmlinks_button->pack(qw/-padx 5 -side right/); 
+  $balloon->attach($copycmlinks_button, 
+	  -balloonmsg=>"Copy defined links from the selected classmember to all classmembers with the identical language and lemma"
+  );
   
   # List of members
   my $classmemberslist =
@@ -670,6 +692,44 @@ sub modifyclassmember_button_pressed {
   }
 }
 
+sub setstatusno_button_pressed{
+  my ($self)=@_;
+
+  my $cml=$self->subwidget('classmemberslist')->widget();
+  my $item=$cml->infoAnchor();
+  if (not defined $item){
+	$self->warning_dialog("Select classmember!");
+	return;
+  }
+  my ($lang,$cm)=$cml->infoData($item);
+  my $data_cms = $self->data->lang_cms($lang);
+  my $class=$data_cms->getClassForClassMember($cm);
+  my $cmlemma=$data_cms->getClassMemberAttribute($cm, 'lemma');
+  my $cmlang=$data_cms->getClassMemberAttribute($cm, 'lang');
+  my $cmidref=$data_cms->getClassMemberAttribute($cm, 'idref');
+  my $lang_name = SynSemClass_multi::Config->getLangName($cmlang);
+			
+  my $answer= $self->question_dialog("Do you really want to set status 'no' for all $lang_name classmembers with status not_touched and lemma $cmlemma?", 'No');
+  return if ($answer eq "No");
+  	
+  my $changedcm=0;
+  foreach my $classcm ($data_cms->getClassMembersNodes($class)){
+	my $idref = $data_cms->getClassMemberAttribute($classcm, 'idref');
+
+	my $lemma=$data_cms->getClassMemberAttribute($classcm, 'lemma');
+
+	next if (!SynSemClass_multi::Sort_all::equal_lemmas($cmlemma, $lemma));
+	next if ($data_cms->getClassMemberAttribute($classcm, 'status') ne "not_touched");
+
+	print "setting status 'no' for classmember $lemma ($idref) ...\n";
+ 	$data_cms->setClassMemberAttribute($classcm, "status", "no");
+ 	$data_cms->addClassMemberLocalHistory($classcm, "status: no");
+	$changedcm++;
+  }
+  $self->warning_dialog("Status 'no' has been set for $changedcm clasmember(s)!");
+  $self->refresh_data();
+}
+
 sub copycmlinks_button_pressed{
   my ($self)=@_;
 
@@ -685,6 +745,7 @@ sub copycmlinks_button_pressed{
   my $cmlemma=$data_cms->getClassMemberAttribute($cm, 'lemma');
   my $cmlang=$data_cms->getClassMemberAttribute($cm, 'lang');
   my $cmidref=$data_cms->getClassMemberAttribute($cm, 'idref');
+  my $lang_name = SynSemClass_multi::Config->getLangName($cmlang);
 
 			
   my $answer= $self->question_dialog("Do you really want to copy links from classmember $cmlemma ($cmidref)?", 'No');
@@ -694,34 +755,39 @@ sub copycmlinks_button_pressed{
   
   $cmlemma =~ s/_.*$//;
   my $changedcm=0;
-  foreach my $classcm ($data_cms->getClassMembersNodes($class)){
-	my $idref = $data_cms->getClassMemberAttribute($classcm, 'idref');
-	next if ($idref eq $cmidref);
+  my $pack = "SynSemClass_multi::" . uc($cmlang) . "::Links";
+  my @links_for_copy =  $pack->get_links_for_copy;
 
-	my $lemma=$data_cms->getClassMemberAttribute($classcm, 'lemma');
-  	my $orig_lemma = $lemma;
-	$lemma =~ s/_.*$//;
+  if (scalar @links_for_copy == 0){
+	$self->warning_dialog("No defined $lang_name links to copy!");
+  }else{
+  	foreach my $classcm ($data_cms->getClassMembersNodes($class)){
+		my $idref = $data_cms->getClassMemberAttribute($classcm, 'idref');
+		next if ($idref eq $cmidref);
 
-	next if (!SynSemClass_multi::Sort_all::equal_lemmas($cmlemma, $lemma));
+		my $lemma=$data_cms->getClassMemberAttribute($classcm, 'lemma');
+	  	my $orig_lemma = $lemma;
+		$lemma =~ s/_.*$//;
 
-	print "copying links from classmember $orig_cmlemma ($cmidref) to classmember $orig_lemma ($idref) ...\n";
-
-  	my $pack = "SynSemClass_multi::" . uc($cmlang) . "::Links";
-	my @links_for_copy =  $pack->get_links_for_copy;
+		next if (!SynSemClass_multi::Sort_all::equal_lemmas($cmlemma, $lemma));
 	
-	foreach my $link_type(@links_for_copy){
-		if ($data_cms->copyLinks($link_type, $cm, $classcm)){
-			print "\t$link_type - ok\n";
-			$data_cms->addClassMemberLocalHistory($classcm, "copy $link_type links");
-		}else{
-			print "\t$link_type - can not copy\n";
-			$self->warning_dialog("Error by copying $link_type links!");
-			return;
+		print "copying links from classmember $orig_cmlemma ($cmidref) to classmember $orig_lemma ($idref) ...\n";
+
+	
+		foreach my $link_type(@links_for_copy){
+			if ($data_cms->copyLinks($link_type, $cm, $classcm)){
+				print "\t$link_type - ok\n";
+				$data_cms->addClassMemberLocalHistory($classcm, "copy $link_type links");
+			}else{
+				print "\t$link_type - can not copy\n";
+				$self->warning_dialog("Error by copying $link_type links!");
+				return;
+			}
 		}
-	}
-	$changedcm++;
+		$changedcm++;
+	  }
+	  $self->warning_dialog("Copied links for $changedcm clasmember(s)!");
   }
-  $self->warning_dialog("Copied links for $changedcm clasmembers!");
 }
 
 sub get_classmember_basic_data{

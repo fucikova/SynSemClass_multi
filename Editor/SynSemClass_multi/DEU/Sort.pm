@@ -132,13 +132,13 @@ sub sort_by_lemmas{
 sub sort_by_ids{
 	my $a=shift;
 	my $b=shift;
-	my %priority=("VALBU", "3", "GUP", "2", "SYNSEMCLASS", "1");
+	my %priority=("VALBU", "3", "GUP", "2", "SynSemClass", "1");
 
 	my ($a1, $a2)=$a=~/^(.*)-ID-(.*)$/;
 	my ($b1, $b2)=$b=~/^(.*)-ID-(.*)$/;
 
 	if ($priority{$a1} eq $priority{$b1}){
-		if ($a1 eq "SYNSEMCLASS"){
+		if ($a1 eq "SynSemClass"){
 			return $a2 cmp $b2;
 		}else{
 			my ($a21,$a22) = $a2=~/^(.*)-([0-9]+)$/;
@@ -154,7 +154,7 @@ sub sort_by_ids{
 			}
 		}
 	}else{
-		return $priority{$a1} <=> $priority{$b1};
+		return $priority{$b1} <=> $priority{$a1};
 	}
 
 }

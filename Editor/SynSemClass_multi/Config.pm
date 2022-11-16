@@ -10,6 +10,7 @@ use utf8;
 my %resourcePath;
 my %tredPath;
 my %languages;
+my %searchBy;
 my $geometry;
    
 my $config_file="../Config/config_file_multi";
@@ -20,6 +21,7 @@ sub loadConfig{
    $resourcePath{value}="";
    $tredPath{value}="";
    $languages{value}="";
+   $searchBy{value}="";
    $geometry="1500x1500";
 		      
    return unless -e $config_file;
@@ -45,6 +47,11 @@ sub loadConfig{
 	       $languages{valid}=(($_=~/^;/) ? 0 : 1);
 	       $languages{value}=~s/^;*Languages=//g;
 	       $languages{value}=~s/"//g;
+	   }elsif ($_ =~ /^;*ClassSearchBy=/){
+	       $searchBy{value}=$_;
+	       $searchBy{valid}=(($_=~/^;/) ? 0 : 1);
+	       $searchBy{value}=~s/^;*ClassSearchBy=//g;
+	       $searchBy{value}=~s/"//g;
 	   }elsif ($_ =~ /^Geometry=/){
 	       $geometry=$_;
 	       $geometry=~s/Geometry=//;
@@ -94,10 +101,17 @@ sub saveConfig{
 	  }
 
 	  if ($languages{value} eq ""){
-	  	  print OUT ';; Languages="cs:Czech,en:English"' . "\n";
+	  	  print OUT ';; Languages="ces,eng"' . "\n";
 	  }else{
 	  	  print OUT ";;" if (!$languages{valid});
 		  print OUT 'Languages="' . $languages{value} . '"' . "\n";
+	  }
+	
+	  if ($searchBy{value} eq ""){
+	  	  print OUT ';; ClassSearchBy="id"' . "\n";
+	  }else{
+	  	  print OUT ";;" if (!$searchBy{valid});
+		  print OUT 'ClassSearchBy="' . $searchBy{value} . '"' . "\n";
 	  }
 	
 	  print OUT "\n";
@@ -162,6 +176,16 @@ sub getLanguages{
 		return @langs;
 	}else{
 		return ("ces","eng");
+	}
+}
+
+sub getClassSearchBy{
+	my ($self)=@_;
+
+	if ($searchBy{valid}){
+		return "$searchBy{value}";
+	}else{
+		return ("id");
 	}
 }
 

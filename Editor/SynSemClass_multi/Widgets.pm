@@ -595,7 +595,14 @@ sub create_widget {
   my $be_sb = $sb_f->BrowseEntry(-background => white, -autolimitheight => true, -browsecmd => [\&search_by_changed, $self, \$search_by_value], -variable => \$search_by_value)->pack(qw/-side top -expand yes -fill x/);
   #$be_sb->icursor('end');
   my @lang_names_s = map { SynSemClass_multi::Config->getLangName($_) . " class name" } @{$self->data->languages()};
-  $search_by_value=$lang_names_s[0];
+  my $classSearchBy = SynSemClass_multi::Config->getClassSearchBy;
+  if ($classSearchBy eq "id"){
+	$search_by_value = "Class ID";
+  }elsif ($classSearchBy eq "roles"){
+	$search_by_value = "Class roles";
+  }else{
+    $search_by_value= SynSemClass_multi::Config->getLangName($classSearchBy) . " class name";
+  }
   my $sb_string=lc($search_by_value);
   $sb_string =~ s/ /_/g;
   foreach (@lang_names_s, "Class ID", "Class roles"){
