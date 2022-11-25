@@ -772,8 +772,8 @@ sub addClassMember {
   $classmember->setAttribute("status", $status);
   $classmember->setAttribute("lang", $lang);
   $classmember->setAttribute("lexidref", $lexidref);
-  $idref="SYNSEMCLASS-ID-" . $id if ($lexidref eq "synsemclass"); #for those classmembers that are not from PDT-Vallex/EngVallex/Vallex 
-  													  #is idref SYNSEMCLASS-ID-<id>, where <id> is classmember id in synsemclass.xml
+  $idref="SynSemClass-ID-" . $id if ($lexidref eq "synsemclass"); #for those classmembers that are not from defined source lexicon
+  													  #is idref SynSemClass-ID-<id>, where <id> is classmember id in synsemclass.xml
   $classmember->setAttribute("idref", $idref);
   $classmember->setAttribute("lemma", $lemma);
  
