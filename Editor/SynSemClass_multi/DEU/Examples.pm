@@ -26,6 +26,8 @@ sub getAllExamples {
 		  	$gelemma =~ s/ /_/g;
 			$gelemma =~ s/\(/_lp_/;
 			$gelemma =~ s/\)/_rp_/;
+			my $enlemma_short = $enlemma;
+			$enlemma_short =~ s/_.*$//;
 	  	  	
 			my $examplesFile = "DEU/example_sentences/Vtext_deu_";
 			$examplesFile .= $gelemma;
@@ -56,7 +58,8 @@ sub getAllExamples {
 				my $lpair_f = $lpair;
 				$lpair_f =~ s/\(/_lp_/;
 				$lpair_f =~ s/\)/_rp_/;
-				next if ($lpair_f !~ /^$enlemma\.$gelemma$/);
+
+				next if (($lpair_f !~ /^$enlemma\.$gelemma$/) and ($lpair_f !~ /^$enlemma_short\.$gelemma$/));
 
 		 		push @sents, [$corpref."##".$sentID."##".$lpair."##". SynSemClass_multi::Config->getCode3($lang)."##0", $text]
 			}
