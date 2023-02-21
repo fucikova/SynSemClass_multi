@@ -310,14 +310,19 @@ sub setClassStatus{
 		$class->setAttribute("merged_with", "");
 	}
 
-	my @status_changes = split("_", $status);
-	my $new_status = $old_status;
-	foreach my $sch (@status_changes){
-		my ($slang, $sval)=split("-", $sch);
-		if ($new_status =~ /^(.*_|)${slang}-/){
-			$new_status =~ s/^(.*_|)${slang}-[^_]*(_.*|)$/$1${sch}$2/;
-		}else{
-			$new_status .= "_${sch}";
+	my $new_status;
+	if ($old_status eq ""){
+		$new_status = $status;
+	}else{
+		my @status_changes = split("_", $status);
+		$new_status = $old_status;
+		foreach my $sch (@status_changes){
+			my ($slang, $sval)=split("-", $sch);
+			if ($new_status =~ /^(.*_|)${slang}-/){
+				$new_status =~ s/^(.*_|)${slang}-[^_]*(_.*|)$/$1${sch}$2/;
+			}else{
+				$new_status .= "_${sch}";
+			}
 		}
 	}
 

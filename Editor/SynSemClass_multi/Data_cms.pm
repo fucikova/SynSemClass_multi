@@ -26,7 +26,7 @@ sub set_user {
 
 sub extendedArgs{
   my ($self)=@_;
-  my @extendedArgs=("#alt", "#any","#sb", "#sth", "#smh", "#smt", "#swh", "---");
+  my @extendedArgs=("#alt", "#or", "#any","#sb", "#sth", "#smh", "#smt", "#swh", "---");
 
   return @extendedArgs;
 }
