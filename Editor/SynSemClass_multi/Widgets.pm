@@ -973,8 +973,19 @@ sub fetch_data {
 		   -text=> ( $entry->[4] eq "fn" ? "fn" : "" ));
 
 
-	$balloon_msg{$e} = $self->data->lang_cms($priority_lang)->getRoleDefinition($entry->[1]); #role definition from the priority lang lexicon
-	$balloon_msg{$e}=$entry->[3] if ($balloon_msg{$e} eq "");  #if is not defined, take the role label from the main lexicon
+	$balloon_msg{$e} = $self->data->lang_cms($priority_lang)->getRoleName($entry->[1]);
+	if ($balloon_msg{$e} ne ""){
+		$balloon_msg{$e} .= " - ";
+	}
+	$balloon_msg{$e} .= $self->data->lang_cms($priority_lang)->getRoleDefinition($entry->[1]); #role definition from the priority lang lexicon
+
+	if ($balloon_msg{$e} eq "" or $balloon_msg{$e} eq " - "){   #if is not defined, take the role label from the main lexicon
+		$balloon_msg{$e}= $entry->[2];
+		if ($balloon_msg{$e} ne ""){
+			$balloon_msg{$e} .= " - ";
+		}
+		$balloon_msg{$e} .= $entry->[3];
+	}
 
   }
   $self->subwidget('balloon')->attach($t, -msg => \%balloon_msg);

@@ -63,6 +63,31 @@ sub isValidArg{
 }
 
 #roles
+sub getRoleName{
+  my ($self, $roleid)=@_;
+  my $doc=$self->doc();
+  my $root=$doc->documentElement();
+  my ($header)=$root->getChildElementsByTagName("header");
+  my ($roles)=$header->getChildElementsByTagName("role_definitions");
+
+  return "" unless $roles;
+  my $role = "";
+  foreach ($roles->getChildElementsByTagName("role")){
+  	if ($_->getAttribute("id") eq $roleid){
+		$role=$_;
+		last;
+	}
+  } 
+
+  if ($role eq ""){
+  	return "";
+  }else{
+	  my ($name)=$role->getChildElementsByTagName("name");
+	  return "" unless $name;
+	  return $name->getText();
+  }
+}
+
 sub getRoleDefinition{
   my ($self, $roleid)=@_;
   my $doc=$self->doc();
@@ -83,6 +108,7 @@ sub getRoleDefinition{
   	return "";
   }else{
 	  my ($definition)=$role->getChildElementsByTagName("definition");
+	  return "" unless $definition;
 	  return $definition->getText();
   }
 }
