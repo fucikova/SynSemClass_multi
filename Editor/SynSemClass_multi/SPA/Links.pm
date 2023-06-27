@@ -13,7 +13,7 @@ use utf8;
 my @ext_lexicons = ("fn_es", "adesse", "ancora", "sensem", "wn_es", "x_srl_es");
 my %ext_lexicons_attr=(
 		"fn_es" => ["framename", "luname", "luid"],
-		"adesse" => ["verb", "verbal_entry", "definition", "diccio_id", "sense"],
+		"adesse" => ["verb", "verbal_entry", "definition", "diccio_id", "sense", "schema_id", "voice"],
 		"ancora" => ["lemma", "sense", "file"],
 		"sensem" => ["verb", "sense", "verbo_es"],
 		"wn_es" => ["word", "sense"],
@@ -311,6 +311,8 @@ sub fetch_adesselinks{
 		$text .= " ." . $entry->[5];
 	}
 	$text .=" (diccio ID: " . $entry->[6] . " / sense: " . $entry->[7] . ")";
+
+	$text .=" schema: " . $entry->[8] . "/voice: " . $entry->[9]; 
 	$e= $t->addchild("",-data => $entry->[0]);
     $t->itemCreate($e, 0, -itemtype=>'text',
 		   -text=> $text );
@@ -443,6 +445,16 @@ sub getNewLink{
 		if ($new_value[4] !~ /^[0-9]*$/){
 			SynSemClass_multi::Editor::warning_dialog($self, "Sense must be a number!");
 			($ok, @new_value) = $self->show_link_editor_dialog($action, $link_type, "sense", @new_value);
+			next;
+		}
+		if ($new_value[5] !~ /^[0-9]*$/){
+			SynSemClass_multi::Editor::warning_dialog($self, "Schema ID must be a number!");
+			($ok, @new_value) = $self->show_link_editor_dialog($action, $link_type, "schema_id", @new_value);
+			next;
+		}
+		if ($new_value[6] !~ /^[0-9]*$/){
+			SynSemClass_multi::Editor::warning_dialog($self, "Voice must be a number!");
+			($ok, @new_value) = $self->show_link_editor_dialog($action, $link_type, "voice", @new_value);
 			next;
 		}
 	}elsif($link_type eq "ancora"){
@@ -624,15 +636,19 @@ sub show_adesse_editor_dialog{
 	}
   	my $verb_l=$d->Label(-text=>'Verb')->grid(-row=>0, -column=>0,-sticky=>"w");
 	my $verb=$d->Entry(qw/-width 30 -background white/,-text=>$text)->grid(-row=>0, -column=>1,-sticky=>"we");
-  	my $verbal_entry_l=$d->Label(-text=>'Verbal entry')->grid(-row=>1, -column=>0,-sticky=>"w");
-	my $verbal_entry=$d->Entry(qw/-width 30 -background white/,-text=>$value[1])->grid(-row=>1, -column=>1,-sticky=>"we");
-  	my $definition_l=$d->Label(-text=>'Definition')->grid(-row=>2, -column=>0,-sticky=>"w");
-	my $definition=$d->Entry(qw/-width 30 -background white/,-text=>$value[2])->grid(-row=>2, -column=>1,-sticky=>"we");
-  	my $diccio_id_l=$d->Label(-text=>'Diccio ID')->grid(-row=>0, -column=>2,-sticky=>"w");
-	my $diccio_id=$d->Entry(qw/-width 30 -background white/,-text=>$value[3])->grid(-row=>0, -column=>3,-sticky=>"we");
-  	my $sense_l=$d->Label(-text=>'Sense')->grid(-row=>1, -column=>2,-sticky=>"w");
-	my $sense=$d->Entry(qw/-width 30 -background white/,-text=>$value[4])->grid(-row=>1, -column=>3,-sticky=>"we");
-	$d->Subwidget("B_Show")->configure(-command=>[\&test_link, $self, 'adesse', $verb, $verbal_entry, $definition, $diccio_id, $sense]);
+  	my $verbal_entry_l=$d->Label(-text=>'Verbal entry')->grid(-row=>0, -column=>2,-sticky=>"w");
+	my $verbal_entry=$d->Entry(qw/-width 30 -background white/,-text=>$value[1])->grid(-row=>0, -column=>3,-sticky=>"we");
+  	my $definition_l=$d->Label(-text=>'Definition')->grid(-row=>1, -column=>0,-sticky=>"w");
+	my $definition=$d->Entry(qw/-width 30 -background white/,-text=>$value[2])->grid(-row=>1, -column=>1,-sticky=>"we");
+  	my $schema_id_l=$d->Label(-text=>'Schema ID')->grid(-row=>2, -column=>0,-sticky=>"w");
+	my $schema_id=$d->Entry(qw/-width 30 -background white/,-text=>$value[5])->grid(-row=>2, -column=>1,-sticky=>"we");
+  	my $voice_l=$d->Label(-text=>'Voice  ')->grid(-row=>2, -column=>2,-sticky=>"e");
+	my $voice=$d->Entry(qw/-width 30 -background white/,-text=>$value[6])->grid(-row=>2, -column=>3,-sticky=>"we");
+  	my $diccio_id_l=$d->Label(-text=>'Diccio ID')->grid(-row=>3, -column=>0,-sticky=>"w");
+	my $diccio_id=$d->Entry(qw/-width 30 -background white/,-text=>$value[3])->grid(-row=>3, -column=>1,-sticky=>"we");
+  	my $sense_l=$d->Label(-text=>'Sense')->grid(-row=>3, -column=>2,-sticky=>"e");
+	my $sense=$d->Entry(qw/-width 30 -background white/,-text=>$value[4])->grid(-row=>3, -column=>3,-sticky=>"we");
+	$d->Subwidget("B_Show")->configure(-command=>[\&test_link, $self, 'adesse', $verb, $verbal_entry, $definition, $diccio_id, $sense, $schema_id, $voice]);
 
 	if ($focused eq "sense"){
 		$focused_entry=$sense;
@@ -642,6 +658,10 @@ sub show_adesse_editor_dialog{
 		$focused_entry=$diccio_id;
 	}elsif ($focused eq "definition"){
 		$focused_entry=$definition;
+	}elsif ($focused eq "schema_id"){
+		$focused_entry=$schema_id;
+	}elsif ($focused eq "voice"){
+		$focused_entry=$voice;
 	}else{
 		$focused_entry=$verb;
 	}
@@ -654,6 +674,8 @@ sub show_adesse_editor_dialog{
 	  $new_value[2]=$self->data()->trim($definition->get());
 	  $new_value[3]=$self->data()->trim($diccio_id->get());
 	  $new_value[4]=$self->data()->trim($sense->get());
+	  $new_value[5]=$self->data()->trim($schema_id->get());
+	  $new_value[6]=$self->data()->trim($voice->get());
    	  $d->destroy();
 	  return (2, @new_value) if ($dialog_return =~/Next/);
 	  return (1, @new_value);
@@ -850,8 +872,10 @@ sub get_adesse_link_address{
   	my $definition=$self->data()->getLinkAttribute($link, "definition");
   	my $diccio_id=$self->data()->getLinkAttribute($link, "diccio_id");
   	my $sense=$self->data()->getLinkAttribute($link, "sense");
+  	my $schema_id=$self->data()->getLinkAttribute($link, "schema_id");
+  	my $voice=$self->data()->getLinkAttribute($link, "voice");
     
-	return $self->get_adesse_address($verb, $verbal_entry, $definition, $diccio_id, $sense);
+	return $self->get_adesse_address($verb, $verbal_entry, $definition, $diccio_id, $sense, $schema_id, $voice);
 }
 
 sub get_ancora_link_address{
@@ -957,6 +981,8 @@ sub test_adesse_link{
 	my $definition=$self->data()->trim($values[2]->get());
 	my $diccio_id=$self->data()->trim($values[3]->get());
 	my $sense=$self->data()->trim($values[4]->get());
+	my $schema_id=$self->data()->trim($values[5]->get());
+	my $voice=$self->data()->trim($values[6]->get());
 
 	if ($verb eq ""){
 	  	SynSemClass_multi::Editor::warning_dialog($self, "Fill the Verb!");
@@ -983,8 +1009,18 @@ sub test_adesse_link{
 		$values[4]->focusForce;
 		return -2;
 	}
+	if ($schema_id !~ /^[0-9]*$/){
+		SynSemClass_multi::Editor::warning_dialog($self, "Schema ID must be a number!");
+		$values[5]->focusForce;
+		return -2;
+	}
+	if ($voice !~ /^[0-9]*$/){
+		SynSemClass_multi::Editor::warning_dialog($self, "Voice must be a number!");
+		$values[6]->focusForce;
+		return -2;
+	}
 
-  	return $self->get_adesse_address($verb, $verbal_entry, $definition, $diccio_id, $sense);
+  	return $self->get_adesse_address($verb, $verbal_entry, $definition, $diccio_id, $sense, $schema_id, $voice);
 }
 
 sub test_ancora_link{
@@ -1114,19 +1150,31 @@ sub get_fn_es_address{
 }
 
 sub get_adesse_address{
-  my ($self, $verb, $verbal_entry, $definition, $diccio_id, $sense)=@_;
+  my ($self, $verb, $verbal_entry, $definition, $diccio_id, $sense, $schema_id, $voice)=@_;
   my $address="";
   $address=$self->data()->getLexBrowsing("adesse");
   return if $address eq "";
 
-  if ($sense eq ""){
+  if ($voice eq "" or $schema_id eq ""){
+	$address .= "verbos.php?";
+	if ($sense eq ""){
 	  if ($diccio_id eq ""){
   		$address .= "verbo=" . $verb; 
 	  }else{
   		$address .= "diccio_id=" . $diccio_id; 
-  	  }
-  }else{
+	  }
+  	}else{
 	  $address .= "sense=" . $sense;
+  	}
+  }else{
+	$address .= "ESS_res.php?";
+	$address .= "esqsinsem_id=" . $schema_id;
+	$address .= "&voz=" . $voice;
+	if ($diccio_id ne ""){
+		$address .= "&diccio_id=" . $diccio_id;
+	}elsif ($sense ne ""){
+		$address .= "&sense=" . $sense;
+	}
   }
   
   return $address;

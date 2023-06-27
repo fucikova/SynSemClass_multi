@@ -108,7 +108,7 @@
       </lexicon>
       <lexicon id="adesse" name="adesse">
         <lexref>http://adesse.uvigo.es/</lexref>
-        <lexbrowsing>http://adesse.uvigo.es/data/verbos.php?</lexbrowsing>
+        <lexbrowsing>http://adesse.uvigo.es/data/</lexbrowsing>
         <lexsearching>http://adesse.uvigo.es/data/verbos.php</lexsearching>
         <argumentsused>
          </argumentsused>
