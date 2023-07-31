@@ -126,7 +126,6 @@ sub getClassSubList {
   my @classes=();
   my ($milestone,$after,$before,$i);
   my $class_attr="2";
-  my $name_lang="ces";
   if ($search_csl_by eq "class_roles"){
  	return $self->getClassList("$search_csl_by:$item");
   }
@@ -150,7 +149,7 @@ sub getClassSubList {
     $after = 2*$slen;
     $before = 0;
   } else {
-    # search by lemma or enname or dename or classID
+    # search by class lemma for selected lang or classID
 	if($search_csl_by eq "class_id"){
 		$class_attr = "1";
 	}elsif($search_csl_by =~ /_class_name/){
@@ -320,25 +319,43 @@ sub addClass {
   $self->main->set_change_status(1);
 
   foreach my $lang (@{$self->languages()}){
+	  my $ret_val = $self->addClassToLangLexicon($new_id, $lang, $lemmas{$lang});
+	  if ($ret_val ne "1"){
+		return $ret_val;
+	  }
+  }
+  
+  print "Added class: $new_id, " . join(":", @lang_lemmas) . "\n";
+  return $class_main;
+}
+
+sub addClassToLangLexicon{
+	my ($self, $classID, $lang, $lemma) = @_;
+	
 	my $data_lang = $self->lang_cms($lang);
+
+	my $class = $data_lang->getClassByID($classID);
+	if ($class){
+		print "Class with ID $classID already exists in $lang lexicon\n";
+		return -1;
+	}
+
   	my $doc_lang=$data_lang->doc();
   	my $root_lang=$doc_lang->documentElement();
 	my ($body_lang)=$root_lang->getChildElementsByTagName("body");
 	return 0 unless $body_lang;
 	my $class_lang=$doc_lang->createElement("veclass");
 	$body_lang->appendChild($class_lang);
-	$class_lang->setAttribute("id",$new_id);
-	$class_lang->setAttribute("lemma", $lemmas{$lang} || "");
+	$class_lang->setAttribute("id",$classID);
+	$class_lang->setAttribute("lemma", $lemma || "");
     my $classlangdef=$doc_lang->createElement("class_definition");
 	$class_lang->appendChild($classlangdef);
     my $cms_lang=$doc_lang->createElement("classmembers");
 	$class_lang->appendChild($cms_lang);
 
   	$data_lang->set_change_status(1);
-  }
-  
-  print "Added class: $new_id, " . join(":", @lang_lemmas) . "\n";
-  return $class_main;
+	return 1;
+
 }
 
 sub classReviewed {
@@ -772,7 +789,7 @@ sub addClassMember {
   $classmember->setAttribute("status", $status);
   $classmember->setAttribute("lang", $lang);
   $classmember->setAttribute("lexidref", $lexidref);
-  $idref="SynSemClass-ID-" . $id if ($lexidref eq "synsemclass"); #for those classmembers that are not from defined source lexicon
+  $idref="SynSemClass-ID-" . $id if ($lexidref eq "synsemclass"); #for those classmembers that are not from PDT-Vallex/EngVallex/Vallex 
   													  #is idref SynSemClass-ID-<id>, where <id> is classmember id in synsemclass.xml
   $classmember->setAttribute("idref", $idref);
   $classmember->setAttribute("lemma", $lemma);
