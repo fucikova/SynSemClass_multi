@@ -2385,7 +2385,7 @@ sub one_tred_button_pressed{
   
   if ($selected=~/^[ *]{7}\t<([^>]*)>.*/){
 	  my ($ecorpref, $enodeID, $epair, $elang, $testData) = split("##", $1);
-	if ($ecorpref ne "pcedt"){
+	if ($ecorpref !~ /(pcedt|pedt)/){
 	    SynSemClass_multi::Editor::warning_dialog($self,"This sentence is from $ecorpref, so it can not be opened in TrEd!");
 	}else{
 		$self->openTrEdForFileNodes($enodeID);

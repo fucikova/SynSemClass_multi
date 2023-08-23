@@ -42,9 +42,21 @@ sub getAllExamples {
 		my $examplesFile= "ENG/example_sentences/Vtext_eng." . $enid . ".php";
 		
 		my $sentencesPath=SynSemClass_multi::Config->getFromResources($examplesFile);
+
 		if (!$sentencesPath){
-			print "getAllExamples: There is not sentencesPath for $examplesFile\n";
-			next;
+			#try another sentences resources
+			for my $corpus ('pedt'){	
+				$examplesFile = "ENG/example_sentences/Vtext_eng_" . $corpus . "_" . $enid . ".txt";
+				$sentencesPath=SynSemClass_multi::Config->getFromResources($examplesFile);
+				if ($sentencesPath){
+					$corpref = $corpus;
+					last;
+				}
+			}
+			if (!$sentencesPath){
+				print "getAllExamples: There is not sentencesPath for $examplesFile\n";
+				next;
+			}
 		}
 
 		if (not open (IN,"<:encoding(UTF-8)", $sentencesPath)){
@@ -54,16 +66,20 @@ sub getAllExamples {
 
 		while(<IN>){
 			chomp($_);
-			next if ($_!~/^<[^>#]*#([^>]*)><([^>]*)> (.*)$/);
-			my $nodeID=$1;
+			next if ($_!~/^(<train>|<test>|)<[^>#]*#([^>]*)><([^>]*)> (.*)$/);
+			my $data_type=$1;
+			my $nodeID=$2;
 		
-			my $frpair=$2;
-			my $text=$3;
-			next if ($frpair !~ /^$enid\.$csid$/);
-			my $testData = 0;
-			$testData = 1 if ($nodeID =~ /wsj_2/);
+			my $frpair=$3;
+			my $text=$4;
+			next if ($corpref eq "pcedt" and $csid ne ".*" and $frpair !~ /^$enid\.$csid$/);
 	
-	 		push @sents, [$corpref."##".$nodeID."##".$frpair."##eng##" . $testData, $text]
+			my $testData=0;
+			if ($data_type eq "<test>" or ($data_type eq "" and $nodeID =~ /wsj_2/)){
+				$testData=1;
+			}
+	 		push @sents, [$corpref."##".$nodeID."##".$frpair."##eng##".$testData, $text]
+			#push @sents, [$_, $corpref."##".$nodeID."##".$frpair."##ces", $lexEx, $testData,  $text]
 		}
 		close IN;
 	}
