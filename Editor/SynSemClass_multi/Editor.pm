@@ -1000,7 +1000,7 @@ sub classlangname_button_pressed{
 			$cmlemma = $1;
 			$cmidref = $2;
 		}
-		$cmidref=~s/^.*-ID-// if (($lang eq "eng") or ($lang eq "ces"));
+		$cmidref=~s/^(Eng|PDT-)Vallex-ID-// if (($lang eq "eng") or ($lang eq "ces"));
 		my $newName=$cmlemma . " (" . $cmidref . ")";
 		if (($oldName ne "") and ($oldName ne $newName)){
 			my $text = "Do you want to change $lang_name class name from $oldName to $newName?";
