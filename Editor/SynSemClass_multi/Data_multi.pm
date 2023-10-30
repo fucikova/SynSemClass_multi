@@ -283,7 +283,7 @@ sub generateNewClassId {
   	$i++;
   	$id_cand = "vec" . sprintf("%05d", $i) . "_$user";
   }
-  if ($user eq "SYS"){
+  if (($user eq "SYS") or ($user eq "SL")){
   	return "vec" . sprintf("%05d", $i);
   }else{
 	  return $id_cand;

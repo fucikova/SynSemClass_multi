@@ -392,7 +392,7 @@ sub format_cmId {
   my ($self, $classId, $number, $lang, $user)=@_;
 
   my $cmId = $classId ."-" . $lang . "-cm" . sprintf("%05d", $number);
-  $cmId .= "_$user" if ($user ne "SYS");
+  $cmId .= "_$user" if (($user ne "SL") and ($user ne "SYS"));
   return $cmId;
 }
 
