@@ -480,8 +480,7 @@ sub getClassMemberByID{
   my $class_id = $cmid;
   $class_id=~s/-.*-cm.....(|_..*)$//;
   my $lang = $cmid;
-  $lang =~s/^.*-(.*)-/\1/; 
-  
+  $lang =~s/^.*-(.*)-.*/\1/; 
   my $data_cms = $self->lang_cms($lang);
   my $lang_class = $data_cms->getClassByID($class_id);  
   next unless ref($lang_class);
