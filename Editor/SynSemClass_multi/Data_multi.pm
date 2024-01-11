@@ -764,12 +764,30 @@ sub copyMapping{
 #addClassMember - for adding new classmember
 #$maparg - reference for array ([[argfrom, argfrom_form, argfrom_spec],argto], ...)
 #$extlexes  - reference for array - ([link_type,@values], ...) - ([engvallex,[idref, lemma]], [czengvallex,[idref, enid,enlemma, csid, cslemma]],...) 
-
 sub addClassMember {
   my ($self, $class, $status, $lang, $lemma, $idref, $lexidref, $restrict, $maparg,$cmnote, $extlexes, $examples)=@_;
+  
+  return (0,"not ref class") unless ref($class);
+  return (0, "bad attributes for classmember") if ($lang eq "" or $lemma eq "" or $idref eq "" or $lexidref eq "");
+  
+  my $classid = $class->getAttribute("id");
+  my $data_cms = $self->lang_cms($lang);
+  my $lang_class = $data_cms->getClassByID($classid);  
+	
+  my $id=$data_cms->generateNewClassMemberId($lang_class, $lang);
+
+  return ($self->addClassMemberWithID($class, $id, $status, $lang, $lemma, $idref, $lexidref, $restrict, $maparg, $cmnote, $extlexes, $examples));
+}
+
+
+#addClassMemberWithID - for adding new classmember with specified id
+sub addClassMemberWithID {
+  my ($self, $class, $id, $status, $lang, $lemma, $idref, $lexidref, $restrict, $maparg,$cmnote, $extlexes, $examples)=@_;
 
   return (0,"not ref class") unless ref($class);
 
+  return (0, "bad cm id") if ($id !~ /-$lang-/);
+  return (0, "existing classmember with $id") if ($self->getClassMemberByID($id));
   $status = "not_touched"  if ($status eq "");
   return (0, "bad attributes for classmember") if ($lang eq "" or $lemma eq "" or $idref eq "" or $lexidref eq "");
   
@@ -779,11 +797,11 @@ sub addClassMember {
   my $data_cms = $self->lang_cms($lang);
   my $lang_class = $data_cms->getClassByID($classid);  
   my ($classmembers)=$lang_class->getChildElementsByTagName("classmembers");
+  
+
   my $doc=$data_cms->doc();
   my $classmember=$doc->createElement("classmember");
 
-
-  my $id=$data_cms->generateNewClassMemberId($lang_class, $lang);
   $classmember->setAttribute("id", $id);
   $classmember->setAttribute("status", $status);
   $classmember->setAttribute("lang", $lang);
@@ -813,7 +831,24 @@ sub addClassMember {
 
   my $examples_node=$doc->createElement("examples");
   $classmember->appendChild($examples_node);
-  $classmembers->appendChild($classmember);
+
+  my $id_nr = $id;
+  $id_nr=~s/^.*-$lang-cm0*//;
+  $id_nr =~ s/_..*$//;
+  my $id_s = 0;
+  my $sibling = "";
+  foreach my $cm ($classmembers->getChildElementsByTagName("classmember")){
+	$sibling = $cm;
+	$id_s = $sibling->getAttribute("id");
+  	$id_s=~s/^.*-$lang-cm0*//;
+  	$id_s =~ s/_..*$//;
+	last if ($id_s > $id_nr);
+  }
+  if ($id_s > $id_nr){
+	$classmembers->insertBefore($classmember, $sibling);
+  }else{
+	$classmembers->insertAfter($classmember, $sibling);
+  }
 
   return (0, "can not edit classmember data") if (!$self->editClassMember($classmember, $restrict, $maparg, $cmnote, $extlexes, $examples));
   
