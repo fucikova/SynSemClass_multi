@@ -52,6 +52,16 @@ sub loadConfig{
 	       $searchBy{valid}=(($_=~/^;/) ? 0 : 1);
 	       $searchBy{value}=~s/^;*ClassSearchBy=//g;
 	       $searchBy{value}=~s/"//g;
+		   my $langs = $languages{value};
+		   $langs =~ s/,/|/g;
+		   if ($searchBy{value} !~ /^($langs|id|roles)$/){
+			$searchBy{value} = "id";
+			print "Bad value for ClassSearchBy in config_file_multi (valid values are ";
+			foreach (split(",",$languages{value})){
+				print "'$_', ";
+			} 
+			print "'id' or 'roles')\n";
+		   }
 	   }elsif ($_ =~ /^Geometry=/){
 	       $geometry=$_;
 	       $geometry=~s/Geometry=//;
