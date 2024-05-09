@@ -305,7 +305,7 @@ sub fetch_framenetlinks{
   foreach my $entry ($self->data()->getClassMemberLinksForType($classmember, 'fn')) {
 	$e= $t->addchild("",-data => $entry->[0]);
     $t->itemCreate($e, 0, -itemtype=>'text',
-		   -text=> $entry->[3] . "\t" . $entry->[4] );
+		   -text=> $entry->[3] . "\t" . $entry->[4] . " (" . $entry->[5] . ")");
   }
 }
 
@@ -523,69 +523,71 @@ sub getNewLink{
 		}
 	}elsif($link_type eq "fn"){
 		my $frameName=$new_value[0];
-		if ($frameName eq "" or $frameName eq "!"){
+		if ($frameName eq ""){
 			SynSemClass_multi::Editor::warning_dialog($self, "Fill the frame name!");
 			($ok, @new_value) = $self->show_link_editor_dialog($action, $link_type, "framename", @new_value);
 			next;
 		}
-		if ($frameName =~ /^!/){
-			my $ask_fn =~ s/^!//;
-			if ($framenet_mapping->{$ask_fn}->{validframe}){
-				my $answer=SynSemClass_multi::Editor::question_dialog($self, $ask_fn ." is valid frame name!\nCan I give the '!' off?",'Yes');  
-				if ($answer eq "Yes"){
-					$frameName = $ask_fn;
-					$new_value[0] = $frameName;
-				}
-			}
-		}elsif (!$framenet_mapping->{$frameName}->{validframe}){
-			my $answer=SynSemClass_multi::Editor::question_dialog($self, $frameName ." is not valid frame name!\nDo you still want to save it (with the '!')?",'No');
-			if ($answer eq 'Yes'){
-				$frameName = "!" . $frameName;
-				$new_value[0] = $frameName;
-			}else{
-				SynSemClass_multi::Editor::warning_dialog($self, "Fill another frame name!");
-				($ok, @new_value) = $self->show_link_editor_dialog($action, $link_type, "framename", @new_value);
-				next;	
-			}
+		
+		if (!$framenet_mapping->{$frameName}->{validframe}){
+			SynSemClass_multi::Editor::warning_dialog($self, "$frameName is not valid frame. Fill another frame name!");
+			($ok, @new_value) = $self->show_link_editor_dialog($action, $link_type, "framename", @new_value);
+			next;	
 		}
 
 		my $luName=$new_value[1];
-		if ($frameName !~ /^!/){
-			if ($luName eq ""){
-  				my $cmlemma = $self->data()->getClassMemberAttribute($self->selectedClassMember(), 'lemma');
-				$cmlemma =~s/_/ /g;
-				$cmlemma .=".v";
+		if ($luName eq ""){
+  			my $lu_from_lemma = $self->data()->getClassMemberAttribute($self->selectedClassMember(), 'lemma');
+			$lu_from_lemma =~s/_/ /g;
+			$lu_from_lemma .=".v";
 			
-
-				if ($framenet_mapping->{$frameName}->{$cmlemma}){
-					my $answer=SynSemClass_multi::Editor::question_dialog($self, "Empty LU name. Do you want to use LU name " . $cmlemma . "?", "Yes");
-					if ($answer eq "Yes"){
-						$new_value[1] = $cmlemma;
-						$luName = $cmlemma;
-					}
-				}
-				if ($luName eq ""){
-					my $answer=SynSemClass_multi::Editor::question_dialog($self, "Empty LU name. Do you want to fill it?", "No");
-					if ($answer eq "Yes"){
-						($ok, @new_value) = $self->show_link_editor_dialog($action, $link_type, "luname", @new_value);
-						next;
-					}
+			if ($framenet_mapping->{$frameName}->{$lu_from_lemma}){
+				my $defined_luid=$framenet_mapping->{$frameName}->{$lu_from_lemma};
+				my $answer=SynSemClass_multi::Editor::question_dialog($self, "Empty LU name. Do you want to use LU name " . $lu_from_lemma . " (LU ID $defined_luid)?", "Yes");
+				if ($answer eq "Yes"){
+					$new_value[1] = $lu_from_lemma;
+					$luName = $lu_from_lemma;
+					$new_value[2] = $defined_luid;
+					$luid = $defined_luid;
 				}
 			}
-
-			if ($luName ne ""){
-				if (!$framenet_mapping->{$frameName}->{$luName}){
-					SynSemClass_multi::Editor::warning_dialog($self, $luName . " is not valid LU name for frame " . $frameName . "! Fill another LU name (or empty)!");
+	
+			if ($luName eq ""){
+				SynSemClass_multi::Editor::warning_dialog($self, "Fill the LU name!");
+				($ok, @new_value) = $self->show_link_editor_dialog($action, $link_type, "luname", @new_value);
+				next;
+			}
+		}
+			
+		if ($luName ne ""){
+			my $luid = $new_value[2] || "";
+			if (!$framenet_mapping->{$frameName}->{$luName}){
+				my $answer = SynSemClass_multi::Editor::question_dialog($self, $luName . " is not defined LU name for frame " . $frameName . " in v1.7! Do you really want to use it?", "Yes");
+				if ($answer eq 'No'){
 					($ok, @new_value) = $self->show_link_editor_dialog($action, $link_type, "luname", @new_value);
 					next;	
-				}	
-		
-				$luid=$framenet_mapping->{$frameName}->{$luName};
-				$new_value[2]=$luid;
-
+				}else{
+					if ($luid eq ""){
+						SynSemClass_multi::Editor::warning_dialog($self, "For LUs that are not in v1.7 you have to fill LU ID directly!");
+						($ok, @new_value) = $self->show_link_editor_dialog($action, $link_type, "luid", @new_value);
+						next;								
+					}
+				}
 			}else{
-				$new_value[2]="";
-			}
+				$defined_luid = $framenet_mapping->{$frameName}->{$luName};
+				if ($luid eq ""){
+					$new_value[2] = $defined_luid;
+				}elsif ($luid ne $defined_luid){
+					my $answer = SynSemClass_multi::Editor::question_dialog($self, "Filled LU ID '$luid' doesn't match defined LU ID '$defined_luid' from v1.7!\n Do you want to use the defined ID ('$defined_luid')?", "Yes");
+					if ($answer eq "Yes"){
+						$new_value[2] = $defined_luid;
+					}else{
+						($ok, @new_value) = $self->show_link_editor_dialog($action, $link_type, "luid", @new_value);
+						next;								
+					}
+				}
+			}	
+
 		}
 	}elsif ($link_type eq "wn"){
 		if ($new_value[0] eq ""){
@@ -864,10 +866,14 @@ sub show_framenet_editor_dialog{
 	my $framename=$d->Entry(qw/-width 50 -background white/,-text=>$value[0])->grid(-row=>0, -column=>1,-sticky=>"we");
   	my $luname_l=$d->Label(-text=>'LU name')->grid(-row=>1, -column=>0,-sticky=>"w");
 	my $luname=$d->Entry(qw/-width 50 -background white/,-text=>$value[1])->grid(-row=>1, -column=>1,-sticky=>"we");
-	$d->Subwidget("B_Show")->configure(-command=>[\&test_link, $self, 'fn', $framename, $luname]);
+  	my $luid_l=$d->Label(-text=>'LU ID')->grid(-row=>2, -column=>0,-sticky=>"w");
+	my $luid=$d->Entry(qw/-width 50 -background white/,-text=>$value[2])->grid(-row=>2, -column=>1,-sticky=>"we");
+	$d->Subwidget("B_Show")->configure(-command=>[\&test_link, $self, 'fn', $framename, $luname, $luid]);
 
 	if ($focused eq "luname"){
 		$focused_entry=$luname;
+	}elsif ($focused eq "luid"){
+		$focused_entry=$luid;
 	}else{
 		$focused_entry=$framename;
 	}
@@ -877,6 +883,7 @@ sub show_framenet_editor_dialog{
 	  my @new_value;
 	  $new_value[0]=$self->data()->trim($framename->get());
 	  $new_value[1]=$self->data()->trim($luname->get());
+	  $new_value[2]=$self->data()->trim($luid->get());
    	  $d->destroy();
 	  return (2, @new_value) if ($dialog_return =~/Next/);
 	  return (1, @new_value);
@@ -1053,6 +1060,7 @@ sub test_framenet_link{
   	my ($self,@values)=@_;
 	my $frameName = $self->data()->trim($values[0]->get());
 	my $luName=$self->data()->trim($values[1]->get());
+	my $luId=$self->data()->trim($values[2]->get()) || "";
 	
 	if ($frameName eq ""){
 	  	SynSemClass_multi::Editor::warning_dialog($self, "Fill the frame name!");
@@ -1064,15 +1072,23 @@ sub test_framenet_link{
 		$values[0]->focusForce;
 		return -2;
 	}
-	if ($luName ne "" and !$framenet_mapping->{$frameName}->{$luName}){
-	  	SynSemClass_multi::Editor::warning_dialog($self, "'$luName' is not valid LU name for frame '$frameName'!");
-		$values[1]->focusForce;
-		return -2;
-	}
-		
-	my $luId="";
 	if ($luName ne ""){
-		$luId=$framenet_mapping->{$frameName}->{$luName};
+		my $defined_luid = $framenet_mapping->{$frameName}->{$luName} || "";
+		if ($defined_luid eq ""){
+			if ($luId eq ""){
+	  			SynSemClass_multi::Editor::warning_dialog($self, "'$luName' is unknown LU name for frame '$frameName' in v1.7 - please fill LU ID!");
+				$values[2]->focusForce;
+				return -2;				
+			}
+		}else{
+			if ($luId eq ""){
+				$luId = $defined_luid;
+			}elsif ($luId ne $defined_luid){
+	  			SynSemClass_multi::Editor::warning_dialog($self, "Filled LU ID '$luId' doesn't match defined LU ID '$defined_luid' from v1.7!");
+				$values[2]->focusForce;
+				return -2;				
+			}
+		}
 	}
   	return $self->get_framenet_address($frameName, $luName, $luId);
 }
