@@ -107,7 +107,8 @@ sub create_widget {
   # Class Names
   my $classnamesframes_frame=();
   my %classnames_frames=();
-  my %classnames_button=();
+  my %classnames_set_button=();
+  my %classnames_unset_button=();
   my %classnames_balloon=();
   my %balloon_msg=();
   my $classnamesframes_frame=$classes_frame->Frame(-takefocus => 0);
@@ -122,11 +123,16 @@ sub create_widget {
 						    -wrap word
 						    -scrollbars oe /);
   	$classnames_frames{$lang}->pack(qw/-fill x/);
-    $classnames_button{$lang}=$classnames_frames{$lang}->subwidget('button_frame')->Button(-text=>'Set',
+    $classnames_unset_button{$lang}=$classnames_frames{$lang}->subwidget('button_frame')->Button(-text=>'Unset',
 	  		-underline=>0,
-	   		-command => [\&classlangname_button_pressed,$self,$lang]);
-	$classnames_button{$lang}->pack(qw/-side left -fill x/);
-  	$classnames_frames{$lang}->subwidget("text")->bind('<s>', sub { $self->classlangname_button_pressed($lang)});
+	   		-command => [\&classlangname_unset_button_pressed,$self,$lang]);
+	$classnames_unset_button{$lang}->pack(qw/-side left -fill x/);
+  	$classnames_frames{$lang}->subwidget("text")->bind('<u>', sub { $self->classlangname_unset_button_pressed($lang)});
+    $classnames_set_button{$lang}=$classnames_frames{$lang}->subwidget('button_frame')->Button(-text=>'Set',
+	  		-underline=>0,
+	   		-command => [\&classlangname_set_button_pressed,$self,$lang]);
+	$classnames_set_button{$lang}->pack(qw/-side left -fill x/);
+  	$classnames_frames{$lang}->subwidget("text")->bind('<s>', sub { $self->classlangname_set_button_pressed($lang)});
 	$classnames_balloon{$lang}=$classnamesframes_frame->Balloon(
 														    -balloonposition => 'mouse'
     													);
@@ -348,6 +354,21 @@ sub get_balloon_msg{
 sub set_balloon_msg{
 	my ($self, $lang, $value) = @_;
 	$self->[5]->{$lang} = $value;
+}
+
+sub refresh_classnames{
+  my ($self)=@_;
+  my $cid=$self->subwidget("classlist")->focused_class_id();
+  my $cmfield=$self->subwidget("classmemberslist")->focused_classmember();
+    
+  my $class=$self->data->main->getClassByID($cid);
+  $self->subwidget("classlist")->fetch_data($class);
+    
+  $self->classlist_item_changed($self->subwidget("classlist")->focus($class));
+  if ($cmfield){
+    my $classmember=$self->data()->findClassMemberForClass($class,$cmfield);
+	$self->classmemberslist_item_changed($self->subwidget("classmemberslist")->focus($classmember));
+  }
 }
 
 sub refresh_data {
@@ -967,7 +988,48 @@ sub show_classmember_editor_dialog{
 
 }
 
-sub classlangname_button_pressed{
+sub classlangname_unset_button_pressed{
+  my ($self, $lang)=@_;
+		
+  my $lang_name = SynSemClass_multi::Config->getLangName($lang);
+
+  if (not $self->data->lang_cms($lang)->user_can_modify()){
+  	my $text = "You can not modify $lang_name records (you are not annotator or reviewer of the " . lc($lang_name) . " lexicon)!";
+	$self->warning_dialog($text);
+	return 0;
+  }
+
+  my $cid=$self->subwidget("classlist")->focused_class_id();
+  if ($cid) {
+    my $class=$self->data->main->getClassByID($cid);
+	my $data_cms = $self->data->lang_cms($lang);
+	my $class_cms = $data_cms->getClassByID($cid);
+
+	my $oldName=$data_cms->getClassLemma($class_cms);
+		
+	if ($oldName ne ""){
+		my $text = "Do you want to remove $oldName and set empty $lang_name class name?";
+		my $answer= $self->question_dialog($text, "Yes");
+		if ($answer eq "No"){
+			return 0;
+		}
+	}
+	$data_cms->setClassLemma($class_cms, "");
+	$data_cms->addClassLocalHistory($class_cms, "setting empty $lang_name class name");
+
+    my $ref_classnames_frames = $self->subwidget('classnames_frames');
+    my %classnames_frames = %$ref_classnames_frames;
+    $classnames_frames{$lang}->set_data("");
+
+	$self->refresh_classnames();
+	$self->update_title();
+  } else {
+  	$self->warning_dialog("Select class!");
+	return 0;
+  }
+}
+
+sub classlangname_set_button_pressed{
   my ($self, $lang)=@_;
 		
   my $lang_name = SynSemClass_multi::Config->getLangName($lang);
@@ -1015,8 +1077,9 @@ sub classlangname_button_pressed{
 	    my $ref_classnames_frames = $self->subwidget('classnames_frames');
 	    my %classnames_frames = %$ref_classnames_frames;
 	    $classnames_frames{$lang}->set_data($newName);
-		
-	    $self->update_title();
+
+		$self->refresh_classnames();
+		$self->update_title();
 		
 	}else{
 		$self->warning_dialog("Select classmember!");
